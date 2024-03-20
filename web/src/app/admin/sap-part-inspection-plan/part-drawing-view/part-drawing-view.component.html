@@ -1,0 +1,128 @@
+<div class="content">
+	<div class="block block-rounded">
+		<div class="block-header border-bottom">
+			<button class="btn btn-default push-5-r" (click)="close()" type="button"
+				title="{{('Label.Close'| translate)}}">
+				<i class="si si-close"> </i>
+			</button>
+			<h3 class="block-title">
+				{{ "Label.Drawing" | translate }}
+			</h3>
+		</div>
+		<div class="block-content">
+			<div class="row overflow-auto">
+				<form [formGroup]="formInput">
+					<div class="row form-group">
+						<div class="input-inline col-sm-3">
+							<label class="col-form-label">{{ "Label.DrawingNumber" | translate }}:</label>
+              <label class="form-text text-danger">{{ "Message.RequiredSymbol" | translate }}</label>
+						</div>
+						<div class="col-sm-9" *ngIf="!isEnabled || isDrawingDisabled">
+							<input  type="text" disabled class="form-control"
+								formControlName="drawingNumber" maxlength="50" />
+						</div>
+						<div class="col-sm-9" *ngIf="isEnabled && !isDrawingDisabled">
+							<input  type="text" class="form-control" formControlName="drawingNumber"
+								maxlength="50" />
+						</div>
+						<div class="offset-3 col-sm-9">
+							<ng-container *ngIf="isDrawingNumberModified()">
+								<small *ngIf="isDrawingNumberEmpty()" class="form-text text-danger">
+									{{ "Message.Required" | translate }}
+								</small>
+								<small *ngIf="isDrawingNumberHasWhiteSpace()" class="form-text text-danger">
+									{{ "Message.BlankDrawingNumber" | translate }}
+								</small>
+							</ng-container>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="input-inline col-sm-3">
+							<label class="col-form-label">{{ "Label.DrawingRevisionNumber" | translate }}:
+							</label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+						</div>
+						<div class="col-sm-9" *ngIf="!isEnabled">
+							<input id="drawingRevisionNumber" disabled type="text" class="form-control"
+								formControlName="drawingRevisionNumber" maxlength="50" />
+						</div>
+						<div class="col-sm-9" *ngIf="isEnabled">
+							<input id="drawingRevisionNumber" type="text" class="form-control"
+								formControlName="drawingRevisionNumber" maxlength="50" />
+						</div>
+						<div class="offset-3 col-sm-9">
+							<ng-container *ngIf="isDrawingRevisionModified()">
+								<small *ngIf="isDrawingRevisionEmpty()" class="form-text text-danger">
+									{{ "Message.Required" | translate }}
+								</small>
+								<small *ngIf="isDrawingRevisionHasWhiteSpace()" class="form-text text-danger">
+									{{ "Message.BlankDrawingRevisionNumber" | translate }}
+								</small>
+							</ng-container>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="input-inline col-sm-3">
+							<label class="col-form-label">{{ "Label.DrawingDescription" | translate }}:
+							</label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+			  </label>
+						</div>
+						<div class="col-sm-9">
+							<textarea id="drawingDescription" type="text" class="form-control"
+								formControlName="drawingDescription" maxlength="256"></textarea>
+						</div>
+						<div class="offset-3 col-sm-9">
+							<ng-container *ngIf="isDrawingDescriptionModified()">
+								<small *ngIf="isDrawingDescriptionEmpty()" class="form-text text-danger">
+									{{ "Message.Required" | translate }}
+								</small>
+								<small *ngIf="isDrawingDescriptionHasWhiteSpace()" class="form-text text-danger">
+									{{ "Message.BlankDrawingDescription" | translate }}
+								</small>
+							</ng-container>
+						</div>
+					</div>
+					<div class="row form-group ">
+						<div class="input-inline col-sm-3">
+							<label class="col-form-label">{{ "Label.PartDrawingAttachments" | translate }}:
+							</label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+						</div>
+						<div class="col-sm-9">
+							<app-file-upload [files]="drawingAttachments" formControlName="drawingAttachments"
+								[fileExtensions]="['pdf','xlsx','png','jpg']" [downloadFiles]="true"
+								[showSelectFile]="isEnabled" [fileUploadId]="tempFolder" [multiple]="true"
+								[dragAndDrop]="isEnabled" [showDeleteFile]="isEnabled" [maxFileSize]="maxFileSize"
+								[maxFileUploadLimit]="maxFileUploadLimit" [showFiles]="true"
+								[buttonText]="'Label.SelectFile'" [isDisabled]="!isEnabled">
+							</app-file-upload>
+						</div>
+						<div class="offset-3 col-sm-9">
+							<ng-container *ngIf="isDrawingAttachmentsModified()">
+								<small *ngIf="isDrawingAttachmentsEmpty()" class="form-text text-danger">
+									{{ "Message.Required" | translate }}
+								</small>
+							</ng-container>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" [disabled]="isSaveDisabled()"
+			(click)="activeModal.close(formInput.value)">
+			{{ "Label.Add" | translate }}
+		</button>
+		<button type="button" class="btn btn-default" (click)="close()">
+			{{ "Label.Cancel" | translate }}
+		</button>
+
+	</div>
+</div>

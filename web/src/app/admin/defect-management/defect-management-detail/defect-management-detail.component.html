@@ -1,0 +1,81 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.DefectManagementConfiguration" | translate }}
+        <!-- <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i> -->
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DefectSection" | translate }}:</label>
+            <div class="col-sm-10">
+              <j-auto-complete-defect-section  formControlName="defectSection"  (onSelect)="onDefectSectionSelect($event)" [config]="defectSectionAutoCompleteConfig">
+              </j-auto-complete-defect-section>
+
+            </div>
+            <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDefectSectionModified()">
+                <small *ngIf="isDefectSectionEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+                <small *ngIf="isDefectSectionExists()" class="text-danger">
+                  {{ "Message.DefectSectionExists" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DefectTypeName" | translate }}:</label>
+            <div class="col-sm-8">
+              <input id="defectTypeName" type="text" class="form-control" formControlName="defectTypeName" #defectTypeName
+                maxlength="50" />
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn btn-primary" [disabled]="!defectTypeName.value"
+                (click)="addDefectTypes(defectTypeName.value)">
+                {{ "Label.Add" | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+              <app-configuration-ptable [column]="defectTypeNameColumns" [enableSkeleton]="false"
+                [source]="originalDefectTypes" [enableDetail]="false" [enableToggle]="false" [enableEdit]="true"
+                [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true" [enableAuditTrail]="false"
+                [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                (deleteEvent)="deleteDefectType($event)">
+              </app-configuration-ptable>
+            </div>
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

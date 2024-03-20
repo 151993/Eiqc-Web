@@ -1,0 +1,28 @@
+.notification {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em;
+}
+
+.ribbon-box {
+    font-size: 30%;
+    top: 8%;
+    padding: 0 8%;
+    height: 30%;
+    line-height: 140%;
+    border-radius: 0.25rem;
+}
+
+.icon {
+    color: grey;
+    flex: 1;
+    text-align: center;
+    font-size: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 30% !important;
+}

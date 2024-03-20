@@ -1,0 +1,160 @@
+<div class="modal-header">
+  <button class="btn btn-default push-5-r" (click)="close()" type="button" title="{{('Label.Close'| translate)}}">
+    <i class="si si-close"> </i>
+  </button>
+  <h3 class="block-title">
+    {{ "Label.DimensionalMeasurements" | translate }}
+  </h3>
+</div>
+<div class="modal-body">
+  <div class="row overflow-auto">
+    <form [formGroup]="formInput">
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.ParameterName" | translate }}:</label>
+        <div class="col-sm-9">
+          <j-auto-complete-parameter-management [parameterManagementTypeId]="measurementParameterType"
+            formControlName="parameterManagement">
+          </j-auto-complete-parameter-management>
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isParameterManagementModified()">
+            <small *ngIf="isParameterManagementEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.UOM" | translate }}:</label>
+        <div class="col-sm-9">
+          <j-auto-complete-uom formControlName="uom">
+          </j-auto-complete-uom>
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isUOMModified()">
+            <small *ngIf="isUOMEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.NominalValue" | translate }}:</label>
+        <div class="col-sm-2">
+          <input id="normalValue" type="text" class="form-control" formControlName="normalValue"
+            (ngModelChange)="onNormalChange($event)" placeholder="00.00000" autocomplete="off" appMaxFraction
+            [fraction]="minFractionDigits" [isNegative]="false" />
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isNormalValueModified()">
+            <small *ngIf="isNormalValueEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.UpperTolerance" | translate }}:</label>
+        <div class="col-sm-2">
+          <input id="upperTolerance" type="text" class="form-control" formControlName="upperTolerance"
+            placeholder="00.00000" autocomplete="off" appMaxFraction [fraction]="fractionDigits" [isNegative]="false" />
+        </div>
+        <div class="offset-3 col-sm-9">
+            <small *ngIf="isUpperToleranceEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.LowerTolerance" | translate }}:</label>
+        <div class="col-sm-2">
+          <input id="lowerTolerance" type="text" class="form-control" formControlName="lowerTolerance"
+            placeholder="00.00000" autocomplete="off" appMaxFraction [fraction]="fractionDigits"[isNegative]="false"/>
+        </div>
+        <div class="offset-3 col-sm-9">
+            <small *ngIf="isLowerToleranceEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.InstrumentType" | translate }}:</label>
+        <div class="col-sm-9">
+          <j-auto-complete-instrument-type formControlName="instrumentType" [config]="instrumentTypeAutoCompleteConfig">
+          </j-auto-complete-instrument-type>
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isInstrumentTypeModified()">
+            <small *ngIf="isInstrumentTypeEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.Accuracy" | translate }}:</label>
+        <div class="col-sm-9">
+          <input id="accuracy" type="text" class="form-control" formControlName="accuracy" [attr.disabled]="true" />
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label">{{ "Label.DataType" | translate }}:</label>
+        <div class="col-sm-9">
+          <p-radioButton class="inputRadioButton"  (ngModelChange)="dataTypeChange($event)" *ngFor="let type of dataTypeList" name="dataType" [value]="type.name"
+            [label]="type.name" formControlName="dataType" [inputId]="type.name"></p-radioButton>
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isDataTypeModified()">
+            <small *ngIf="isDataTypeEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="row form-group"  *ngIf="isDataTypeCTQ">
+        <label class="col-sm-3 col-form-label">{{ "Label.ChartType" | translate }}:</label>
+        <div class="col-sm-9">
+          <j-auto-complete-chart-type formControlName="chartType" [config]="chartTypeAutoCompleteConfig">
+          </j-auto-complete-chart-type>
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isChartTypeModified()">
+            <small *ngIf="isChartTypeEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="row form-group"  *ngIf="isDataTypeCTQ">
+        <label class="col-sm-3 col-form-label">{{ "Label.CalculationPoint" | translate }}:</label>
+        <div class="col-sm-9">
+            <input id="calculationPoint" type="text" class="form-control" formControlName="calculationPoint"
+              autocomplete="off" (input)="checkCalculationPointGreaterThanZero($event)" readonly/>
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isCalculationPointModified()">
+            <small *ngIf="isCalculationPointEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+            <small *ngIf="!isCalculationPointGreaterThanZero" class="form-text text-danger">
+              {{ "Message.ValidatePatternInputGreaterThanZero" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+
+  <button type="button" class="btn btn-primary" [disabled]="!formInput.valid || !formInput.dirty"
+    (click)="activeModal.close(formInput.value)">
+    {{ "Label.Add" | translate }}
+  </button>
+  <button type="button" class="btn btn-default" (click)="close()">
+    {{ "Label.Cancel" | translate }}
+  </button>
+
+</div>

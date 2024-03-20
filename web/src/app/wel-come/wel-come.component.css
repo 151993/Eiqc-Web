@@ -1,0 +1,27 @@
+.jabilLogo {
+    max-width: 10%;
+  }
+  
+  .appLogo {
+    max-width: 42%;
+  }
+  
+  .action-button {
+    background-color: #36b4e5;
+  }
+  
+  .welcomeContainer {
+    margin: -76px;
+    height: 100vh !important;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.7) 75%,
+        #000 100%
+      ),
+      url('src\assets\img\welcome.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+  }

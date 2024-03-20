@@ -1,0 +1,66 @@
+<div class="modal-header">
+  <button class="btn btn-default push-5-r" (click)="close()" type="button" title="{{('Label.Close'| translate)}}">
+    <i class="si si-close"> </i>
+  </button>
+  <h3 class="block-title">
+    {{ "Label.DefectType" | translate }}
+  </h3>
+</div>
+<div class="modal-body">
+  <div class="row overflow-auto">
+    <form [formGroup]="formInput">
+      <div class="row form-group">
+        <label class="col-sm-2 col-form-label">{{ "Label.DefectType" | translate }}:</label>
+        <div class="col-sm-10">
+          <j-auto-complete-defect-type [sectionId]="sectionId"  formControlName="defectTypes" [isDisabled]="isViewDisable" [multiple]="true">
+          </j-auto-complete-defect-type>
+        </div>
+        <div class="offset-3 col-sm-9">
+          <ng-container *ngIf="isDefectTypeModified()">
+            <small *ngIf="isisDefectTypeModifiedEmpty()" class="form-text text-danger">
+              {{ "Message.Required" | translate }}
+            </small>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+       
+        </div>
+        <div class="offset-3 col-sm-9">
+         
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+       
+        </div>
+        <div class="offset-3 col-sm-9">
+         
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+         
+        </div>
+        <div class="offset-3 col-sm-9">
+         
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+
+  <button type="button" *ngIf="!isViewDisable" class="btn btn-primary" [disabled]="!formInput.valid || !formInput.dirty"
+    (click)="activeModal.close(formInput.value)">
+    {{ "Label.Add" | translate }}
+  </button>
+  <button type="button" class="btn btn-default" (click)="close()">
+    {{ "Label.Cancel" | translate }}
+  </button>
+
+</div>

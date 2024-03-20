@@ -1,0 +1,894 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.SAPPartInspectionPlanConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <!--     -->
+        <button type="button" id="buttonSaveAsDraft" class="btn btn-primary" (click)="saveDraftForm()"
+          [disabled]="isSaveDisabled()" data-dismiss="modal" title="{{ 'Label.SaveDraft' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.SaveDraft" | translate }}
+        </button>
+      </div>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveSubmitForm()" [disabled]="isSubmitDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Submit' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Submit" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.PartNo" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+
+              <j-auto-complete-sap-part formControlName="partNo" [config]="sapPartAutoCompleteConfig"
+                (onSelect)="selectPart($event)" (onUnselect)="clearPart()" [isDisabled]="recId">
+              </j-auto-complete-sap-part>
+              <i class="fa fa-copy" id="copy" title="Copy" (click)="onCopyClicked()"></i>
+              <span> {{copyMessage}} </span>
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isPartNoModified()">
+                <small *ngIf="isPartNoEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.ManufacturerPartNumber" | translate }}:</label>
+            <div class="col-sm-9">
+              <j-auto-complete-manufacture-part-number [partNo]="partNo"
+                [config]="manuFacturePartNumberAutoCompleteConfig" [isDisabled]="(isSupplierDisabledField || isEdit)"
+                (onSelect)="selectMPN($event)" (onUnselect)="clearMPN()" formControlName="manufacturePartNumber">
+              </j-auto-complete-manufacture-part-number>
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isManufacturePartNumberModified()">
+                <small *ngIf="isManufacturePartNumberEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.PartDescription" | translate }}:</label>
+            <div class="col-sm-9">
+              <textarea id="partDescription" type="text" class="form-control" formControlName="partDescription"
+                maxlength="256"></textarea>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.Manufacturer" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="manufacturer" type="text" class="form-control" formControlName="manufacturer" maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.MpnMaterial" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="mpnMaterialHERS" type="text" class="form-control" formControlName="mpnMaterialHERS"
+                maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.MPNMatched" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <p-radioButton class="inputRadioButton" [disabled]="isSQEDisabledField" *ngFor="let type of yesNoList"
+                (click)="onMPNMatchChanged()" name="mpnMatched" [value]="type.name" [label]="type.name"
+                formControlName="mpnMatched" [inputId]="type.name"></p-radioButton>
+            </div>
+          </div>
+          <div class="row form-group" *ngIf="isMPNReasonVisible">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.MPNReason" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="mpnReason" type="text" class="form-control" formControlName="mpnReason" maxlength="255" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.IP" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="iP" type="text" class="form-control" formControlName="iP" />
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isIPModified()">
+                <small *ngIf="isIPEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+                <small *ngIf="isIPHasWhiteSpace()" class="form-text text-danger">
+                  {{ "Message.BlankIP" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="row form-group" *ngIf="isCAFNoMandatory">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.CAFNo" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="cafNo" type="text" class="form-control" formControlName="cafNo"
+                (ngModelChange)="onCAFNoChange($event)" />
+            </div>
+            <div class="offset-3 col-sm-9">
+              <!-- <ng-container *ngIf="isCAFNoModified()">
+                <small *ngIf="isCAFNoEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container> -->
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.SiteIP" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="siteIP" type="text" class="form-control" formControlName="siteIP" />
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isSiteIPModified()">
+                <small *ngIf="isSiteIPEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.SafePart" | translate }}:</label>
+            <div class="col-sm-9">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isSafePart" name="isSafePart"
+                  formControlName="isSafePart">
+                <label class="custom-control-label" for="isSafePart" title="
+                {{formInput.controls['isSafePart'].value
+                      ? ('Label.Yes' | translate)
+                      : ('Label.No' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group ">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.WorkCell" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-work-cell-user formControlName="workCell" [isDisabled]="isSupplierDisabledField"
+                [multiple]="false" (onSelect)="GenerateCAFNo($event)" (onUnselect)="onUnselectWorkCell($event)">
+              </j-auto-complete-work-cell-user>
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isWorkCellModified()">
+                <small *ngIf="isWorkCellEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <!-- <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.DivisionModelNumber" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="divisionModelNumber" type="text" class="form-control" formControlName="divisionModelNumber"
+                maxlength="50" />
+            </div>
+          </div>  -->
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.GenWI" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="genWI" type="text" class="form-control" formControlName="genWI" maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.RefDoc" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="refDoc" type="text" class="form-control" formControlName="refDoc" maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.Commodity" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-commodity formControlName="commodity" (onSelect)="onCommoditySelect($event)"
+                (onUnselect)="unselectCommodity($event)" [multiple]="false" [isDisabled]="true">
+              </j-auto-complete-commodity>
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isCommodityModified()">
+                <small *ngIf="isCommodityEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="input-inline col-sm-11">
+            </div>
+            <div class="col-sm-1">
+              <button class="btn btn-primary" type="button" (click)="openDrawingModel()"
+                title="{{ 'Label.New' | translate }}">
+                <i class="fa fa-plus"></i> {{ "Label.New" | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.Drawing" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <app-configuration-ptable [column]="displayDrawingColumns" [enableSkeleton]="false"
+                [source]="drawingDetails" [enableDetail]="false" [enableToggle]="false" [enableEdit]="true"
+                [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true" [enableAuditTrail]="false"
+                [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                (editEvent)="editDrawingRecord($event)" (deleteEvent)="deleteDrawingRecord($event)">
+              </app-configuration-ptable>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-11">
+            </div>
+            <div class="col-sm-1">
+              <button class="btn btn-primary" type="button" (click)="openSpecModel()"
+                title="{{ 'Label.New' | translate }}">
+                <i class="fa fa-plus"></i> {{ "Label.New" | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.Specification" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <app-configuration-ptable [column]="displaySpecificationColumns" [enableSkeleton]="false"
+                [source]="specificationDetails" [enableDetail]="false" [enableToggle]="false" [enableEdit]="true"
+                [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true" [enableAuditTrail]="false"
+                [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                (editEvent)="editSpecRecord($event)" (deleteEvent)="deleteSpecificationRecord($event)">
+              </app-configuration-ptable>
+            </div>
+          </div>
+          <!-- <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.AdminCertification" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-admin-certification formControlName="adminCertifications" [multiple]="true">
+              </j-auto-complete-admin-certification>
+            </div>
+          </div> -->
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.ProductLifeCycleStage" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-product-life-cycle-stage formControlName="productLifeCycleStage" [multiple]="false"
+                [config]="productLifeCycleStageAutoCompleteConfig">
+              </j-auto-complete-product-life-cycle-stage>
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isProductLifeCycleStageModified()">
+                <small *ngIf="isProductLifeCycleStageEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">           
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.SupplierDetails" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-supplier formControlName="supplier" [isDisabled]="isSupplierDisabledField"
+                (onSelect)="onSupplierSelect($event)" (onUnselect)="onSupplierUnSelect($event)"
+                [config]="supplierAutoCompleteConfig">
+              </j-auto-complete-supplier>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.SupplierContact" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-supplier-user formControlName="supplierContact" [isDisabled]="isSupplierDisabledField"
+                [supplierId]="supplierId" (onSelect)="onSupplierContactSelect($event)"
+                (onUnselect)="onSupplierContactUnSelect($event)">
+              </j-auto-complete-supplier-user>
+
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isSupplierContactModified()">
+                <small *ngIf="isSupplierContactEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.SupplierContactEmail" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="supplierContactEmail" type="text" class="form-control" value="{{supplierContactEmail}}"
+                disabled />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.JabilOwnerContact" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="jabilOwnerContact" type="text" class="form-control" formControlName="jabilOwnerContact"
+                maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.SamplingPlan" | translate }}:</label>
+            <div class="col-sm-9">
+              <app-configuration-ptable [column]="samplingPlanColumns" [enableSkeleton]="false" [source]="samplingPlans"
+                [enableDetail]="false" [enableToggle]="false" [enableEdit]="false" [paginator]="false"
+                [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false" [enablePaginator]="false"
+                [enableTblBottomPageInfo]="false" [enableColumnFilter]="false">
+              </app-configuration-ptable>
+            </div>
+          </div>
+          <div class="row form-group ">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.DateCodeLimit" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <p-inputNumber formControlName="dateCodeLimit" (onInput)="onDateCodeLimitSelect()" [showButtons]="true"
+                autocomplete="off" inputId="dateCodeLimit" [useGrouping]="false" [disabled]="isSupplierDisabledField"
+                [min]="0" [max]="99" mode="decimal">
+              </p-inputNumber>
+              Month(s)
+            </div>
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-3 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-9">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group ">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.Certification" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-6">
+              <app-file-upload [files]="uploadCertificationFiles" formControlName="uploadCertificationFiles"
+                [fileExtensions]="['jpg','jpeg','pdf','png','xls','xlsx','doc','docx','ppt','csv']"
+                [downloadFiles]="true" [fileUploadId]="tempFolder" [maxFileSize]="maxFileSize"
+                [maxFileUploadLimit]="maxFileUploadLimit" [multiple]="true" [showDeleteFile]="true" [dragAndDrop]="true"
+                [showFiles]="true" [buttonText]="'Label.SelectFile'">
+              </app-file-upload>
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isUploadCertificationModified()">
+                <small *ngIf="isUploadCertificationEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group ">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.Comments" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <textarea id="comments" type="text" class="form-control" formControlName="comments">
+            </textarea>
+            </div>
+            <div class="offset-3 col-sm-9">
+            </div>
+          </div>
+          <div *ngIf="(partCommentDetails && partCommentDetails.length)" class="row form-group">
+            <div class="col-sm-9">
+              <label class="col-form-label fw-bold">{{ "Label.PreviousComments" | translate }}:
+              </label>
+            </div>
+          </div>
+          <div class="row form-group " *ngFor="let history of partCommentDetails">
+            <div class="col-sm-3"> <label class="col-form-label">{{ "Label.Comments" | translate }}:
+              </label></div>
+            <div class="col-sm-9"> <label for="{{history.comments}}"> {{history.comments}}</label></div>
+            <div class="col-sm-3"> <label class="col-form-label">{{ "Label.CommentedBy" | translate }}:
+              </label></div>
+            <div class="col-sm-9"><label for="{{history.submittedBy}}"> {{history.submittedByUser.name}}</label></div>
+            <div class="col-sm-3"> <label class="col-form-label">{{ "Label.CommentedTime" | translate }}:
+              </label></div>
+            <div class="col-sm-9"><label for="{{history.created}}"> {{history.createdDate}}</label></div>
+          </div>
+          <div class="block-content">
+            <div class="container-fluid">
+              <div class="col-sm-12">
+                <ul class="nav nav-tabs nav-fill">
+                  <li class="nav-item">
+                    <a href="#visualInspection" data-toggle="tab" (click)="expandCountTabDynamic()"
+                      class="nav-link">{{ "Label.VisualInspection" | translate }}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#testReport" (click)="expandTestReportTabDynamic()" data-toggle="tab"
+                      class="nav-link">{{ "Label.TestReport" | translate }}</a>
+                  </li>
+                  <li class="nav-item" *ngFor="let item of tabConfig; let i= index">
+                    <ng-container *ngIf="item.name=='DateCode' && item.isVisible;else visibleTabs">
+                      <a href="#{{titleCaseWord(item.name,true)}}" data-toggle="tab" (click)="expandTabDynamic(item.id)"
+                        class="nav-link">{{ labelTransform(item.name,false) | translate }}</a>
+                    </ng-container>
+                    <ng-template #visibleTabs>
+                      <a href="#{{titleCaseWord(item.name,true)}}" *ngIf="item.name=='BowTwist'"
+                        (click)="getBowTwistData()" data-toggle="tab"
+                        class="nav-link">{{ labelTransform(item.name,false) | translate }}</a>
+                      <a href="#{{titleCaseWord(item.name,true)}}" *ngIf="item.name !=='BowTwist' && item.isVisible"
+                        data-toggle="tab" (click)="expandTabDynamic(item.id)"
+                        class="nav-link">{{ labelTransform(item.name,false) | translate }}</a>
+                    </ng-template>
+                  </li>
+                </ul>
+                <div class="tab-content" id="inspectionTabContent">
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="dateCode" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <div class="row">
+                      <div class="content">
+                        <div class="block block-rounded">
+                          <div class="row form-group ">
+                            <div class="input-inline col-sm-3">
+                              <label class="col-form-label">{{ "Label.ManufactureDate" | translate }}:
+                              </label>
+                            </div>
+                            <div class="col-sm-4">
+                              <app-j-calendar formControlName="manufactureDate"
+                                (dateSelect)="onManufactureDateSelect($event)" [disabled]="true" id="manufactureDate"
+                                [showTime]="false" [timeOnly]="false" [selectionMode]="selectionModeSingle">
+                              </app-j-calendar>
+                              <div class="col-sm-4">
+                                <ng-container *ngIf="isManufactureDateModified()">
+                                  <small *ngIf="isManufactureDateEmpty()" class="form-text text-danger">
+                                    {{ "Message.Required" | translate }}
+                                  </small>
+                                  <small *ngIf="isManufactureDateHasWhiteSpace()" class="form-text text-danger">
+                                    {{ "Message.BlankManufactureDate" | translate }}
+                                  </small>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row form-group ">
+                            <div class="input-inline col-sm-3">
+                              <label class="col-form-label">{{ "Label.ShelfLife" | translate }}:
+                              </label>
+                            </div>
+                            <div class="col-sm-4">
+                              <p-inputNumber formControlName="shelfLifeMonths"
+                                (ngModelChange)="onShelfLifeSelect($event)" [showButtons]="true" autocomplete="off"
+                                inputId="shelfLifeMonths" [useGrouping]="false" [min]="minNumber" [max]="maxNumber"
+                                [size]="size">
+                              </p-inputNumber>Months
+                              <div class="col-sm-4">
+                                <ng-container *ngIf="isShelfLifeMonthsModified()">
+                                  <small *ngIf="isShelfLifeMonthsEmpty()" class="form-text text-danger">
+                                    {{ "Message.Required" | translate }}
+                                  </small>
+                                  <small *ngIf="isShelfLifeMonthsHasWhiteSpace()" class="form-text text-danger">
+                                    {{ "Message.BlankShelfLifeMonths" | translate }}
+                                  </small>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <div class="input-inline col-sm-3">
+                              <label class="col-form-label">{{ "Label.ManufactureDC" | translate }}:
+                              </label>
+                            </div>
+                            <div class="col-sm-4">
+                              <p-inputNumber formControlName="manufactureDCWeeks" [disabled]="true" [showButtons]="true"
+                                autocomplete="off" inputId="manufactureDCWeeks" [useGrouping]="false" [min]="minNumber"
+                                [max]="54" [size]="size">
+                              </p-inputNumber>Weeks
+                              <div class="col-sm-4">
+                                <ng-container *ngIf="isManufactureDCWeeksModified()">
+                                  <small *ngIf="isManufactureDCWeeksEmpty()" class="form-text text-danger">
+                                    {{ "Message.Required" | translate }}
+                                  </small>
+                                  <small *ngIf="isManufactureDCWeeksHasWhiteSpace()" class="form-text text-danger">
+                                    {{ "Message.BlankManufactureDCWeeks" | translate }}
+                                  </small>
+                                </ng-container>
+                              </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-4">
+                              <p-inputNumber formControlName="manufactureDCYears" [showButtons]="true"
+                                autocomplete="off" inputId="manufactureDCYears" [disabled]="true" [useGrouping]="false"
+                                [min]="minNumber" [max]="maxNumber" [size]="size">
+                              </p-inputNumber> Years
+                              <div class="col-sm-4">
+                                <ng-container *ngIf="isManufactureDCYearsModified()">
+                                  <small *ngIf="isManufactureDCYearsEmpty()" class="form-text text-danger">
+                                    {{ "Message.Required" | translate }}
+                                  </small>
+                                  <small *ngIf="isManufactureDCYearsHasWhiteSpace()" class="form-text text-danger">
+                                    {{ "Message.BlankManufactureDCYears" | translate }}
+                                  </small>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <label
+                              class="col-sm-3 col-form-label">{{ "Label.SurfaceFinishingDate" | translate }}:</label>
+                            <div class="col-sm-4">
+                              <app-j-calendar formControlName="surfaceFinishingDate" id="surfaceFinishingDate"
+                                [showTime]="false" [timeOnly]="false" [maxDate]="maxDate"
+                                (dateSelect)="onSurfaceFinishingDateSelect($event)"
+                                [disabled]="!isSurfaceFinishingDateEnabled" [selectionMode]="selectionModeSingle">
+                              </app-j-calendar>
+                            </div>
+                          </div>
+                          <div class="row form-group ">
+                            <label class="col-sm-3 col-form-label">{{ "Label.DateCodeDetails" | translate }}:
+                            </label>
+                            <div class="col-sm-9">
+                              <input id="dateCodeDetails" type="text" class="form-control"
+                                formControlName="dateCodeDetails" autocomplete="off" maxlength="50" />
+                            </div>
+                          </div>
+                          <div class="row form-group">
+                            <label class="col-sm-3 col-form-label">{{ "Label.ExpireDate" | translate }}:</label>
+                            <div class="col-sm-4">
+                              <app-j-calendar formControlName="expireDate" id="expireDate" [showTime]="false"
+                                [timeOnly]="false" [selectionMode]="selectionModeSingle">
+                              </app-j-calendar>
+                              <div class="col-sm-4">
+                                <ng-container *ngIf="isExpireDateModified()">
+                                  <small *ngIf="isExpireDateEmpty()" class="form-text text-danger">
+                                    {{ "Message.Required" | translate }}
+                                  </small>
+                                  <small *ngIf="isExpireDateHasWhiteSpace()" class="text-danger">
+                                    {{ "Message.BlankExpireDate" | translate }}
+                                  </small>
+                                </ng-container>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="visualInspection" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+
+                    <app-configuration-ptable [column]="countParameterColumns" [enableSkeleton]="false"
+                      [source]="countParameters" [enableDetail]="false" [enableToggle]="false" [enableEdit]="false"
+                      [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false"
+                      [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                      [dynamicTypeCollection]="dynamicTypeCollection" [dynamicRadioCollection]="dataTypeResult"
+                      (dropDownChangedEvent)="countParameterDropDownChangeEvent($event)"
+                      (textChangedEvent)="detailsDefineTextChangedEvent($event)"
+                      (checkBoxChangedEvent)="visualInspectionCheckBoxChangedEvent()"
+                      (radioButtonChangedEvent)="dataTypeRadioButtonChangedEvent($event)">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="testReport" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <app-configuration-ptable [column]="displayTestReportColumns" [enableSkeleton]="false"
+                      [source]="testReportTabDetails" [enableDetail]="false" [enableToggle]="false" [enableEdit]="false"
+                      [enableAttachment]="false" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false"
+                      [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                      [enableColumnFilter]="false" (editEvent)="editTestReportRecord($event)"
+                      (textChangedEvent)="testReportTextChangedEvent($event)"
+                      (checkBoxChangedEvent)="testReportCheckBoxChangedEvent()">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="functionAttribute" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <small *ngIf="isFunctionAttributeInspectionDetailsEmpty()" class="form-text text-danger">
+                      {{ "Message.TestReportInspectionDetailsRequired" | translate }}
+                    </small>
+                    <app-configuration-ptable [column]="displayResultOrientedColumns" [enableSkeleton]="false"
+                      [source]="resultOrientedTabDetails" [enableDetail]="false" [enableToggle]="false"
+                      [enableEdit]="false" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false"
+                      [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                      [enableColumnFilter]="false" [dynamicRadioCollection]="resultExpectedResultParameter"
+                      (textChangedEvent)="testRequirementTextChangedEvent($event)"
+                      (radioButtonChangedEvent)="resultRadioButtonChangedEvent($event)"
+                      (checkBoxChangedEvent)="functionAttributeCheckBoxChangedEvent()">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="dimensionalMeasurements" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <div class="row">
+                      <div class="input-inline col-sm-11">
+
+                      </div>
+                      <div class="col-sm-1">
+                        <button class="btn btn-primary" type="button" (click)="openMeasurementParameterModel()"
+                          title="{{ 'Label.Add' | translate }}">
+                          {{ "Label.Add" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                    <app-configuration-ptable [column]="funMicroMeasurementParameterColumns" [enableSkeleton]="false"
+                      [source]="measurementParameters" [enableDetail]="false" [enableToggle]="false" [enableEdit]="true"
+                      [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true" [enableAuditTrail]="false"
+                      [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                      (editEvent)="editMeasurementParameterRecord($event)"
+                      (deleteEvent)="deleteMeasurementParameterRecord($event)">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="functionVariable" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <div class="row">
+                      <div class="input-inline col-sm-11">
+
+                      </div>
+                      <div class="col-sm-1">
+                        <button class="btn btn-primary" type="button" (click)="openFunParameterModel()"
+                          title="{{ 'Label.Add' | translate }}">
+                          {{ "Label.Add" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                    <app-configuration-ptable [column]="funMicroMeasurementParameterColumns" [enableSkeleton]="false"
+                      [source]="funParameters" [enableDetail]="false" [enableToggle]="false" [enableEdit]="true"
+                      [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true" [enableAuditTrail]="false"
+                      [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                      (editEvent)="editFunParameterRecord($event)" (deleteEvent)="deleteFunParameterRecord($event)">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="microSectionParameter" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <div class="row">
+                      <div class="input-inline col-sm-11">
+
+                      </div>
+                      <div class="col-sm-1">
+                        <button class="btn btn-primary" type="button" (click)="openMicroSectionParameterModel()"
+                          title="{{ 'Label.Add' | translate }}">
+                          {{ "Label.Add" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                    <app-configuration-ptable [column]="microSectionParameterColumns" [enableSkeleton]="false"
+                      [source]="microSectionParameters" [enableDetail]="false" [enableToggle]="false"
+                      [enableEdit]="true" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true"
+                      [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                      [enableColumnFilter]="false" (editEvent)="editMicroSectionParameterRecord($event)"
+                      (deleteEvent)="deleteMicroSectionParameterRecord($event)">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="specWithMMC" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <div class="row">
+                      <div class="input-inline col-sm-11">
+
+                      </div>
+                      <div class="col-sm-1">
+                        <button class="btn btn-primary" type="button" (click)="openMPositionToleranceModel()"
+                          title="{{ 'Label.Add' | translate }}">
+                          {{ "Label.Add" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                    <app-configuration-ptable [column]="mPositionToleranceColumns" [enableSkeleton]="false"
+                      [source]="mPositionTolerances" [enableDetail]="false" [enableToggle]="false" [enableEdit]="true"
+                      [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true" [enableAuditTrail]="false"
+                      [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                      (editEvent)="editMPositionToleranceRecord($event)"
+                      (deleteEvent)="deleteMPositionToleranceRecord($event)">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="specWithLMC" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <div class="row">
+                      <div class="input-inline col-sm-11">
+
+                      </div>
+                      <div class="col-sm-1">
+                        <button class="btn btn-primary" type="button" (click)="openLPositionToleranceModel()"
+                          title="{{ 'Label.Add' | translate }}">
+                          {{ "Label.Add" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                    <app-configuration-ptable [column]="lPositionToleranceColumns" [enableSkeleton]="false"
+                      [source]="lPositionTolerances" [enableDetail]="false" [enableToggle]="false" [enableEdit]="true"
+                      [paginator]="false" [showInactiveStatus]="false" [enableDelete]="true" [enableAuditTrail]="false"
+                      [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                      (editEvent)="editLPositionToleranceRecord($event)"
+                      (deleteEvent)="deleteLPositionToleranceRecord($event)">
+                    </app-configuration-ptable>
+                  </div>
+                  <div class="tab-pane fade show col-sm-12 pt-2" id="bowTwist" role="tabpanel"
+                    aria-labelledby="inspectionTabContent">
+                    <br />
+                    <div class="row form-group ">
+                      <div class="input-inline col-sm-3">
+                        <label class="col-form-label">{{ "Label.SpecType" | translate }}:
+                        </label>
+                      </div>
+                      <div class="col-sm-9">
+                        <select class="form-control" *ngIf="specType" (change)="onSpecTypeChanged($event)">
+                          <option value="">{{"Label.Select" | translate}}</option>
+                          <ng-container *ngFor="let type of specType | keyvalue">
+                            <option *ngIf="type.key==specTypeId; else dropdownSpec" value="{{ type.key }}"
+                              selected="selected"> {{type.value}} </option>
+                            <ng-template #dropdownSpec>
+                              <option value="{{ type.key }}"> {{type.value}} </option>
+                            </ng-template>
+                          </ng-container>
+                        </select>
+                        <div class="col-sm-9">
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="row form-group">
+                      <label class="col-sm-3 col-form-label">{{ "Label.DataType" | translate }}:</label>
+                      <div class="col-sm-9">
+                        <table>
+                          <tr>
+                            <td *ngFor="let type of dataTypeList">
+                              <div *ngIf="type.id == dataTypeId; else radioBowDataType">
+                                <input type="radio" class="inputRadioButton" (click)="onBowDataTypeChanged($event)"
+                                  id={{rowIndex}} name=radioBow{{rowIndex}} checked="true" [value]="type.name">
+                                <label for="{{type.name}}"> {{type.name}}</label>
+                              </div>
+                              <ng-template #radioBowDataType>
+                                <input type="radio" class="inputRadioButton" id={{rowIndex}}
+                                  (click)="onBowDataTypeChanged($event)" name=radioBow{{rowIndex}} [value]="type.name">
+                                <label for="{{type.name}}"> {{type.name}}</label>
+                              </ng-template>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                    <br />
+
+                    <div *ngIf="bowTwistTitles.length>0">
+                      <div>
+                        <label class="col-sm-6 col-form-label">{{ bowTwistTitles[0].displayMessage }}:</label>
+                      </div>
+                      <br />
+                      <div>
+                        <label class="col-sm-2 col-form-label">{{ "Label.WarPage" | translate }}:</label>
+                        <label class="col-sm-1 col-form-label">{{ "Label.Spec" | translate }}:</label>
+                        <label class="col-sm-1 col-form-label">{{ "Label.Length" | translate }}:</label>
+                        <label class="col-sm-1 col-form-label">{{ "Label.Width" | translate }}:</label>
+                        <label class="col-sm-2 col-form-label">{{ "Label.Unit" | translate }}:</label>
+                        <label class="col-sm-3 col-form-label">{{ "Label.FormulaName" | translate }}:</label>
+                        <label class="col-sm-2 col-form-label">{{ "Label.UpperLimit" | translate }}:</label>
+                      </div>
+                      <br />
+                      <ng-container formArrayName="bowTwist">
+                        <ng-container *ngFor="let bowTwistControl of bowTwist.controls; let bowIndex = index"
+                          [formGroupName]="bowIndex">
+                          <div class="row form-group">
+                            <label
+                              class="col-sm-2 col-form-label">{{ bowTwistTitles[0].rows[bowIndex].rowTitle }}:</label>
+                            <div class="col-sm-1">
+
+                              <input id="spec" type="text" class="form-control" formControlName="spec" suffix="%"
+                                (ngModelChange)="onSpecChanged($event,bowIndex)" placeholder="00.00000"
+                                autocomplete="off" appMaxFraction [fraction]="minFractionDigits" [isNegative]="false" />
+                            </div>
+
+                            <div class="col-sm-1">
+                              <input id="length" type="text" class="form-control" formControlName="length"
+                                (ngModelChange)="onLengthChanged($event,bowIndex)" placeholder="00.00000"
+                                autocomplete="off" appMaxFraction [fraction]="minFractionDigits" [isNegative]="false" />
+                            </div>
+                            <div class="col-sm-1">
+                              <input id="width" type="text" class="form-control" formControlName="width"
+                                (ngModelChange)="onWidthChanged($event,bowIndex)" placeholder="00.00000"
+                                autocomplete="off" appMaxFraction [fraction]="minFractionDigits" [isNegative]="false" />
+                            </div>
+                            <div class="col-sm-2">
+                              <select class="form-control" *ngIf="unit" (change)="onUnitChanged($event,bowIndex)">
+                                <option value="">{{"Label.Select" | translate}}</option>
+                                <ng-container *ngFor="let type of unit | keyvalue">
+                                  <option *ngIf="type.key==bowTwistTitles[0].rows[bowIndex].unitId; else dropdownUnit"
+                                    value="{{ type.key }}" selected="selected"> {{type.value}} </option>
+                                  <ng-template #dropdownUnit>
+                                    <option value="{{ type.key }}"> {{type.value}} </option>
+                                  </ng-template>
+                                </ng-container>
+                              </select>
+
+
+                            </div>
+                            <div class="col-sm-3">
+                              <j-auto-complete-bow-twist-formula formControlName="bowTwistFormula"
+                                [warPageId]="bowTwistTitles[0].rows[bowIndex].id"
+                                (onSelect)="onBowTwistNameSelect($event,bowIndex)"
+                                (onUnselect)="onBowTwistNameClear($event,bowIndex)" [multiple]="false">
+                              </j-auto-complete-bow-twist-formula>
+                            </div>
+                            <div class="col-sm-2">
+                              <input id="upperLimit" type="text" class="form-control" formControlName="upperLimit"
+                                (change)="onWidthChanged($event,bowIndex)" placeholder="00.00000" autocomplete="off"
+                                appMaxFraction [fraction]="minFractionDigits" />
+                            </div>
+                          </div>
+                        </ng-container>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

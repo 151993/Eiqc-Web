@@ -1,0 +1,7 @@
+<div class="input-group"> 
+  <j-auto-complete-user class="extendWidth" [(ngModel)]="value" [dropdown]="false" [multiple]="true"
+    (sendSelectedValue)="shareSelected($event)"></j-auto-complete-user>
+  <div class="input-group-btn">
+    <button class="btn btn-default" (click)="showBinocularsModel($event)"><i class="fa fa-binoculars"></i></button>
+  </div>
+</div>

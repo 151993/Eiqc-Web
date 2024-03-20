@@ -1,0 +1,12 @@
+.RightSideNav {
+  position: fixed;
+  height: 85%;
+  width: 300px;
+  border: 1px solid #bfbfbf;
+  overflow: auto;
+  z-index: 2;
+  right: 2px !important;
+  transition: width 0.5s;
+  margin-bottom: 25px;
+  background: white;
+}

@@ -1,0 +1,34 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block block-rounded">
+      <div class="block-header border-bottom">
+        <button class="btn btn-default push-5-r" type="button" [routerLink]="['../']"
+          title="{{ 'Label.Back' | translate }}">
+          <i class="si si-action-undo"> </i>
+        </button>
+        <h3 class="block-title">
+          {{ "Label.ApprovedSupplierMeasurementSubmissionForm" | translate }}
+        </h3>
+        <div class="block-options" *ngIf="canCreate">
+          <button class="btn btn-primary" type="button" [routerLink]="['../AddSAPPartInspectionPlan']"
+            title="{{ 'Label.New' | translate }}">
+            <i class="fa fa-plus"></i> {{ "Label.New" | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="scrollMenu">
+        <div>
+          <app-configuration-ptable [column]="displayColumnsApproveReject" [source]="dataSourceApproveReject"
+          [totalRecords]="totalRecords" [first]="first"
+          [enableDetail]="true"  [showInactiveStatus]="false" [enableToggle]="false" [enableEdit]="false"
+          [enableDelete]="false" [enableAuditTrail]="false" (detailClickedEvent)="detailSelected($event)"
+          (filterEvent)="onFilterEvent($event)" [tableWidth]="150" (pageSortEvent)="onPageSortEvent($event)">
+        </app-configuration-ptable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.content p{
+	margin: 18px 0px 45px 0px;
+	font-size:2em;
+	color:#666;
+	text-align:center;
+}
+.content p span{
+	color:#e54040;
+}
+.content{
+    padding:115px 0px 0px 0px;
+    margin: 0 auto;
+}

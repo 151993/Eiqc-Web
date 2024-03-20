@@ -1,0 +1,55 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <h3 class="block-title justify-content-center align-self-center ">
+        {{ "Label.DCCTasks" | translate }}
+      </h3>
+      <div class="block-options">
+
+      </div>
+    </div>
+    <div class="block-content">
+      <div class="row">
+        <div class="block-content">
+          <div class="container-fluid">
+            <div class="col-sm-12">
+              <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                  <a href="#pendingApproval" data-toggle="tab" [ngClass]="{ 'active':activeTab==='pendingApproval'}"
+                    class="nav-link" (click)="pending('pendingApproval')">{{ "Label.PendingApproval" | translate }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#approvedRejected" data-toggle="tab" [ngClass]="{ 'active':activeTab==='approvedRejected'}"
+                    class="nav-link" (click)="approved('approvedRejected')">{{ "Label.ApprovedRejected" | translate }}</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="sapPartInspectionTabContent">
+                <div class="tab-pane fade show col-sm-12 pt-2 scrollMenu" id="pendingApproval" role="tabpanel"
+                  aria-labelledby="sapPartInspectionTabContent" [ngClass]="{ 'active':activeTab==='pendingApproval'}">
+
+                  <app-configuration-ptable [column]="displayColumns" [source]="dataSource"
+                    [totalRecords]="totalRecords" [dynamicTypeCollection]="dynamicTypeCollection" [dynamicCollectionColumnReference]="'workCellId'"
+                    [first]="first" [enableDetail]="true" [enableToggle]="false" [enableEdit]="false" [showInactiveStatus]="false"
+                    [enableDelete]="false" [enableAuditTrail]="false" (detailClickedEvent)="detailSelected($event)"
+                    (exportEvent)="onExportEvent($event)" (assignToUserEvent)="handleAssignToUserEvent($event)"
+                    (filterEvent)="onFilterEvent($event)" [tableWidth]="150" (pageSortEvent)="onPageSortEvent($event)" [canAssignToUser]="true">
+                  </app-configuration-ptable>
+
+                </div>
+                <div class="tab-pane fade show col-sm-12 pt-2 scrollMenu" id="approvedRejected" role="tabpanel"
+                  aria-labelledby="sapPartInspectionTabContent" [ngClass]="{ 'active':activeTab==='approvedRejected'}">
+                  <app-configuration-ptable [column]="displayColumnsApproveReject" [source]="dataSourceApproveReject"
+                  [totalRecords]="totalRecordsApprovedRejected" [dynamicTypeCollection]="dynamicTypeCollection" [first]="first"
+                  [enableDetail]="true" [enableToggle]="false" [enableEdit]="false" [showInactiveStatus]="false"
+                  [enableDelete]="false" [enableAuditTrail]="false" (detailClickedEvent)="detailSelected($event)"
+                  (filterEvent)="onFilterEvent($event)" [tableWidth]="150" (pageSortEvent)="onPageSortEvent($event)" (exportEvent)="onExportEvent($event)">
+                  </app-configuration-ptable>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+.input-inline label {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #575757;
+  background-color: #ebebeb;
+  border-color: #000000;
+}
+
+
+
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  background-color: #ebebeb;
+  border-color: #000000;
+  font-size: small;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.position {
+  margin-left: 84%;
+}
+
+.red{
+    color:red;
+}
+
+.green{
+    color:green;
+}
+
+.border { 
+  border: 1px solid red; 
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  grid-gap: 20px;
+}
+
+.positionWarpage{
+  margin-left: -1px;
+  margin-top: 7px;
+}

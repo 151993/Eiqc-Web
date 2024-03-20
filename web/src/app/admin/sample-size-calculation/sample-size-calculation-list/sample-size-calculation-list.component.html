@@ -1,0 +1,52 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block block-rounded">
+      <div class="block-header border-bottom">
+        <button class="btn btn-default push-5-r" type="button" [routerLink]="['../']"
+          title="{{ 'Label.Back' | translate }}">
+          <i class="si si-action-undo"> </i>
+        </button>
+        <h3 class="block-title">
+          {{ "Label.SampleSizeCalculation" | translate }}
+        </h3>
+      </div>
+      <div class="row form-group"></div>
+      <div class="row form-group">
+        <label class="col-sm-2 col-form-label">{{ "Label.PartNumber" | translate }}:</label>
+        <div class="col-sm-10">
+          <input id="partNumber" type="text" (ngModelChange)="isPartNumberEmpty()" [(ngModel)]="partNumber"
+            class="form-control" maxlength="200" />
+        </div>
+        <div class="offset-2 col-sm-10">
+          <small *ngIf="!isPartNoFilled" class="form-text text-danger">
+            {{ "Message.Required" | translate }}
+          </small>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-2 col-form-label">{{ "Label.VendorCode" | translate }}:</label>
+        <div class="col-sm-10">
+          <input id="vendorCode" type="text" class="form-control" id="vendorCode" maxlength="200" />
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-4"><button type="button" class="btn btn-primary" [disabled]="!isPartNoFilled"
+            (click)="search()" data-dismiss="modal" title="{{ 'Label.Search' | translate }}">
+            <i class=" fa fa-floppy-o"></i> {{ "Label.Search" | translate }}
+          </button></div>
+        <div class="col-sm-3"></div>
+
+      </div>
+      <div class="scrollmenu">
+        <app-configuration-ptable [column]="displayColumns" [source]="dataSource" [totalRecords]="totalRecords"
+          [first]="first" (editEvent)="editRecord($event)" (toggleEvent)="toggleStatus($event)"
+          (deleteEvent)="deleteRecord($event)" (auditTrailEvent)="showAuditLog($event)"
+          (filterEvent)="onFilterEvent($event)" (pageSortEvent)="onPageSortEvent($event)" [enableEdit]="false"
+          [tableWidth]="400" (exportEvent)="onExportEvent($event)" [enableDelete]="false" [enableView]="false"
+          [enableAuditTrail]="false">
+        </app-configuration-ptable>
+      </div>
+    </div>
+  </div>
+</div>

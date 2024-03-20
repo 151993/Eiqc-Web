@@ -1,0 +1,43 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" [routerLink]="['../']"
+        title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.Site" | translate }}
+      </h3>
+      <div class="block-options">
+        <button *ngIf="canCreate" class="btn btn-primary" type="button" [routerLink]="['../AddSite']"
+          title="{{ 'Label.New' | translate }}">
+          <i class="fa fa-plus"></i> {{ "Label.New" | translate }}
+        </button>
+      </div>
+      <div class="block-options">
+        <button *ngIf="canCreate" class="btn btn-primary" type="button" (click)="syncFromTM1()"
+          title="{{ 'Label.Sync' | translate }}">
+          <i class="fa fa-sync"></i> {{ "Label.Sync" | translate }}
+        </button>
+      </div>
+      <div class="block-options lastTM1SyncDate">
+        <label  class="lbl1" title="Last TM1 Sync Date">
+          {{ "Label.LastTM1SyncDate"  | translate }}:
+       </label>
+        <label class="lbl" title="Last TM1 Sync Date">
+         {{ lastTM1SyncDate  }}
+        </label>
+      </div>
+    </div>
+    <div class="block-content">
+      <div>
+        <app-configuration-ptable [column]="displayColumns" [source]="dataSource" [totalRecords]="totalRecords"
+          [first]="first" (editEvent)="editRecord($event)" (toggleEvent)="toggleStatus($event)"
+          (deleteEvent)="deleteRecord($event)" (exportEvent)="onExportEvent($event)" (auditTrailEvent)="showAuditLog($event)"
+          (filterEvent)="onFilterEvent($event)" (pageSortEvent)="onPageSortEvent($event)" [enableEdit]="canUpdate"
+          [enableDelete]="false">
+        </app-configuration-ptable>
+      </div>
+    </div>
+  </div>
+</div>

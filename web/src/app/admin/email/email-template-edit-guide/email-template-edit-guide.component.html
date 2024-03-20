@@ -1,0 +1,22 @@
+<div class="RightSideNav">
+  <div class="block-header bg-gray-lighter">
+    <div class="row">
+      <div class="col-md-6 push-5-t">
+        <h3 class="block-title ">
+          {{ 'Label.Guide' | translate }}
+        </h3>
+      </div>
+      <button type="button" class="ml-auto close" title="{{ 'Label.Close' | translate }}" (click)="closeGuide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <p-panel *ngFor="let item of dataSource">
+      <p-header>
+        {{item.key}}
+      </p-header>
+      {{ 'Label.GuideReplacedWith' | translate }} {{item.description}}
+    </p-panel>
+  </div>
+</div>

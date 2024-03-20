@@ -1,0 +1,224 @@
+/* START: Custom CSS */
+
+/* a {
+    color: #337ab7;
+}
+
+#sidebar {
+    padding-top: 15px;
+}
+
+.panel {
+    margin-bottom: 0px;
+}
+
+.active-link {
+    color: #fff !important;
+} */
+
+
+/* END: Custom CSS */
+
+
+/* START: Special for MyRecent as it needs to pop out on the right */
+/*
+.myRecentItem {
+    position: fixed;
+    margin-left: 250px;
+    margin-top: -48px;
+    z-index: 1;
+    background: #fff;
+    border: 1px solid #bfbfbf;
+    min-width: 250px;
+    width: 400px;
+    height: 0px;
+    padding-left: 10px;
+    transition: 0.5s ease;
+}
+
+.myRecent-expanded {
+    height: auto;
+}
+
+.myRecent div {
+    border-top: 1px solid #e3e9ea;
+}
+
+.myRecentItem div a {
+    padding-left: 10px !important;
+}
+
+.noPadding {
+    padding-left: 0px !important;
+    display: block;
+} */
+
+
+
+/* END: Special for MyRecent as it needs to pop out on the right */
+
+
+/* ###################################### */
+
+
+/* START : Parent */
+
+/* :host-context(.hide) .sideNav {
+    width: 0px;
+    transition: width 0.5s;
+}
+
+.sideNav {
+    position: fixed;
+    height: 100%;
+    height: calc(100% - 60px);
+    width: 100px;
+    border: 1px solid #bfbfbf;
+    overflow: auto;
+    z-index: 2;
+    transition: width 0.5s;
+}
+
+
+/* END : Parent */
+
+
+/* ###################################### */
+
+
+/* START : Child - level 1 */
+
+
+/* START : Collapsed */
+/*
+.sideNav-div {
+    border-top: solid 1px #bfbfbf !important;
+    border-radius: 0px;
+}
+
+.sideNav-div:last-child {
+    border-bottom: solid 1px #bfbfbf !important;
+    border-radius: 0px;
+}
+
+.sideNav-div a {
+    display: table;
+}
+
+.sideNav-div a i,
+span {
+    display: table-cell;
+    vertical-align: middle;
+    background-color: #003865;
+}
+
+.sideNav-div a:hover {
+    color: white;
+}
+
+.sideNav-div a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 15px 0px 15px 10px;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.sideNav-div a[aria-expanded="true"] {
+    color: #fff;
+}
+
+.sideNav-div a i {
+    color: #aeb2b7;
+}
+
+.sideNav-div a span {
+    padding-left: 5px;
+} */
+
+
+
+/* END : Collapsed */
+
+
+/* START : Expand */
+
+
+
+/* END : Expand */
+
+
+/* END : Child Level 1 */
+
+
+/* ###################################### */
+
+
+/* START : Child Level 2 - Child of Child */
+
+/* .sideNav-div-child {
+    overflow: hidden;
+}
+
+.sideNav-div-child ul li a {
+    color: rgba(255, 255, 255, 0.5);
+    padding: 6px;
+}
+
+.sideNav-div-child ul li a:hover {
+    color: #fff;
+}
+
+.sideNav-div-child ul li a:active {
+    color: #fff;
+}
+
+.sideNav-div-child ul li a span {
+    padding-left: 2em;
+    display: inline-block;
+}
+
+.dropdown-toggle::after {
+    position: sticky;
+    left: 85%;
+} */
+
+
+
+/***
+Styles Modified
+***/
+
+/* .sideNav-div a i {
+    color: #bfbfbf !important;
+} */
+
+
+
+/* END : Child Level 2 - Child of Child */
+
+
+i {
+  margin-right: 10px;
+}
+
+
+.menu-item:hover {
+  color: #fff;
+  background-color: transparent;
+}
+
+li>a:hover {
+  color: #fff !important;
+  background-color: transparent !important;
+  border-style: solid;
+  border-color: #fff;
+  color: #113C5F;
+}
+
+#page-container.sidebar-dark #sidebar {
+  color: #ebebeb;
+  background-color: #002B49 !important;
+  box-shadow: none;
+}

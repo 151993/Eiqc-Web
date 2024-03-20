@@ -1,0 +1,52 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="close()" title="{{('Label.Close'| translate)}}">
+        <i class="si si-close"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ 'Label.Detail' | translate }}
+      </h3>
+      <div class="block-options">
+      </div>
+    </div>
+    <div class="block-content">
+      <div class="row">
+        <div class="form-group row">
+          <div class="col-md-6 col-xl-6 row">
+            <label class="col-md-3 col-xl-3 col-form-label">{{ "Label.CreatedBy" | translate }}:</label>
+            <input type="text" readonly class="form-control-plaintext col-md-9 col-xl-9"
+              value="{{auditMeta.createdByUser.name}}" />
+          </div>
+          <div class="col-md-6 col-xl-6 row">
+            <label class="col-md-4 col-xl-4 col-form-label">{{ "Label.CreatedDate" | translate }}:</label>
+            <input type="text" readonly class="form-control-plaintext col-md-8 col-xl-8"
+              value="{{ auditMeta.created | timeZ: true }}" />
+          </div>
+          <div class="col-md-6 col-xl-6 row">
+            <label class="col-md-3 col-xl-3 col-form-label">{{ "Label.Title" | translate }}:</label>
+            <input type="text" readonly class="form-control-plaintext col-md-9 col-xl-9"
+              value="{{ auditMeta.title }}" />
+          </div>
+          <div class="col-md-6 col-xl-6 row">
+            <label class="col-md-4 col-xl-4 col-form-label">{{ "Label.Type" | translate }}:</label>
+            <input type="text" readonly class="form-control-plaintext col-md-8 col-xl-8"
+              value="{{ auditMeta.auditLogType}}" />
+          </div>
+          <div class="col-md-6 col-xl-6 row">
+            <label class="col-md-3 col-xl-3 col-form-label">{{ "Label.ChangeReason" | translate }}:</label>
+            <p class="form-control-plaintext col-md-9 col-xl-9">
+              {{ auditMeta.changeReason }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <app-configuration-ptable [column]="displayColumns" [enableSkeleton]="false" [source]="source"
+          [totalRecords]="source.length" [enableDetail]="false" [enableToggle]="false" [enableEdit]="false"
+          [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false" [fileName]="fileName">
+        </app-configuration-ptable>
+      </div>
+    </div>
+  </div>
+</div>

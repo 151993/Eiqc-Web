@@ -1,0 +1,33 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+      <div class="block block-rounded">
+          <div class="block-header border-bottom">
+            <button class="btn btn-default push-5-r" type="button" [routerLink]="['../']"
+              title="{{ 'Label.Back' | translate }}">
+              <i class="si si-action-undo"> </i>
+            </button>
+            <h3 class="block-title">
+              {{ "Label.FormMPositionActual" | translate }}
+            </h3>
+            <div class="block-options" *ngIf="canCreate">
+              <button class="btn btn-primary" type="button" [routerLink]="['../AddFormMPositionActual']"
+                title="{{ 'Label.New' | translate }}">
+                <i class="fa fa-plus"></i> {{ "Label.New" | translate }}
+              </button>
+            </div>
+      </div>
+      <div class="block-content">
+          <div>
+              <app-configuration-ptable [column]="displayColumns" [source]="dataSource" [totalRecords]="totalRecords" [first]="first"
+                                        (editEvent)="editRecord($event)" (toggleEvent)="toggleStatus($event)" (deleteEvent)="deleteRecord($event)"
+                                        (auditTrailEvent)="showAuditLog($event)" (filterEvent)="onFilterEvent($event)" (pageSortEvent)="onPageSortEvent($event)"
+                                        [enableEdit]="canUpdate" [enableDelete]="canDelete" [enableView]="canAccess" (exportEvent)="onExportEvent($event)">
+              </app-configuration-ptable>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,267 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.GRSConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.GRSNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="gRSNo" type="text" class="form-control" formControlName="gRSNo" maxlength="20" />
+            </div>
+            <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isGRSNoModified()">
+                <small *ngIf="isGRSNoEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+                <small *ngIf="isGRSNoExists()" class="text-danger">
+                  {{ "Message.GRSNoExists" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MedialCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="medialCode" type="text" class="form-control" formControlName="medialCode" maxlength="50" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isMedialCodeModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MPN" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="mPN" type="text" class="form-control" formControlName="mPN" maxlength="50" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isMPNModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MaterialName" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="materialName" type="text" class="form-control" formControlName="materialName"
+                maxlength="100" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isMaterialNameModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MFG" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="mFG" type="text" class="form-control" formControlName="mFG" maxlength="50" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isMFGModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Quantity" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="quantity" type="number" class="form-control" formControlName="quantity" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isQuantityModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LotNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lotNo" type="text" class="form-control" formControlName="lotNo" maxlength="50" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLotNoModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InspectQty" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="inspectQty" type="number" class="form-control" formControlName="inspectQty" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isInspectQtyModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.RejectionQty" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="rejectionQty" type="number" class="form-control" formControlName="rejectionQty" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isRejectionQtyModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InspectorName" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="inspectorName" type="text" class="form-control" formControlName="inspectorName"
+                maxlength="8000" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isInspectorNameModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InspectionResult" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="inspectionResult" type="text" class="form-control" formControlName="inspectionResult"
+                maxlength="8000" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isInspectionResultModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.GRSNoType" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="gRSNoType" type="text" class="form-control" formControlName="gRSNoType" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isGRSNoTypeModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PO" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="pO" type="text" class="form-control" formControlName="pO" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isPOModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VendorCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorCode" type="text" class="form-control" formControlName="vendorCode" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isVendorCodeModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MatlGroup" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="matlGroup" type="text" class="form-control" formControlName="matlGroup" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isMatlGroupModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VendorName1" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorName1" type="text" class="form-control" formControlName="vendorName1" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isVendorName1Modified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SkipIQC" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="skipIQC" type="text" class="form-control" formControlName="skipIQC" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSkipIQCModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PartNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <j-auto-complete-part formControlName="part"
+              (onDropdownClick)="getData()"
+              [config]="partAutoCompleteConfig"
+                ></j-auto-complete-part>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isPartNoModified()">
+              </ng-container>
+            </div>-->
+          </div> 
+
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

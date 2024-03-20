@@ -1,0 +1,43 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block block-rounded">
+      <div class="block-header border-bottom">
+        <button class="btn btn-default push-5-r" type="button" [routerLink]="['../']"
+          title="{{ 'Label.Back' | translate }}">
+          <i class="si si-action-undo"> </i>
+        </button>
+        <h3 class="block-title">
+          {{ "Label.Part" | translate }}
+        </h3>
+        <div hidden="true">
+          <div class="block-options" *ngIf="canCreate">
+            <button class="btn btn-primary" type="button" (click)="syncFromSAP()"
+              title="{{ 'Label.Sync' | translate }}">
+              <i class="fa fa-sync"></i> {{ "Label.Sync" | translate }}
+            </button>
+          </div>
+          <div class="block-options lastSAPSyncDate">
+            <label class="lbl1" title="Last SAP Sync Date">
+              {{ "Label.LastSAPSyncDate"  | translate }}:
+            </label>
+            <label class="lbl" title="Last SAP Sync Date">
+              {{ lastSAPSyncDate  }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="scrollMenu">
+        <div>
+          <app-configuration-ptable [column]="displayColumns" [source]="dataSource" [totalRecords]="totalRecords"
+            [first]="first" (editEvent)="editRecord($event)" (toggleEvent)="toggleStatus($event)"
+            (deleteEvent)="deleteRecord($event)" [enableAuditTrail]="false" (filterEvent)="onFilterEvent($event)"
+            (pageSortEvent)="onPageSortEvent($event)" [tableWidth]="150" [enableEdit]="canUpdate" [enableDelete]="canDelete">
+          </app-configuration-ptable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

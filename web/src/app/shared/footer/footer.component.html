@@ -1,0 +1,19 @@
+<!-- Footer -->
+<footer id="page-footer" class="bg-body-light">
+  <div class="content py-3">
+    <div class="row font-size-sm">
+      <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
+        <div class="footer-logo">
+          <a href="http://jabil.com" target="_blank"><img src="assets/img/jabil-2020/JabilMasterBrand_White_PMS298.png" alt="Jabil logo"></a>
+        </div>
+      </div>
+      <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
+        <a class="font-w600" href="#" target="_blank">{{appName}} {{version}}</a> &copy; <span class="js-year-copy"></span>
+        | <a class="font-w600" [attr.href]="'mailto:'+ supportEmail">{{ "Label.GetInTouch" | translate }} </a>
+        | <a class="font-w600" href="javascript:void(0)" target="_blank">{{currentYear}}</a>
+        | <span [class]="environmentClass"> {{ "Label.Environment" | translate }}: {{ environment }} </span>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END Footer -->

@@ -1,0 +1,44 @@
+<div class="content">
+	<div class="block block-rounded">
+		<div class="block-header border-bottom">
+			<button class="btn btn-default push-5-r" (click)="close()" type="button"
+				title="{{('Label.Close'| translate)}}">
+				<i class="si si-close"> </i>
+			</button>
+			<h3 class="block-title">
+				{{ "Label.PartSpecAttachments" | translate }}
+			</h3>
+			<div class="block-options">
+				<button type="button" class="btn btn-primary" (click)="activeModal.close(formInput.value)" [disabled]="isSaveDisabled()"
+					data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+					<i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+				</button>
+			</div>
+		</div>
+		<div class="block-content contentHeight">
+			<div class="row overflow-auto">
+				<form [formGroup]="formInput">
+					<div class="row form-group ">
+						<div *ngIf="!isFileUploadDisabled" class="col-sm-11">
+							<app-file-upload [files]="specAttachments" formControlName="specAttachments"
+								[fileExtensions]="['pdf','xlsx','png','jpg']" [downloadFiles]="true"
+								[showSelectFile]="true" [fileUploadId]="tempFolder" [multiple]="true"
+								[dragAndDrop]="true" [maxFileSize]="maxFileSize"
+								[maxFileUploadLimit]="maxFileUploadLimit" [showFiles]="true"
+								[buttonText]="'Label.SelectFile'">
+							</app-file-upload>
+						</div>
+						<div *ngIf="isFileUploadDisabled" class="col-sm-11">
+							<app-file-upload [files]="specAttachments" formControlName="specAttachments"
+								 [fileExtensions]="['pdf','xlsx','png','jpg']" [downloadFiles]="true"
+								 [fileUploadId]="tempFolder" [multiple]="true"
+								 [showFiles]="true"[buttonText]="'Label.SelectFile'"
+								 [dragAndDrop]="false" [showSelectFile]="false" [showDeleteFile]="false" [isDisabled]="true">
+							</app-file-upload>					
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

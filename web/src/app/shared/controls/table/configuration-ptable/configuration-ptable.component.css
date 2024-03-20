@@ -1,0 +1,12 @@
+.options-buttons>div>div>button {
+    margin: 5px 5px 5px 5px;
+}
+
+body .ui-table .ui-sortable-column.p-highlight {
+  background-color: #003865 !important;
+  color: #ffffff;
+}
+
+body .p-component .ui-dropdown {
+  min-width: 4.5rem !important;
+}

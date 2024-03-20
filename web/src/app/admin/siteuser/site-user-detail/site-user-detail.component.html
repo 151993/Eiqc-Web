@@ -1,0 +1,58 @@
+     <div class="content">
+      <div class="block block-rounded">
+        <div class="block-header border-bottom">
+          <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{formInput.dirty
+                ? ('Label.Cancel'| translate)
+                : ('Label.Back'| translate)
+            }}">
+            <i class="si si-action-undo"> </i>
+          </button> 
+          <h3 class="block-title">
+            {{ "Label.SiteSmeConfiguration" | translate }}        
+          </h3>    
+          <div class="block-options">
+            <button type="button" class="btn btn-primary" (click)="saveForm()" title="{{ 'Label.Assign' | translate }}"
+              [disabled]="isSaveDisabled()" data-dismiss="modal">
+              <i class=" fa fa-floppy-o"></i> {{ "Label.Assign" | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="block-content">
+          <div class="row">
+            <form [formGroup]="formInput">
+              <div class="row form-group ">
+                <label class="col-sm-1 col-form-label">{{ "Label.Site" | translate }}:</label>
+                <div class="col-sm-9">
+                  <j-auto-complete-site formControlName="sites" [isSiteSME]="isSiteSME" [siteCode]="siteCode" (onSelect)="onSiteSelect($event)">
+                  </j-auto-complete-site>
+                  <div class="offset-1 col-sm-9">
+                    <ng-container *ngIf="isSiteModified()">
+                      <small *ngIf="isSiteEmpty()" class="form-text text-danger">
+                        {{ "Message.Required" | translate }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group ">
+                <label class="col-sm-1 col-form-label">{{ "Label.User" | translate }}:</label>
+                <div class="col-sm-9">
+                  <j-binoculars-user formControlName="siteUserSme">
+                  </j-binoculars-user>
+                  <div class="offset-1 col-sm-9">
+                    <ng-container *ngIf="isUserModified()">
+                      <small *ngIf="isUserEmpty()" class="form-text text-danger">
+                        {{ "Message.Required" | translate }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>         
+              <div class="row form-group">
+                <app-site-user-list [site]="site"></app-site-user-list>
+              </div>
+            </form>
+          </div>
+        </div>    
+      </div>
+    </div>

@@ -1,0 +1,220 @@
+/* You can add global styles to this file, and also import other style files */
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    /* margin-bottom: 5px; */
+}
+
+.mainContainer {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    transition: margin 0.5s;
+}
+
+.adminText {
+    float: left;
+    text-align: left;
+    color: #005288;
+    width: 112px;
+    height: 40px;
+}
+
+.adminText:hover .adminText,
+.tile-admin:hover .adminText {
+    color: #ffffff !important;
+}
+
+.adminImg {
+    text-align: right;
+    color: grey;
+    position: relative;
+    bottom: -15px;
+    font-size: 40px;
+    float: right;
+}
+
+.tile {
+    width: 100% !important;
+    display: inline-block;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 5px !important;
+    margin-bottom: 7px;
+    margin-right: 10px;
+}
+
+.tile-admin {
+    background-color: white;
+    color: #fff;
+    border-color: #005288;
+    border: 1px #bfbfbf solid !important;
+    height: 120px;
+}
+
+.tile-admin:hover {
+    background-color: #70b9eb;
+}
+
+.page-title {
+    margin-bottom: 5px;
+    height: 52px;
+    padding: 15px 65px 10px;
+}
+
+.page-title.blue {
+    background-color: #eff4f9;
+    text-align: center !important;
+    color: black !important;
+    font-size: 18px !important;
+    font-weight: normal;
+}
+
+
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+    /* CSS */
+    .content {
+        padding: 58px 0px 0px 0px;
+    }
+}
+
+
+/*
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    /* CSS */
+    .content {
+        padding: 58px 0px 0px 0px;
+    }
+}
+
+
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* CSS */
+    html {
+        min-width: 1000px;
+        min-height: 800px;
+    }
+    .content {
+        padding: 58px 0px 0px 0px;
+    }
+    .content p {
+        font-size: 1.5em;
+    }
+    .copy-right p {
+        font-size: 0.9em;
+    }
+}
+
+
+/*
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* CSS */
+    html {
+        min-width: 1000px;
+        min-height: 800px;
+    }
+}
+
+
+/*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+    /* CSS */
+    html {
+        min-width: 1000px;
+        min-height: 800px;
+    }
+    .content {
+        padding: 58px 0px 0px 0px;
+    }
+    .content p {
+        font-size: 1.3em;
+    }
+    .copy-right p {
+        font-size: 0.9em;
+    }
+}
+
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    /* CSS */
+    html {
+        min-width: 1000px;
+        min-height: 800px;
+    }
+    .content {
+        padding: 20px 0px 0px 0px;
+        margin: 0px 12px;
+    }
+    .content p {
+        font-size: 0.9em;
+    }
+    .copy-right p {
+        font-size: 0.8em;
+    }
+}
+
+
+/* Tables Prime ng - jabil image*/
+
+body .ui-table .ui-sortable-column.p-highlight {
+  color: #fff;
+  background-color: #54C0E8 !important;
+  border-top-color: #54C0E8 !important;
+}
+
+body .ui-table .ui-table-tbody>tr {
+  background-color: #fff !important;
+}
+
+body .p-component .ui-dropdown {
+  min-width: 4.5rem !important;
+}
+
+body .ui-table .ui-table-tbody>tr>td {
+  padding: 0px 5px 0px 5px !important;
+}
+
+
+/* Autocomplete Prime ng - jabil image */
+
+body .ui-autocomplete.ui-autocomplete-multiple .ui-autocomplete-multiple-container .ui-autocomplete-token {
+  font-size: 14px;
+  padding: 0.2145em 0.429em;
+  margin: 0 0.286em 0 0;
+  background: #54C0E8 !important;
+  color: #ffffff;
+}
+
+.inputRadioButton {
+    margin-left: 10px;
+}
+
+

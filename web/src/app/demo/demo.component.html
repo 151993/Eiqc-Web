@@ -1,0 +1,315 @@
+<div class="content">
+	<div class="block block-rounded">
+		<div class="block-header border-bottom">
+			<button class="btn btn-default push-5-r" type="button" title="{{ 'Label.Back' | translate }}">
+				<i class="si si-action-undo"> </i>
+			</button>
+			<h3 class="block-title">
+				[Place title here] - {{ "Label.ActionBar" | translate }}
+			</h3>
+			<div class="block-options">
+				<button class="btn btn-primary m-1" type="button" title="{{ 'Label.New' | translate }}">
+					<i class="fa fa-plus"></i> {{ "Label.New" | translate }}
+				</button>
+				<button class="btn btn-primary m-1" type="button" title="{{ 'Label.Import' | translate }}">
+					{{ "Label.Import" | translate }}
+				</button>
+				<button class="btn btn-primary m-1" type="button" title="{{ 'Label.Export' | translate }}">
+					{{ "Label.Export" | translate }}
+				</button>
+				<button class="btn btn-primary m-1" type="button" title="{{ 'Label.Delete' | translate }}">
+					{{ "Label.Delete" | translate }}
+				</button>
+				<button class="btn btn-primary m-1" type="button" title="{{ 'Label.Save' | translate }}">
+					{{ "Label.Save" | translate }}
+				</button>
+			</div>
+		</div>
+		<div class="block-content">
+			<div class="container-fluid">
+				<div class="col-sm-12">
+					<ul class="nav nav-tabs nav-fill">
+						<li class="nav-item">
+							<a href="#notifications" data-toggle="tab" class="nav-link active">Notifications</a>
+						</li>
+						<li class="nav-item">
+							<a href="#progress" data-toggle="tab" class="nav-link">Progress / Loading</a>
+						</li>
+						<li class="nav-item">
+							<a href="#modals" data-toggle="tab" class="nav-link">Popup Modals</a>
+						</li>
+						<li class="nav-item">
+							<a href="#search" data-toggle="tab" class="nav-link">Search</a>
+						</li>
+						<li class="nav-item">
+							<a href="#datetime" data-toggle="tab" class="nav-link">Date & Time</a>
+						</li>
+						<li class="nav-item">
+							<a href="#table" data-toggle="tab" class="nav-link">Table</a>
+						</li>
+						<li class="nav-item">
+							<a href="#attachment" data-toggle="tab" class="nav-link">Attachment</a>
+						</li>
+						<li class="nav-item">
+							<a href="#jbootstrap" data-toggle="tab" class="nav-link">Jabil Bootstrap</a>
+						</li>
+						<!-- <li class="ml-auto">
+              <ul class="block-options push-10-t push-10-r">
+                <li>
+                  <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"
+                    title="{{ 'Label.Refresh' | translate }}" (click)="refreshActiveTab()">
+                    <i class="si si-refresh"></i>
+                  </button>
+                </li>
+              </ul>
+            </li> -->
+					</ul>
+					<div class="tab-content" id="demoTabContent">
+						<div class="tab-pane fade show active col-sm-12 pt-2" id="notifications" role="tabpanel"
+							aria-labelledby="demoTabContent">
+							<div class="row">
+								<div class="col">
+									<a class="block block-link-hover3 text-center">
+										<div class="block-content block-content-full">
+											<button class="btn btn-success w-100" (click)="showNotification()">
+												Show success notification
+											</button>
+										</div>
+									</a>
+								</div>
+								<div class="col">
+									<a class="block block-link-hover3 text-center">
+										<div class="block-content block-content-full">
+											<button class="btn btn-danger w-100" (click)="showErrorNotification()">
+												Show error notification
+											</button>
+										</div>
+									</a>
+								</div>
+								<div class="col">
+									<a class="block block-link-hover3 text-center">
+										<div class="block-content block-content-full">
+											<button class="btn btn-info w-100" (click)="showInfoNotification()">
+												Show info notification
+											</button>
+										</div>
+									</a>
+								</div>
+								<div class="col">
+									<a class="block block-link-hover3 text-center">
+										<div class="block-content block-content-full">
+											<button class="btn btn-warning w-100" (click)="showWarningNotification()">
+												Show warning notification
+											</button>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade show col-sm-12 pt-2" id="progress" role="tabpanel"
+							aria-labelledby="demoTabContent">
+							<div class="row mb-3">
+								<div class="col">
+									<div class="block-content block-content-full ">
+										<button class="btn btn-info w-100" (click)="mockLoading()">
+											Show header loading
+										</button>
+									</div>
+								</div>
+								<div class="col">
+									<div class="block-content block-content-full ">
+										<button class="btn btn-info w-100" (click)="mockFullPageLoading()">
+											Show full page loading
+										</button>
+									</div>
+								</div>
+								<div class="col">
+									<div class="block-content block-content-full ">
+										<button class="btn btn-info w-100" (click)="mockStaticLoading()">
+											Show static loading
+										</button>
+									</div>
+								</div>
+								<div class="col">
+									<div class="block-content block-content-full ">
+										<button class="btn btn-info w-100" [routerLink]="['../Demo/SkeletonLoading']">
+											Skeleton loading
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade show col-sm-12 pt-2" id="modals" role="tabpanel"
+							aria-labelledby="demoTabContent">
+							<div class="row mb-3">
+								<div class="col">
+									<div class="block-content block-content-full ">
+										<button class="btn btn-info w-100" (click)="showChangeReasonModal()">
+											ChangeReason Popup
+										</button>
+									</div>
+								</div>
+								<div class="col">
+									<div class="block-content block-content-full ">
+										<button class="btn btn-info w-100" (click)="showConfirmationModal()">
+											Confirmation Popup
+										</button>
+									</div>
+								</div>
+								<div class="col">
+									<div class="block-content block-content-full ">
+										<button class="btn btn-info w-100" (click)="showCustomConfirmationModal()">
+										  Custom Confirmation Popup
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade show col-sm-12 pt-2" id="search" role="tabpanel"
+							aria-labelledby="demoTabContent">
+							<div class="row mb-3">
+								<div class="col-md-4">
+									<div class="block-content block-content-full ">
+										<form [formGroup]="userFormInput">
+											<div class="row form-group">
+												<label class="col-sm-12 col-form-label">{{ "Label.User" | translate }}
+													{{ "Label.Multiple" | translate }}:</label>
+												<div class="col-sm-12">
+													<j-auto-complete-user formControlName="userMultiple"
+														[multiple]="true">
+													</j-auto-complete-user>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="block-content block-content-full ">
+										<form [formGroup]="userFormInput">
+											<div class="row form-group">
+												<label class="col-sm-12 col-form-label">{{ "Label.User" | translate }}
+													{{ "Label.Single" | translate }}:</label>
+												<div class="col-sm-12">
+													<j-auto-complete-user formControlName="userSingle"
+														[multiple]="false">
+													</j-auto-complete-user>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>			
+								<div class="col-md-4">
+									<div class="block-content block-content-full ">
+										<form [formGroup]="roleFI">
+											<div class="row form-group">
+												<label class="col-sm-12 col-form-label">{{ "Label.Role" | translate
+													}}:</label>
+												<div class="col-sm-12">
+													<j-auto-complete-role formControlName="role">
+													</j-auto-complete-role>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade show col-sm-12 pt-2" id="datetime" role="tabpanel"
+							aria-labelledby="demoTabContent">
+							<div class="row mb-3">
+								<form [formGroup]="dateFormInput">
+									<div class="row">
+										<div class="col">
+											<div class="form-group">
+												<label class="col-sm-12 col-form-label">{{ "Label.Date" | translate }}
+													(Single):</label>
+												<div class="col-sm-12">
+													<app-j-calendar formControlName="selectedDateSingle"
+														[showTime]="false" [timeOnly]="false"
+														[selectionMode]="selectionModeSingle" [minDate]="minDate"
+														[maxDate]="maxDate">
+													</app-j-calendar>
+												</div>
+												<div class="col-md-12">
+													Selected: {{ dateFormInput.get('selectedDateSingle').value | json }}
+												</div>
+											</div>
+										</div>
+										<div class="col">
+											<div class="form-group">
+												<label class="col-sm-12 col-form-label">{{ "Label.Date" | translate }}
+													(Range):</label>
+												<div class="col-sm-12">
+													<app-j-calendar formControlName="selectedDateRange"
+														[showTime]="false" [timeOnly]="false"
+														[selectionMode]="selectionModeRange" [minDate]="minDate"
+														[maxDate]="maxDate">
+													</app-j-calendar>
+												</div>
+												<div class="col-md-12">
+													Selected: {{ dateFormInput.get('selectedDateRange').value | json }}
+												</div>
+											</div>
+										</div>
+										<div class="col">
+											<div class="form-group">
+												<label class="col-sm-12 col-form-label">{{ "Label.Date" | translate }}
+													(Multiple):</label>
+												<div class="col-sm-12">
+													<app-j-calendar formControlName="selectedDateMultiple"
+														[showTime]="false" [timeOnly]="false"
+														[selectionMode]="selectionModeMultiple" [minDate]="minDate"
+														[maxDate]="maxDate">
+													</app-j-calendar>
+												</div>
+												<div class="col-md-12">
+													Selected:
+													{{ dateFormInput.get('selectedDateMultiple').value | json }}
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<div class="col-md-12">
+									<button class="btn btn-info w-100" (click)="disableDate()">
+										Disable
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade show col-sm-12 pt-2" id="table" role="tabpanel"
+							aria-labelledby="tableTabContent">
+							<div class="row mb-3">
+								<div class="col">
+									<app-demo-table></app-demo-table>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade show col-sm-12 pt-2" id="jbootstrap" role="tabpanel"
+							aria-labelledby="jBootstrapTabContent">
+							<div class="row mb-3">
+								<div class="col">
+									<a class="btn btn-info w-100" target="_blank"
+										href="https://jabilbootstrap.azurewebsites.net/index.html"
+										role="button">Navigate to Jabil Bootstrap
+										WebPage</a>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade show col-sm-12 pt-2" id="attachment" role="tabpanel"
+							aria-labelledby="demoTabContent">
+							<div class="row mb-3">
+								<div class="col">
+									<app-file-upload [files]="files" [fileExtensions]="['json','csv']"
+										[downloadFiles]="true" [fileUploadId]="tempFolder" [multiple]="true"
+										[dragAndDrop]="true" [showFiles]="true" [buttonText]="'Label.SelectFile'">
+									</app-file-upload>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

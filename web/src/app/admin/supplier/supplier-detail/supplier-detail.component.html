@@ -1,0 +1,266 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.SupplierConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SAPSupplierModel_ID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="sapSupplierModel_ID" type="text" class="form-control" formControlName="sapSupplierModel_ID"
+                maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group" style="display:none;">
+            <label class="col-sm-2 col-form-label">{{ "Label.ValuationArea" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="siteCode" type="text" class="form-control" formControlName="siteCode" maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SiteCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="valuationArea" type="text" class="form-control" formControlName="valuationArea" maxlength="10" />
+            </div>
+            <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSiteNameModified()">
+                <small *ngIf="isSiteNameEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Company" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorName" type="text" class="form-control" formControlName="vendorName" maxlength="50" />
+            </div>
+            <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isVendorNameModified()">
+                <small *ngIf="isVendorNameEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VendorCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorCode" type="text" class="form-control" formControlName="vendorCode" maxlength="50" />
+            </div>
+            <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isVendorCodeModified()">
+                <small *ngIf="isVendorCodeEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Email" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="email" type="text" class="form-control" formControlName="email" maxlength="250" />
+            </div>
+            <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isEmailModified()">
+                <small *ngIf="isEmailEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PhoneNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="phoneNo" type="text" class="form-control" formControlName="phoneNo" maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.FaxNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="faxNo" type="text" class="form-control" formControlName="faxNo" maxlength="50" />
+            </div>
+          </div>
+
+
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Address" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="address" type="text" class="form-control" formControlName="address" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.StreetNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="streetNo" type="text" class="form-control" formControlName="streetNo" maxlength="100" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.City" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="city" type="text" class="form-control" formControlName="city" maxlength="50" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PostalCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="postalCode" type="text" class="form-control" formControlName="postalCode" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Country" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="country" type="text" class="form-control" formControlName="country" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group" style="display: none;">
+            <label class="col-sm-2 col-form-label">{{ "Label.SupplierStatus" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="supplierStatus" type="text" class="form-control" formControlName="supplierStatus"
+                maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SearchTerm" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="searchTerm" type="text" class="form-control" formControlName="searchTerm" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SiteName" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="siteName" type="text" class="form-control" formControlName="siteName" maxlength="30" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VendorName2" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorName2" type="text" class="form-control" formControlName="vendorName2" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VendorName3" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorName3" type="text" class="form-control" formControlName="vendorName3" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VendorName4" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorName4" type="text" class="form-control" formControlName="vendorName4" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.IcSite" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="icSite" type="text" class="form-control" formControlName="icSite" maxlength="10" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VendorAcctGrp" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vendorAcctGrp" type="text" class="form-control" formControlName="vendorAcctGrp" maxlength="10" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PurchaseOrg" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="purchaseOrg" type="text" class="form-control" formControlName="purchaseOrg" maxlength="10" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SalesOrgPoc" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="salesOrgPoc" type="text" class="form-control" formControlName="salesOrgPoc" maxlength="50" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.CompanyCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="companyCode" type="text" class="form-control" formControlName="companyCode" maxlength="10" />
+            </div>
+
+          </div>
+          
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.IcVendorOfPlant" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="icVendorOfPlant" type="text" class="form-control" formControlName="icVendorOfPlant" maxlength="15" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.CreatedDate" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="createdDate" type="text" class="form-control" formControlName="createdDate" maxlength="15" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Region" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="region" type="text" class="form-control" formControlName="region" maxlength="10" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LandCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="landCode" type="text" class="form-control" formControlName="landCode" maxlength="10" />
+            </div>
+
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

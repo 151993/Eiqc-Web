@@ -1,0 +1,25 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="close()"
+        title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.AuditTrail" | translate }}
+      </h3>
+      <div class="block-options">
+      </div>
+    </div>
+    <div class="block-content">
+      <div class="row">
+        <app-configuration-ptable [column]="displayColumns" [enableSkeleton]="false" [source]="dataSource"
+          [totalRecords]="totalRecords" [first]="first" [enableDetail]="true" [enableToggle]="false"
+          [enableEdit]="false" [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false"
+          [fileName]="fileName" [displayTime]="true" (exportEvent)="onExportEvent($event)" (filterEvent)="onFilterEvent($event)"
+          (pageSortEvent)="onPageSortEvent($event)" (detailClickedEvent)="detailSelected($event)">
+        </app-configuration-ptable>
+      </div>
+    </div>
+  </div>
+</div>

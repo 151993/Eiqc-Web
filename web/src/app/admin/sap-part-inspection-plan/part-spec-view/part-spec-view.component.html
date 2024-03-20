@@ -1,0 +1,97 @@
+<div class="content">
+	<div class="block block-rounded">
+		<div class="block-header border-bottom">
+			<button class="btn btn-default push-5-r" (click)="close()" type="button"
+				title="{{('Label.Close'| translate)}}">
+				<i class="si si-close"> </i>
+			</button>
+			<h3 class="block-title">
+				{{ "Label.Specification" | translate }}
+			</h3>
+		</div>
+		<div class="block-content">
+				<form [formGroup]="formInput">
+					<div  class="row form-group">
+						<div  class="input-inline col-sm-3">
+						  <label class="col-form-label">{{ "Label.SpecNumber" | translate }}:
+						  </label>
+						</div>
+						<div class="col-sm-9" *ngIf="!isEnabled || isSpecNumberDisabled">
+						  <input id="specNumber"  type="text" disabled class="form-control" formControlName="specNumber"
+							maxlength="50" />
+						</div>
+						<div class="col-sm-9" *ngIf="isEnabled && !isSpecNumberDisabled">
+							<input id="specNumber"  type="text"  class="form-control" formControlName="specNumber"
+							  maxlength="50" />
+						  </div>
+						  <div class="offset-3 col-sm-9">
+							<ng-container *ngIf="isSpecNumberModified()">
+								<small *ngIf="isSpecNumberEmpty()" class="form-text text-danger">
+									{{ "Message.Required" | translate }}
+								</small>
+								<small *ngIf="isSpecNumberHasWhiteSpace()" class="form-text text-danger">
+									{{ "Message.BlankSpecNumber" | translate }}
+								</small>
+							</ng-container>
+						</div>
+					  </div>					
+					<div  class="row form-group">
+						<div class="input-inline col-sm-3">
+						  <label class="col-form-label">{{ "Label.SpecRevisionNumber" | translate }}:
+						  </label>
+						</div>
+						<div class="col-sm-9" *ngIf="!isEnabled">
+						  <input id="specRevisionNumber" disabled  type="text" class="form-control" formControlName="specRevisionNumber"
+							maxlength="50" />
+						</div>
+						<div class="col-sm-9" *ngIf="isEnabled">
+							<input id="specRevisionNumber"  type="text" class="form-control" formControlName="specRevisionNumber"
+							  maxlength="50" />
+						  </div>
+						<div class="offset-3 col-sm-9">
+						</div>
+					  </div>
+					  <div  class="row form-group ">
+						<div class="input-inline col-sm-3">
+						  <label class="col-form-label">{{ "Label.SpecificationDescription" | translate }}:
+						  </label>
+						</div>
+						<div class="col-sm-9" *ngIf="!isEnabled">
+						  <input id="specDescription" disabled type="text" class="form-control" formControlName="specDescription"
+							maxlength="50" />
+						</div>
+						<div class="col-sm-9" *ngIf="isEnabled">
+							<input id="specDescription" type="text" class="form-control" formControlName="specDescription"
+							  maxlength="50" />
+						  </div>
+					  </div>
+
+					<div class="row form-group ">
+						<div class="input-inline col-sm-3">
+							<label class="col-form-label">{{ "Label.PartSpecAttachments" | translate }}:
+							</label>
+						  </div>
+						<div class="col-sm-9">
+							<app-file-upload [files]="specAttachments" formControlName="specAttachments"
+								[fileExtensions]="['pdf','xlsx','png','jpg']" [downloadFiles]="true"
+								[showSelectFile]="isEnabled" [fileUploadId]="tempFolder" [multiple]="true"
+								[dragAndDrop]="isEnabled" [showDeleteFile]="isEnabled" [maxFileSize]="maxFileSize"
+								[maxFileUploadLimit]="maxFileUploadLimit" [showFiles]="true"
+								[buttonText]="'Label.SelectFile'" [isDisabled]="!isEnabled">
+							</app-file-upload>
+						</div>
+					</div>
+				</form>
+		</div>
+	</div>
+	<div  class="modal-footer">
+		<button type="button" class="btn btn-primary" [disabled]="isSaveDisabled()"
+		  (click)="activeModal.close(formInput.value)">
+		  {{ "Label.Add" | translate }}
+		</button>
+		<button type="button" class="btn btn-default" (click)="close()">
+		  {{ "Label.Cancel" | translate }}
+		</button>
+	  
+	  </div>
+</div>

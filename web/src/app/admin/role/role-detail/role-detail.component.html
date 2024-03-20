@@ -1,0 +1,73 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{formInput.dirty
+          ? ('Label.Cancel' | translate)
+          : ('Label.Back'| translate)
+      }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.RoleConfiguration" | translate }}
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" title="{{ 'Label.Save' | translate }}"
+          [disabled]="isSaveDisabled()" data-dismiss="modal">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content">
+      <div class="row">
+        <form [formGroup]="formInput">
+          <div class="row form-group ">
+            <label class="col-sm-1 col-form-label">{{ "Label.Name" | translate }}:</label>
+            <div class="col-sm-11">
+              <j-auto-complete-role-enum formControlName="roleEnum" [config]="roleEnumAutoCompleteConfig"
+               ></j-auto-complete-role-enum>
+            </div>
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-1 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-11">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="p-grid">
+              <div class="p-col">
+                <label class="col-sm-2 col-form-label">Permissions :</label>
+                <p-panel>
+                  <p-header>
+                    <div class="row">
+                      <div class="m-1">
+                        <p-checkbox binary="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="isAllNodeSelected"
+                          (onChange)="toggleSelect()" inputId="toggleall"></p-checkbox>
+                        <label class="m-1" for="toggleall">Toggle All</label>
+                      </div>
+                      <button class="m-1" pButton type="button" label="Expand all" (click)="expandAll()"></button>
+                      <button class="m-1" pButton type="button" label="Collapse all" (click)="collapseAll()"></button>
+                    </div>
+                  </p-header>
+                  <p class="p-m-0">
+                    <p-tree [value]="permissionData" selectionMode="checkbox" [(selection)]="selectedItems"
+                      (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
+                    </p-tree>
+                  </p>
+                </p-panel>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

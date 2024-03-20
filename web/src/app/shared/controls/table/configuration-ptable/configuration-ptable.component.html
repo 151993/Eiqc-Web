@@ -1,0 +1,676 @@
+<div>
+  <p-table #cpdt [hidden]="dataSource == null && enableSkeleton" [columns]="displayColumns" [value]="dataSource"
+    [lazy]="lazy" [paginator]="enablePaginator" [rows]="pageSize" [responsive]="true"
+    [rowsPerPageOptions]="[10, 20, 50, 100]" [resizableColumns]="false" sortMode="multiple" [autoLayout]="false"
+    [scrollable]="true" scrollHeight="1000vh" (onLazyLoad)="lazyLoad($event)" [multiSortMeta]="multiSortMeta"
+    (onPage)="paginate($event)" [customSort]="enableCustomSort" [totalRecords]="totalRecords" [lazyLoadOnInit]="false"
+    [first]="first" tableStyleClass="table-sm" styleClass="p-datatable-sm"  [style]="{width:tableWidthValue}" dataKey="id">
+    <ng-template pTemplate="caption">
+      <div [hidden]="true" class="row">
+        <div class="col-sm-4 text-left my-auto">
+          <span class="">
+            {{ "Paging.Showing" | translate }}
+            <b class="primaryColor">{{ currentRecords }}</b>
+            {{ "Paging.of" | translate }}
+            <b class="primaryColor">{{ totalRecords }}</b>
+            {{ "Paging.Results" | translate }}
+          </span>
+        </div>
+        <div class="offset-4 col-sm-4 text-right my-auto">
+          <button type="button" class="btn btn-capa-default" (click)="exportCSV()"
+            title="{{ 'Label.ExportCSV' | translate }}">
+            <i class="fa fa-file-excel-o"></i>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngIf="enableRowExpand" style="width: 5rem"></th>
+        <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+
+          <th *ngSwitchCase="'enable_Display'" class="text-center" width="8%" [pSortableColumn]="getSortFieldName(col)"
+            pResizableColumn>
+            {{ "Label." + col.header | translate }}
+            <p-sortIcon [field]="getSortFieldName(col)"></p-sortIcon>
+          </th>
+          <th title="{{ col.columnInfo?.type !== cType.CheckBox &&   col.mouseOverField!=='' ? col.mouseOverField :  '' }}"
+           [pSortableColumn]="getSortFieldName(col)" pResizableColumn *ngSwitchDefault>
+            <div *ngIf="col.columnInfo?.type == cType.CheckBox else chk">
+              <input type="checkbox" id="headerCheckbox" [checked]="isHeaderChecked"
+                (ngModelChange)="onCheckBoxChange($event,row)" [(ngModel)]="isHeaderChecked"
+                style="align-items: center;" (change)="checkAllCheckBox($event)">
+            </div>
+            <ng-template #chk>
+              {{ "Label." + col.header | translate }}
+              <p-sortIcon [field]="getSortFieldName(col)"></p-sortIcon>
+            </ng-template>
+          </th>
+
+        </ng-container>
+        <th [attr.width]="optionWidthValue" class="text-center"
+          *ngIf="enableEdit || enableView || enableDelete || enableAuditTrail || detailEnable || enableSelect || canAssignToUser || canRedefine || canAddDefectTypes || canAddChartType">
+          {{ "Label.Options" | translate }}
+        </th>
+      </tr>
+      <tr *ngIf="enableColumnFilter">
+        <th *ngIf="enableRowExpand"></th>
+        <th *ngFor="let col of columns" [ngSwitch]="col.field">
+          <div *ngSwitchCase="'enable_Display'">
+            <select *ngIf="enableToggle" class="form-control"
+              (change)="filterValue($event, 'isEnabled', filterConditions.equals, cType.Boolean, col.columnInfo?.mappingField)">
+              <option *ngFor="let drop of toggleCollection" value="{{ drop.value }}">{{ drop.label }}</option>
+            </select>
+          </div>
+          <div *ngSwitchDefault>
+            <div [ngSwitch]="col.columnInfo?.type">
+              <ng-container *ngSwitchCase="cType.Boolean">
+                <select class="form-control"
+                  (change)="filterValue($event, col.field, filterConditions.equals, col.columnInfo?.type ? col.columnInfo?.type: 'default', col.columnInfo?.mappingField)">
+                  <option *ngFor="let drop of booleanCollection" value="{{ drop.value }}">{{ drop.label }}</option>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.DynamicType">
+                <select class="form-control" *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" 
+                  (change)="filterValue($event, col.field, filterConditions.contains, col.columnInfo?.type ? col.columnInfo?.type: 'default', col.columnInfo?.mappingField)">
+                  <option value="">
+                    {{
+                    "Label.Select" | translate
+                    }}
+                  </option>
+                  <option *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue" value="{{ type.key }}">
+                    {{
+                    type.value
+                    }}
+                  </option>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.ColumnValueBasedDynamicType">
+                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control"
+                  (change)="filterValue($event, col.field, filterConditions.contains, col.columnInfo?.type ? col.columnInfo?.type: 'default', col.columnInfo?.mappingField)">
+                  <option value="">
+                    {{
+                    "Label.Select" | translate
+                    }}
+                  </option>
+                  <ng-container *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue">
+                    <option *ngFor="let value of type.value" value="{{ value.optionKey }}">{{value.optionValue}}
+                    </option>
+                  </ng-container>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <input pInputText type="text" placeholder="{{ 'Label.Filter' | translate }}"
+                  class="maxWidth form-control"
+                  (input)="filterValue($event, col.field, filterConditions.contains, col.columnInfo?.type ? col.columnInfo?.type: 'default', col.columnInfo?.mappingField)" />
+              </ng-container>
+            </div>
+          </div>
+
+        </th>
+        <th [attr.width]="optionWidthValue"
+          *ngIf="enableEdit || enableView || enableDelete || enableAuditTrail || detailEnable || canAssignToUser || canRedefine || canAddDefectTypes || enableRowExpand || canAddChartType">
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body"  let-row let-columns="columns" let-rowIndex="rowIndex" let-expanded="expanded">
+      <tr [ngClass]="row.isEnabled === false ? 'disabled-row' : ''">
+        <td style="width: 5rem" *ngIf="enableRowExpand">
+          <button type="button" pButton pRipple [pRowToggler]="row" (click)="expandRow(row, expanded,rowIndex)"  class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+          <td *ngSwitchCase="'enable_Display'" width="8%">
+            <div class="text-center">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" [id]="'isEnabled' + row.id"
+                  [checked]="row.isEnabled" [disabled]="!isToggleDisabled()" (click)="toggleEnable(row, $event)"
+                  (change)="checkValue($event)" (ngModelChange)="onCheckBoxChange($event,row)">
+                <label class="custom-control-label" [for]="'isEnabled' + row.id" title="
+                {{row.isEnabled
+                  ? ('Label.Enabled' | translate)
+                  : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </td>
+          <td *ngSwitchDefault>
+            <ng-container [ngSwitch]="col.columnInfo?.type">
+              <ng-container *ngSwitchCase="cType.Boolean">
+                <div class="text-overflow-dynamic-container">
+                  <span title="{{
+                      row[col.field]
+                        ? ('Label.Yes' | translate)
+                        : ('Label.No' | translate)
+                    }}" class="text-overflow-dynamic-ellipsis">
+                    {{
+                    row[col.field]
+                    ? ("Label.Yes" | translate)
+                    : ("Label.No" | translate)
+                    }}
+                  </span>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.DynamicType">                
+                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control"
+                  (change)="onDropDownChange($event,row)" [(ngModel)]="row['selectedDynamicId']" [disabled]="row['isDisabled']">
+                  <option value="0">
+                    {{
+                    "Label.Select" | translate
+                    }}
+                  </option>
+                  <option *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue" value="{{ type.key }}">
+                    {{ type.value}}</option>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.MultipleDropDownTableDynamicType">                
+                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control"
+                  (change)="onDropDownChange($event,row)" id="dropdown{{rowIndex}}{{col.field}}" [(ngModel)]="row[col.valueMember]" [disabled]="row['isDisabled']">
+                  <option value="0">
+                    {{
+                    "Label.Select" | translate
+                    }}
+                  </option>
+                  <option *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue" value="{{ type.key }}">
+                    {{ type.value}}</option>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.ColumnValueBasedDynamicType">
+                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control"
+                  (change)="onDropDownChange($event,row)" [(ngModel)]="row['selectedDynamicId']">
+                  <option value="0">
+                    {{
+                    "Label.Select" | translate
+                    }}
+                  </option>
+                  <ng-container *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue">
+                    <ng-container *ngFor="let value of type.value">
+                      <option *ngIf="row[dynamicCollectionColumnReference]==value.colValToMatch"
+                        value="{{ value.optionKey }}">{{ value.optionValue}}</option>
+                    </ng-container>
+                  </ng-container>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.Url">
+                <div class="text-overflow-wrap">
+                  <span title="{{ row[col.field] }}">
+                    {{ row[col.field] }}
+                  </span>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.Status">
+                <div class="text-overflow-dynamic-container">
+                  <span title="{{ getRecDisplayName(row[col.field], col.columnInfo?.mappingField) }}"
+                    class="text-overflow-dynamic-ellipsis">
+                    <i *ngIf="row[col.field] != null && !row[col.field]?.isEnabled && showInactiveStatus"
+                      class="fa fa-exclamation warning" title="{{ 'Label.Disabled' | translate }}"></i>
+                    {{ getRecDisplayName(row[col.field], col.columnInfo?.mappingField) }}
+                  </span>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.CheckBox">
+                <input type="checkbox" [id]="'checkbox' + row.id" [checked]="row.isChecked" [disabled]="!row.isEnabled"
+                  (change)="checkHeaderCheckBox($event,row)" (click)="onCheckBoxChange($event,row)">
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.TextBox">
+                <div class="text-overflow-dynamic-container">
+                  <input type="text" autocomplete="off" (ngModelChange)="onTextBoxChange($event,row,'textbox'+rowIndex+col.field)" (input)="onTextBoxChange($event,row,'textbox'+rowIndex+col.field)"
+                    [(ngModel)]="row[col.field]" id="textbox{{rowIndex}}{{col.field}}" class="form-control" />
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.BlockCopyPasteTextBox">
+                <div class="text-overflow-dynamic-container">
+                  <input type="text" autocomplete="off" (ngModelChange)="onTextBoxChange($event,row,'textbox'+rowIndex+col.field)" (input)="onTextBoxChange($event,row,'textbox'+rowIndex+col.field)"
+                    [(ngModel)]="row[col.field]" id="textbox{{rowIndex}}{{col.field}}" class="form-control" appBlockCopyPaste />
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.DynamicTypeRadioButton">
+                <table>
+                  <tr>
+                    <td *ngFor="let type of dynamicRadioCollection[col.field] | keyvalue">
+                      <div *ngIf="type.value.isChecked; else radioSection">
+                        <input type="radio" id={{rowIndex}} name=radio{{type.value.section}}{{rowIndex}} checked="true"
+                          [value]="type.value.name" (ngModelChange)="onRadioButtonChange($event,row)"
+                          [(ngModel)]="row[col.field]">
+                        <label for="{{type.value.name}}"> {{type.value.name}}</label>
+                      </div>
+                      <ng-template #radioSection>
+                        <input type="radio" id={{rowIndex}} name=radio{{type.value.section}}{{rowIndex}}
+                          [value]="type.value.name" (ngModelChange)="onRadioButtonChange($event,row)"
+                          [(ngModel)]="row[col.field]">
+                        <label for="{{type.value.name}}"> {{type.value.name}}</label>
+                      </ng-template>
+                    </td>
+                  </tr>
+                </table>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.MultiStatus">
+                <div class="text-overflow-dynamic-container">
+                  <span title="{{ getRecDisplayNameMulti(row[col.field], col.columnInfo?.mappingField) }}"
+                    class="text-overflow-dynamic-ellipsis">
+                    <i *ngIf="anyDisabled(row[col.field])" class="fa fa-exclamation warning"
+                      title="{{ 'Label.Disabled' | translate }}"></i>
+                    {{ getRecDisplayNameMulti(row[col.field], col.columnInfo?.mappingField) }}
+                  </span>
+                </div>
+              </ng-container> 
+              <ng-container *ngSwitchCase="cType.ColorLabel">
+                <div class="text-overflow-dynamic-container" *ngIf="row['isLableWarning']">
+                  <span title="{{ row[col.field] }}" class="text-overflow-dynamic-ellipsis" style="color: red;">
+                    {{ row[col.field] }}
+                  </span>                  
+                </div>
+                <div class="text-overflow-dynamic-container" *ngIf="!row['isLableWarning']">
+                  <span title="{{ row[col.field] }}" class="text-overflow-dynamic-ellipsis">
+                    {{ row[col.field] }}
+                  </span>                  
+                </div>
+              </ng-container>           
+              <ng-container *ngSwitchDefault>
+                <div class="text-overflow-dynamic-container">
+                  <span title="{{ row[col.field] }}" class="text-overflow-dynamic-ellipsis">
+                    {{ row[col.field] }}
+                  </span>
+                </div>
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-container>
+        <td class="text-center options-buttons" [attr.width]="optionWidthValue"
+          *ngIf="enableEdit || enableView || enableDelete || enableAuditTrail || detailEnable || enableSelect || canAssignToUser || canRedefine || canAddDefectTypes || canAddChartType">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <button *ngIf="enableRowOption(row, optionType.Edit)" class="btn btn-info btn-sm"
+                (click)="editRec(row)" title="{{ 'Label.Edit' | translate }}">
+                <i *ngIf="!enableAttachment" class=" fa fa-pencil-alt "></i>
+                <i *ngIf="enableAttachment" class="fa fa-paperclip"></i>
+              </button>
+              <button *ngIf="enableRowOption(row, optionType.View)" class="btn btn-info btn-sm" (click)="editRec(row)"
+                title="{{ 'Label.View' | translate }}">
+                <i class=" fa fa-eye "></i>
+              </button>
+              <button *ngIf="enableRowOption(row, optionType.AuditTrail)" class="btn btn-info btn-sm"
+                (click)="showAuditTrail(row)" title="{{ 'Label.AuditTrail' | translate }}">
+                <i class="si si-book-open"></i>
+              </button>
+              <button *ngIf="enableRowOption(row, optionType.Detail)" class="btn btn-info btn-sm"
+                (click)="detailSelected(row)" title="{{ 'Label.Detail' | translate }}">
+                <i class="fa fa-info-circle"></i>
+              </button>
+              <button *ngIf="enableRowOption(row, optionType.Delete)" class="btn btn-danger btn-sm"
+                (click)="deleteRec(row)" title="{{ 'Label.Delete' | translate }}">
+                <i class=" fa fa-times "></i>
+              </button>
+              <button *ngIf="enableSelect" class="btn btn-info btn-sm" (click)="selectRec(row)"
+                [disabled]="!row.isEnabled" title="{{ 'Label.Select' | translate }}">
+                <i class=" fa fa-check-circle "></i>
+              </button>
+              <button *ngIf="enableRowOption(row, optionType.AssignToUser)" class="btn btn-info btn-sm"
+                (click)="assignToUser(row)" title="{{ 'Label.AssignToUser' | translate }}">
+                <i class=" fa fa-user-plus "></i>
+              </button>
+              <button *ngIf="enableRowOption(row, optionType.AddDefectTypes)" class="btn btn-info btn-sm"
+                (click)="addDefectTypes(row)" title="{{ 'Label.AddDefectTypes' | translate }}">
+                <i class=" fa fa-bug"></i>
+              </button>
+              <button *ngIf="enableRowOption(row, optionType.AddChartType)" class="btn btn-info btn-sm"
+              (click)="addChartType(row)" title="{{ 'Label.AddChartType' | translate }}">
+              <i class=" fa fa-chart-bar"></i>
+            </button>
+              <button *ngIf="enableRowOption(row, optionType.Redefine)" class="btn btn-info btn-sm"
+                (click)="redefine(row)" title="{{ 'Label.Redefine' | translate }}">
+                <i class="fa fa-redo "></i>
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" *ngIf="enableTblBottomPageInfo">
+      <div class="row">
+        <div class="col-sm-4 text-left my-auto tblbottompageinfo">
+          <span class="">
+            {{ "Paging.Showing" | translate }}
+            <b class="primaryColor">{{ currentRecords }}</b>
+            {{ "Paging.of" | translate }}
+            <b class="primaryColor">{{ totalRecords }}</b>
+            {{ "Paging.Results" | translate }}
+          </span>
+        </div>
+        <div class="col-sm-4">
+          <span>
+            {{ "Paging.Page" | translate }} {{ currentPageNum }}
+            {{ "Paging.of" | translate }} {{ totalPage }}
+            {{ "Paging.Pages" | translate }}
+          </span>
+        </div>
+        <div *ngIf="!enableSelect" class="col-sm-4 text-right my-auto tblbottompageinfo">
+          <button type="button" class="btn btn-primary" (click)="exportCSV()"
+            title="{{ 'Label.ExportCSV' | translate }}">
+            <i class="fa fa-file-excel"></i>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion" id="childTable" let-childRowIndex="rowIndex" let-row let-columns="columns" *ngIf="enableRowExpand">
+      <tr>
+          <td [attr.colspan]="column.length + 1">
+              <div class="p-2">
+                  <p-table [value]="row.childDataSource"  [columns]="childDisplayColumns"  
+                  [enableSkeleton]="false"  [enableCustomSort]="false" [lazy]="false" dataKey="0"
+                  [totalRecords]="totalRecords" [enableDetail]="false" [enableToggle]="false" [enableEdit]="false" [enableFilter]="false"
+                  [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false" >
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngIf="enableOrder" class="text-center" width="10%" pResizableColumn>
+                          {{ "Label.Order" | translate }}
+                        </th>
+                         <th *ngIf="enableReorder" class="text-center" width="4%" pResizableColumn>
+                
+                        </th>                       
+                        <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+                          <th *ngSwitchCase="'enable_Display'" class="text-center" width="8%" [pSortableColumn]="getSortFieldName(col)"
+                            pResizableColumn>
+                            {{ "Label." + col.header | translate }}
+                            <p-sortIcon [field]="getSortFieldName(col)"></p-sortIcon>
+                          </th>
+                         <th [pSortableColumn]="getSortFieldName(col)" pResizableColumn [pSortableColumnDisabled] = "!col.isSortable" *ngSwitchDefault>
+                            {{ "Label." + col.header | translate }}
+                            <p-sortIcon *ngIf="col.isSortable" [field]="getSortFieldName(col)"></p-sortIcon>
+                          </th>
+                        </ng-container>                        
+                      </tr>                      
+                    </ng-template>
+                      <ng-template pTemplate="body"  let-row let-columns="columns" let-childRowIndex="rowIndex" >
+                      <tr [ngClass]="row.isEnabled === false ? 'disabled-row' : ''">
+                      
+                        <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+                          <td *ngSwitchCase="'enable_Display'" width="8%">
+                            <div class="text-center">
+                              <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" [id]="'isEnabled' + row.id"
+                                  [checked]="row.isEnabled" [disabled]="!isToggleDisabled()" (click)="toggleEnable(row, $event)"
+                                  (change)="checkValue($event)" (ngModelChange)="onCheckBoxChange($event,row)">
+                                <label class="custom-control-label" [for]="'isEnabled' + row.id" title="
+                                {{row.isEnabled
+                                  ? ('Label.Enabled' | translate)
+                                  : ('Label.Disabled' | translate)
+                                }}"></label>
+                              </div>
+                            </div>
+                          </td>
+                          <td *ngSwitchDefault>
+                            <ng-container [ngSwitch]="col.columnInfo?.type">
+                              <ng-container *ngSwitchCase="cType.Boolean">
+                                <div class="text-overflow-dynamic-container">
+                                  <span title="{{
+                                      row[col.field]
+                                        ? ('Label.Yes' | translate)
+                                        : ('Label.No' | translate)
+                                    }}" class="text-overflow-dynamic-ellipsis">
+                                    {{
+                                    row[col.field]
+                                    ? ("Label.Yes" | translate)
+                                    : ("Label.No" | translate)
+                                    }}
+                                  </span>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.DynamicType">
+                                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control"
+                                  (change)="onDropDownChange($event,row)" [disabled]="row['isDropDownDisabled']" [(ngModel)]="row['selectedDynamicId']">
+                                  <option value="0">
+                                    {{
+                                    "Label.Select" | translate
+                                    }}
+                                  </option>
+                                  <option *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue" value="{{ type.key }}">
+                                    {{ type.value}}</option>
+                                </select>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.ColumnValueBasedDynamicType">
+                                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control"
+                                  (change)="onDropDownChange($event,row)" [disabled]="row['isDropDownDisabled']" [(ngModel)]="row['selectedDynamicId']">
+                                  <option value="0">
+                                    {{
+                                    "Label.Select" | translate
+                                    }}
+                                  </option>
+                                  <ng-container *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue">
+                                    <ng-container *ngFor="let value of type.value">
+                                      <option *ngIf="row[dynamicCollectionColumnReference]==value.colValToMatch"
+                                        value="{{ value.optionKey }}">{{ value.optionValue}}</option>
+                                    </ng-container>
+                                  </ng-container>
+                                </select>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.MultipleDropDownTableDynamicType">
+                                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control"
+                                  (change)="onDropDownChange($event,row)" [disabled]="row['isDropDownDisabled']" [(ngModel)]="row[col.valueMember]">
+                                  <option value="0">
+                                    {{
+                                    "Label.Select" | translate
+                                    }}
+                                  </option>
+                                  <option *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue" value="{{ type.key }}">
+                                    {{ type.value}}</option>
+                                </select>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.Url">
+                                <div class="text-overflow-wrap">
+                                  <span title="{{ row[col.field] }}">
+                                    {{ row[col.field] }}
+                                  </span>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.Status">
+                                <div class="text-overflow-dynamic-container">
+                                  <span title="{{ getRecDisplayName(row[col.field], col.columnInfo?.mappingField) }}"
+                                    class="text-overflow-dynamic-ellipsis">
+                                    <i *ngIf="row[col.field] != null && !row[col.field]?.isEnabled && showInactiveStatus"
+                                      class="fa fa-exclamation warning" title="{{ 'Label.Disabled' | translate }}"></i>
+                                    {{ getRecDisplayName(row[col.field], col.columnInfo?.mappingField) }}
+                                  </span>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.CheckBox">
+                                <input type="checkbox" [id]="'checkbox' + row.id" [checked]="row.isChecked" [disabled]="!row.isEnabled"
+                                  (change)="checkHeaderCheckBox($event,row)" (click)="onCheckBoxChange($event,row)">
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.TextBox">
+                                <div class="text-overflow-dynamic-container">
+                                  <input type="text" autocomplete="off" (ngModelChange)="onChildTextBoxChange($event,row,'textbox'+row.mainRowId+childRowIndex+col.field)" (input)="onChildTextBoxChange($event,row,'textbox'+row.mainRowId+childRowIndex+col.field)"
+                                    [(ngModel)]="row[col.field]" [disabled]="row['isTextBoxDisabled']" id="textbox{{row.mainRowId}}{{childRowIndex}}{{col.field}}" name="'textbox{{row.mainRowId}}{{childRowIndex}}{{col.field}}'" class="form-control" />
+                                </div>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.DynamicTypeRadioButton">
+                                <table>
+                                  <tr>
+                                    <td *ngFor="let type of dynamicRadioCollection[col.field] | keyvalue">
+                                      <div *ngIf="type.value.isChecked; else radioSection">
+                                        <input type="radio" id={{rowIndex}} name=radio{{type.value.section}}{{rowIndex}} checked="true"
+                                          [value]="type.value.name" (ngModelChange)="onRadioButtonChange($event,row)"
+                                          [(ngModel)]="row[col.field]">
+                                        <label for="{{type.value.name}}"> {{type.value.name}}</label>
+                                      </div>
+                                      <ng-template #radioSection>
+                                        <input type="radio" id={{rowIndex}} name=radio{{type.value.section}}{{rowIndex}}
+                                          [value]="type.value.name" (ngModelChange)="onRadioButtonChange($event,row)"
+                                          [(ngModel)]="row[col.field]">
+                                        <label for="{{type.value.name}}"> {{type.value.name}}</label>
+                                      </ng-template>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </ng-container>
+                              <ng-container *ngSwitchCase="cType.MultiStatus">
+                                <div class="text-overflow-dynamic-container">
+                                  <span title="{{ getRecDisplayNameMulti(row[col.field], col.columnInfo?.mappingField) }}"
+                                    class="text-overflow-dynamic-ellipsis">
+                                    <i *ngIf="anyDisabled(row[col.field])" class="fa fa-exclamation warning"
+                                      title="{{ 'Label.Disabled' | translate }}"></i>
+                                    {{ getRecDisplayNameMulti(row[col.field], col.columnInfo?.mappingField) }}
+                                  </span>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngSwitchDefault>
+                                <div class="text-overflow-dynamic-container">
+                                  <span title="{{ row[col.field] }}" class="text-overflow-dynamic-ellipsis">
+                                    {{ row[col.field] }}
+                                  </span>
+                                </div>
+                              </ng-container>
+                            </ng-container>
+                          </td>
+                        </ng-container>                        
+                      </tr>
+                    </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                          <tr cl>
+                              <td class="p-text-center" colspan="3">There are no data for this record yet.</td>
+                          </tr>
+                      </ng-template>
+                  </p-table>
+              </div>
+          </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-table *ngIf="dataSource == null && enableSkeleton" [columns]="displayColumns" [value]="skeletonRow">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">
+          <th *ngSwitchCase="'enable_Display'" class="text-center" width="8%" pResizableColumn>
+            {{ "Label." + col.header | translate }}
+            <p-sortIcon></p-sortIcon>
+          </th>
+          <th pResizableColumn *ngSwitchDefault>
+            {{ "Label." + col.header | translate }}
+            <p-sortIcon></p-sortIcon>
+          </th>
+        </ng-container>
+        <th *ngIf="enableEdit || enableView" width="7%" class="text-center">
+          <ng-container *ngIf="enableEdit">
+            {{ "Label.Edit" | translate }}
+          </ng-container>
+          <ng-container *ngIf="enableView && !enableEdit">
+            {{ "Label.View" | translate }}
+          </ng-container>
+        </th>
+        <th *ngIf="enableDelete" width="7%" class="text-center">
+          {{ "Label.Delete" | translate }}
+        </th>
+        <th *ngIf="enableAuditTrail" width="7%" class="text-center">
+          {{ "Label.AuditTrail" | translate }}
+        </th>
+        <th *ngIf="detailEnable" width="5%" class="text-center"></th>
+      </tr>
+      <tr>
+        <th *ngFor="let col of columns" [ngSwitch]="col.field">
+          <div *ngSwitchCase="'enable_Display'">
+            <select *ngIf="enableToggle" class="form-control">
+              <option *ngFor="let drop of toggleCollection" value="{{ drop.value }}">{{ drop.label }}</option>
+            </select>
+          </div>
+          <div *ngSwitchDefault>
+
+            <div [ngSwitch]="col.columnInfo?.type">
+              <ng-container *ngSwitchCase="cType.CheckBox" style="width: 10px;">
+                <input type="checkbox" id="headerCheckbox" [checked]="isHeaderChecked" [(ngModel)]="isHeaderChecked"
+                  style="align-items: center;" (change)="checkAllCheckBox($event)"
+                  (ngModelChange)="onCheckBoxChange($event,row)">
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.Boolean">
+                <select class="form-control">
+                  <option *ngFor="let drop of booleanCollection" value="{{ drop.value }}">{{ drop.label }}</option>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.DynamicType">
+                <select class="form-control" *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]">
+                  <option value="">
+                    {{
+                    "Label.Select" | translate
+                    }}
+                  </option>
+                  <option *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue" value="{{ type.key }}">
+                    {{
+                    type.value
+                    }}
+                  </option>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchCase="cType.ColumnValueBasedDynamicType">
+                <select *ngIf="dynamicTypeCollection && dynamicTypeCollection[col.field]" class="form-control">
+                  <option value="">
+                    {{
+                    "Label.Select" | translate
+                    }}
+                  </option>
+                  <ng-container *ngFor="let type of dynamicTypeCollection[col.field] | keyvalue">
+                    <option *ngFor="let value of type.value" value="{{ value.optionKey }}">{{value.optionValue}}
+                    </option>
+                  </ng-container>
+                </select>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <input pInputText type="text" placeholder="{{ 'Label.Filter' | translate }}"
+                  class="maxWidth form-control" />
+              </ng-container>
+            </div>
+          </div>
+        </th>
+        <th *ngIf="enableEdit || enableView" width="7%"></th>
+        <th *ngIf="enableDelete" width="7%"></th>
+        <th *ngIf="enableAuditTrail" width="7%"></th>
+        <th *ngIf="detailEnable" width="5%"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row let-columns="columns">
+      <tr>
+        <ng-container *ngFor="let col of columns">
+          <td width="8%">
+            <div class="skeleton"></div>
+          </td>
+        </ng-container>
+        <td *ngIf="enableEdit || enableView" width="7%" class="text-center">
+          <div class="skeleton"></div>
+        </td>
+        <td *ngIf="enableDelete" width="7%" class="text-center">
+          <div class="skeleton"></div>
+        </td>
+        <td *ngIf="enableAuditTrail" width="7%" class="text-center">
+          <div class="skeleton"></div>
+        </td>
+        <td *ngIf="detailEnable" width="5%" class="text-center">
+          <div class="skeleton"></div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="row">
+        <div class="col-sm-4 text-left my-auto">
+          <span class="">
+            {{ "Paging.Showing" | translate }}
+            <b class="primaryColor">{{ currentRecords }}</b>
+            {{ "Paging.of" | translate }}
+            <b class="primaryColor">{{ totalRecords }}</b>
+            {{ "Paging.Results" | translate }}
+          </span>
+        </div>
+        <div class="col-sm-4">
+          <span>
+            {{ "Paging.Page" | translate }} {{ currentPageNum }}
+            {{ "Paging.of" | translate }} {{ totalPage }}
+            {{ "Paging.Pages" | translate }}
+          </span>
+        </div>
+        <div class="col-sm-4 text-right my-auto">
+          <button type="button" class="btn btn-capa-default" title="{{ 'Label.ExportCSV' | translate }}">
+            <i class="fa fa-file-excel-o"></i>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </p-table>
+
+</div>

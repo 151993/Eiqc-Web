@@ -1,0 +1,7 @@
+<div class="ui-fluid">
+	<p-calendar  [appendTo]="'body'"  (onClose)="onClose($event)" [disabled]="disabled" (onSelect)="selectedEvent($event)" (onClearClick)="onClearClick($event)" [(ngModel)]="dateTimeValue" [readonlyInput]="true" [showIcon]="true"
+		inputId="datetimePicker" showButtonBar="true" [monthNavigator]="true" [yearNavigator]="true"
+    yearRange="{{_minYear + ':' + _maxYear}}" [showTime]="showTime" [timeOnly]="timeOnly" selectionMode="{{selectionMode}}"
+    [minDate]="_minDate" [maxDate]="_maxDate">
+	</p-calendar>
+</div>

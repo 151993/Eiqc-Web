@@ -1,0 +1,135 @@
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.header-cell {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+    border: 0;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    height: 250px;
+    width: 48px;
+    border: 1px solid rgba(200, 200, 200, .5);
+}
+
+.header-cell-group {
+    white-space: nowrap;
+}
+
+.header-cell-actions {
+    font-size: 12px;
+    border-top: 1px solid rgba(200, 200, 200, .5);
+    vertical-align: bottom;
+    text-align: center;
+}
+
+.cell-actions {
+    white-space: nowrap;
+    border-right: 1px solid rgba(200, 200, 200, .5);
+    border-bottom: 1px solid rgba(200, 200, 200, .5);
+}
+
+.cell {
+    margin: 0;
+    height: 48px;
+    font-size: 14px;
+    white-space: nowrap;
+    border-right: 1px solid rgba(200, 200, 200, .5);
+    border-bottom: 1px solid rgba(200, 200, 200, .5);
+    width: 48px;
+    min-width: 48px;
+    text-align: center;
+}
+
+.header-cell-sticky {
+    border-left: 1px solid rgba(200, 200, 200, .5);
+    border-top: 1px solid rgba(200, 200, 200, .5);
+    border-bottom: 1px solid rgba(200, 200, 200, .5);
+
+}
+
+.cell-sticky {
+    margin: 0;
+    padding: 0 5px 0 5px;
+    text-align: left;
+    /*position: absolute;*/
+    height: 34px;
+    width: 150px;
+    left: 0;
+    margin-left: -1px;
+    border-bottom: 1px solid rgba(200, 200, 200, .5);
+}
+
+
+.cell-summary {
+    font-size: 12px;
+    width: 48px;
+    min-width: 48px;
+    max-width: 48px;
+    border-bottom: 1px solid rgba(200, 200, 200, .5);
+}
+
+.cell-group {
+    font-size: 12px;
+}
+
+.cell-rows {
+    border-left: 1px solid rgba(200, 200, 200, .5);
+}
+
+.vertical {
+    transform: translate(0px, 100px) rotate(270deg);
+    width: 48px;
+}
+
+.title {
+    border-bottom-color: rgba(200, 200, 200, .5);
+    padding: 5px 10px;
+}
+
+.group-title {
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.placeholder {
+    max-width: 100%;
+    max-height: 90%;
+    overflow-x: auto;
+    overflow-y: auto;
+    margin: 10px;
+}
+
+
+.novalid {
+    color: #f44336
+}
+
+.valid {
+    color: #4caf50;
+}
+
+.norelevant {
+    color: gray;
+}
+
+.legend {
+    font-size: 12px;
+}
+
+.legend-icon {
+    margin-left: 5%;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.cell-icon {
+    cursor: pointer;
+}
+
+button {
+    margin-left: 1px;
+    margin-right: 1px;
+}

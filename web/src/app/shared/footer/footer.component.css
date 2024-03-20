@@ -1,0 +1,27 @@
+footer {
+  color: #ebebeb;
+  background: transparent linear-gradient(180deg,#003865,rgba(0,28,51,.94)) 0 0 no-repeat padding-box;
+  box-shadow: none;
+}
+
+.size-flag {
+  width: 20px;
+}
+
+.environment-flag-local {
+  background-color: grey;
+}
+
+
+a {
+  color: #fff;
+}
+
+a:hover {
+  color: #54C0E8;
+}
+
+.py-3 {
+  padding-bottom: 8px !important;
+  padding-top: 8px !important;
+}

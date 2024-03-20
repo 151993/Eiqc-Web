@@ -1,0 +1,10 @@
+<div class="modal-body">
+  <ng-container *ngIf="!detail">
+    <app-audit-log-list [displayTime]="displayTime" [recordId]="recordId" [entity]="entity" (closeClickedEvent)="close()">
+    </app-audit-log-list>
+  </ng-container>
+  <ng-container *ngIf="detail">
+    <app-audit-log-detail [auditMeta]="detail" (closeClickedEvent)="close()">
+    </app-audit-log-detail>
+  </ng-container>
+</div>

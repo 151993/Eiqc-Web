@@ -1,0 +1,18 @@
+/*
+.messageContainer{
+    height: 98vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*/
+
+.pMessage {
+  /* Set color for loading */
+  color: #002B49;
+  margin-top: 10px;
+}
+
+.centerLoadingMsg {
+  margin-top: -8em;
+}

@@ -1,0 +1,7 @@
+
+<app-configuration-ptable [column]="displayColumns" [source]="dataSource" [totalRecords]="totalRecords"
+  [first]="first" (editEvent)="editRecord($event)" (toggleEvent)="toggleStatus($event)"
+  (deleteEvent)="deleteRecord($event)" (auditTrailEvent)="showAuditLog($event)" (filterEvent)="onFilterEvent($event)"
+  (pageSortEvent)="onPageSortEvent($event)" [enableView]="canAccess" [enableEdit]="canUpdate" [enableDelete]="canDelete"
+  [isToggleEnabled]="true" (exportEvent)="onExportEvent($event)">
+</app-configuration-ptable>

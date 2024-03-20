@@ -1,0 +1,27 @@
+<div class="content">
+	<div class="block block-rounded">
+		<div class="block-header border-bottom">
+			<button class="btn btn-default push-5-r" (click)="close()" type="button"
+				title="{{('Label.Close'| translate)}}">
+				<i class="si si-close"> </i>
+			</button>
+			<h3 class="block-title">
+				{{ "Label.AdminCertificationAttachments" | translate }}
+			</h3>
+		</div>
+		<div class="block-content contentHeight">
+			<div class="row overflow-auto">
+				<form>
+					<div class="row form-group ">
+						<div class="col-sm-11">
+							<app-file-upload [files]="files" [downloadFiles]="true" [fileUploadId]="tempFolder"
+								[multiple]="true" [dragAndDrop]="false" [showSelectFile]="false" [showDeleteFile]="false" [isDisabled]="true"
+								[showFiles]="true" [buttonText]="'Label.SelectFile'">
+							</app-file-upload>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,89 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header">
+      <p>To use Skeleton loading for table, pass in [enableSkeleton]="true" and make sure to set dataSource = null on
+        first load. Refer to example in the project.</p>
+      <p>To use Skeleton loading for detail, set the style using [ngClass] and create a progress flag to show / hide the
+        style. Refer to example in the project.</p>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header">
+      <div class="row">
+        <button class="btn btn-default push-5-r" type="button" title="{{ 'Label.Back' | translate }}"
+          [routerLink]="['../']">
+          <i class="si si-action-undo"> </i>
+        </button>
+        <div class="col-md-6 d-flex">
+          <h3 class="block-title justify-content-center align-self-center ">
+            Skeleton Loading Example
+          </h3>
+        </div>
+        <div class="ml-auto">
+          <button class="btn btn-primary push-5-r push-10" type="button" title="{{ 'Label.Refresh' | translate }}"
+            (click)="getData()">
+            <i class="fa fa-refresh"></i> {{ "Label.Refresh" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="block-content">
+      <div>
+        <app-configuration-ptable [enableSkeleton]="true" [column]="displayColumns" [source]="dataSource"
+          [totalRecords]="totalRecords" [first]="first" [fileName]="fileName" (editEvent)="editRecord($event)"
+          (toggleEvent)="toggleStatus($event)" (deleteEvent)="deleteRecord($event)"
+          (exportEvent)="onExportEvent($event)" (auditTrailEvent)="showAuditLog($event)"
+          (filterEvent)="onFilterEvent($event)" (pageSortEvent)="onPageSortEvent($event)">
+        </app-configuration-ptable>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-md-6 d-flex">
+          <h3 class="block-title justify-content-center align-self-center ">
+            {{ "Label.ApplicationLinkConfiguration" | translate }}
+            <i class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="block-content">
+      <div class="row">
+        <form>
+          <div class="row form-group ">
+            <label class="col-sm-1 col-form-label">{{ "Label.Name" | translate }}:</label>
+            <div class="col-sm-11">
+              <input [ngClass]="{ 'skeleton': dataLoading }" id="name" type="text" class="form-control "
+                maxlength="60" />
+            </div>
+            <div class="offset-1 col-sm-11">
+            </div>
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-1 col-form-label">{{ "Label.Url" | translate }}:</label>
+            <div class="col-sm-11">
+              <textarea [ngClass]="{ 'skeleton': dataLoading }" id="url" class="form-control" maxlength="512"
+                wrap="soft"></textarea>
+            </div>
+            <div class="offset-1 col-sm-11">
+            </div>
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-1 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-11">
+              <label class="css-input switch switch-sm switch-primary">
+                <input [ngClass]="{ 'skeleton': dataLoading }" type="checkbox" /><span></span>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

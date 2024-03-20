@@ -1,0 +1,82 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()"
+        title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.ParameterCategoryConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Sequence" | translate }}:</label>
+            <div class="col-sm-10">
+                <input id="sequence" type="number" class="form-control" formControlName="sequence"/>
+            </div>
+           
+      </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MultiSampling" | translate }}:</label>
+            <div class="col-sm-10">
+                <input id="multiSampling" type="number" class="form-control" formControlName="multiSampling"/>
+            </div>
+            
+      </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Description" | translate }}:</label>
+            <div class="col-sm-10">
+                <input id="description" type="text" class="form-control" formControlName="description" 
+                 
+                maxlength="250" 
+                />
+            </div>
+           
+      </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PCCode" | translate }}:</label>
+            <div class="col-sm-10 align-middle">
+              <j-auto-complete-pc-code formControlName="pCCode" 
+              (onDropdownClick)="getData()"
+              [config]="pcCodeAutoCompleteConfig">
+              </j-auto-complete-pc-code>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isPCCodeModified()">
+              
+                
+              </ng-container>
+            </div> -->
+      </div>
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" [routerLink]="['../']"
+        title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.EmailTemplateConfiguration" | translate }}
+      </h3>
+    </div>
+    <div class="block-content">
+      <div>
+        <app-configuration-ptable [column]="displayColumns" [source]="dataSource" [totalRecords]="totalRecords" [first]="first" [fileName]="fileName"
+                                  (editEvent)="editRecord($event)" (toggleEvent)="toggleStatus($event)" [enableDelete]="false" [enableToggle]="false"
+                                  (auditTrailEvent)="showAuditLog($event)" (filterEvent)="onFilterEvent($event)" (pageSortEvent)="onPageSortEvent($event)"
+                                  [enableEdit]="canUpdate" [enableView]="canAccess">
+        </app-configuration-ptable>
+      </div>
+    </div>
+  </div>
+</div>

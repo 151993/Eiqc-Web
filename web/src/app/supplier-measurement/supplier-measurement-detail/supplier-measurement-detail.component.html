@@ -1,0 +1,884 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.SupplierMeasurementConfiguration" | translate }}
+      </h3>
+      <div class="block-optisSaveAsDraftDisabledions">
+        <button type="button" id="buttonSaveAsDraft" class="btn btn-primary" (click)="saveDraftForm()"
+          [disabled]="isSaveAsDraftDisabled()" data-dismiss="modal" title="{{ 'Label.SaveDraft' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.SaveDraft" | translate }}
+        </button>
+      </div>
+      <div class="block-options">
+        <button type="button" id="buttonReject" class="btn btn-primary" (click)="saveGenerateResultForm()"
+          data-dismiss="modal" title="{{ 'Label.GenerateResult' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.GenerateResult" | translate }}
+        </button>
+      </div>
+      <ng-container *ngIf="isNewSMSForm">
+        <div class="block-options">
+          <button type="button" id="buttonSubmit" class="btn btn-primary"
+            (click)="openConfirmationModal()" [disabled]="isSubmitDisabled()" data-dismiss="modal"
+            title="{{ 'Label.Submit' | translate }}">
+            <i class=" fa fa-floppy-o"></i> {{ "Label.Submit" | translate }}
+          </button>
+        </div>
+        <div class="block-options">
+          <button type="button" id="buttonReject" class="btn btn-primary"
+            (click)="saveRejectForm()" [disabled]="isRejectDisabled()" data-dismiss="modal"
+            title="{{ 'Label.Reject' | translate }}">
+            <i class=" fa fa-floppy-o"></i> {{ "Label.Reject" | translate }}
+          </button>
+        </div>
+      </ng-container>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.PartNo" | translate }}:
+              </label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-part-inspection-part formControlName="partNo" [supplierId]="supplierId"
+                (onSelect)="onPartSelect($event)" (onUnselect)="onPartUnselect($event)"
+                [config]="partNoAutoCompleteConfig">
+              </j-auto-complete-part-inspection-part>
+              <i class="fa fa-copy" id="copy" title="Copy" (click)="onCopyClicked()"></i>
+              <span> {{copyMessage}} </span>
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isPartNoModified()">
+                <small *ngIf="isPartNoEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.ManufacturerPartNumber" | translate }}:</label>
+            <div class="col-sm-9">
+              <j-auto-complete-part-inspection-manufacture-part-number
+                [sapPartInspectionPlanId]="sapPartInspectionPlanId" formControlName="manufacturePartNumber"
+                [config]="manuFacturePartNumberAutoCompleteConfig">
+              </j-auto-complete-part-inspection-manufacture-part-number>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.Manufacturer" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="manufacturer" type="text" class="form-control" formControlName="manufacturer" disabled />
+            </div>
+          </div>
+
+          <div class="row form-group ">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.WorkCell" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="workCell" type="text" class="form-control" formControlName="workCell" disabled />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.SupplierDetails" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <j-auto-complete-supplier formControlName="supplier" [isDisabled]="true"
+                [config]="supplierAutoCompleteConfig">
+              </j-auto-complete-supplier>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.SupplierContact" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+
+              <input id="supplierContact" type="text" class="form-control" formControlName="supplierContact" disabled />
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isSupplierContactModified()">
+                <small *ngIf="isSupplierContactEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.IP" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="ip" type="text" class="form-control" formControlName="ip" disabled />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.IPAttachment" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <a [routerLink]="" (click)="getIPAttachment($event)" class="nav-link active">{{ this.ip }}</a>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.SMSNo" | translate }}:
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="smsNo" type="text" class="form-control" formControlName="smsNo" />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.PONumber" | translate }}:</label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+
+
+            <div class="col-sm-9">
+
+              <j-auto-complete-purchase-order [site]="site" [vendorCode]="vendorCode" [partNo]="partNo"
+                (onSelect)="onPOSelect($event)" formControlName="pONumber" (onUnselect)="onPOUnselect($event)"
+                [config]="pOAutoCompleteConfig">
+              </j-auto-complete-purchase-order>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.POQuantity" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="quantity" type="text" class="form-control" formControlName="quantity" disabled />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.BatchNo" | translate }}:</label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+
+            <div class="col-sm-9">
+              <input id="batchNo" type="text" maxlength="50" class="form-control" formControlName="batchNo" />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="input-inline col-sm-3">
+              <label class="col-form-label">{{ "Label.BatchQuantity" | translate }}:</label>
+              <label class="form-text text-danger">
+                {{ "Message.RequiredSymbol" | translate }}
+              </label>
+            </div>
+            <div class="col-sm-9">
+              <input id="batchQuantity" type="text" class="form-control" formControlName="batchQuantity"
+                (focusout)="onBatchQuantityFocusOut()" (ngModelChange)="onBatchQuantityChange($event)"
+                autocomplete="off" appMaxFraction [fraction]="0" />
+            </div>
+            <div class="offset-3 col-sm-9">
+              <ng-container *ngIf="isbatchQuantityModified()">
+                <small *ngIf="!isbatchQuantityValid" class="form-text text-danger">
+                  {{ "Message.BatchQuantityExceeded" | translate }}
+                </small>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.QuantityBalance" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="quantityBalance" type="text" class="form-control" formControlName="quantityBalance" disabled />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <label class="col-sm-3 col-form-label">{{ "Label.Inspector" | translate }}:</label>
+            <div class="col-sm-9">
+              <input id="inspector" type="text" class="form-control" formControlName="inspector" disabled />
+            </div>
+          </div>
+
+          <div class="row form-group ">
+            <label class="col-sm-3 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-9">
+              <div class="custom-control custom-switch">
+                <input id="smsStatus" type="text" class="form-control" formControlName="smsStatus" disabled />
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div>
+              <p-fieldset collapsed="false" (click)="expandMasterInspectionTabDynamic()"
+                legend="{{ 'Label.MasterInspectionCharacteristic' | translate }}" [toggleable]="true">
+                <small *ngIf="!isSamplingPlanDataNumbersOnly()" class="form-text text-danger">
+                  {{ "Message.OnlyPositiveNumbersAllowed" | translate }}
+                </small>
+                <app-configuration-ptable [column]="displayMasterInspectionColumns" [enableSkeleton]="false"
+                  [source]="supplierSamplingPlans" [enableDetail]="false" [enableToggle]="false" [enableEdit]="false"
+                  [enableAttachment]="true" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false"
+                  [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                  [enableColumnFilter]="false">
+                </app-configuration-ptable>
+              </p-fieldset>
+            </div>
+          </div>
+          <ng-container *ngFor="let item of tabConfig; let i= index">
+            <div class="row form-group" *ngIf="item.id==supplierFunctionAttributeTabId && item.isVisible">
+              <div>
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.FunctionAttribute' | translate }}" [toggleable]="true">
+                  <small *ngIf="isFunctionAttributeInspectionDetailsEmpty()" class="form-text text-danger">
+                    {{ "Message.DefectTypeRequired" | translate }}
+                  </small>
+                  <app-configuration-ptable [column]="displaySupplierFunctionAttributeColumns" [enableSkeleton]="false"
+                    [source]="supplierFunctionAttributeDetails" [enableDetail]="false" [enableToggle]="false"
+                    [isDisplayColumnReload]="isDisplayColumnReload" [enableEdit]="false" [paginator]="false"
+                    [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false"
+                    [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                    [canAddDefectTypes]="canAddDefectTypes" (addDefectTypesEvent)="handleAddDefectTypesEvent($event)"
+                    (textChangedEvent)="testInspectionDetailsTextChangedEvent($event)"
+                    (dropDownChangedEvent)="supplierFunctionAttributeDropDownChangeEvent($event)"
+                    [dynamicTypeCollection]="dynamicTypeFunctionAttributeCollection"
+                    [tableWidth]="tableWidthForFunctionAttribute">
+                  </app-configuration-ptable>
+                  <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isFunctionAttributeFail===false,'red': isFunctionAttributeFail===true  }">{{ isFunctionAttributeFail ? 'Fail' : 'Pass'}}</label>
+                  </div> -->
+                  <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      >{{ functionAttributeFailIndicator==1 ? 'Pass' : functionAttributeFailIndicator==0 ? 'Fail' :  ''}}</label>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+
+            <div class="row form-group" *ngIf="item.id==microSectionParameterTabId && item.isVisible">
+              <div>
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.MicroSectionParameter' | translate }}" [toggleable]="true">
+                  <app-configuration-ptable [column]="microSectionParameterColumns" [enableSkeleton]="false"
+                    [isDisplayColumnReload]="isDisplayColumnReload" [source]="supplierMicroSectionParameters "
+                    [enableDetail]="false" [enableToggle]="false" [enableEdit]="false" [paginator]="false"
+                    [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false"
+                    [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                    [canAddChartType]="canAddChartType" (addChartTypeEvent)="SPCChartMicroSectionEvent($event)"
+                    [dynamicTypeCollection]="dynamicTypeCollection"
+                    (dropDownChangedEvent)="instrumentDropDownChangeEvent($event,6)"
+                    [dynamicCollectionColumnReference]="'instrumentTypeId'"
+                    (textChangedEvent)="supplierMicroSectionTextChangedEvent($event)"
+                    [tableWidth]="tableWidthForMicroSection">
+                  </app-configuration-ptable>
+                  <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isMicroSectionParameterFail===false,'red': isMicroSectionParameterFail===true }">{{ isMicroSectionParameterFail ? 'Fail' : 'Pass'}}</label>
+                  </div> -->
+                  <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isMicroSectionParameterFail===false,'red': isMicroSectionParameterFail===true }">{{ microSectionFailIndicator==1 ? 'Pass' : microSectionFailIndicator==0 ? 'Fail' :  ''}}</label>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+            <div class="row form-group" *ngIf="item.id==dimensionMeasurementTabId && item.isVisible">
+              <div>
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.DimensionalMeasurements' | translate }}" [toggleable]="true">
+                  <app-configuration-ptable [column]="dimensionMeasurementColumns" [enableSkeleton]="false"
+                    [source]="supplierDimensionMeasurements " [enableDetail]="false" [enableToggle]="false"
+                    [enableEdit]="false" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false"
+                    [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                    [enableColumnFilter]="false" [dynamicTypeCollection]="dynamicTypeCollection"
+                    [canAddChartType]="canAddChartType" (addChartTypeEvent)="SPCChartDimensionMeasurementEvent($event)"
+                    [isDisplayColumnReload]="isDisplayColumnReload"
+                    (dropDownChangedEvent)="instrumentDropDownChangeEvent($event,3)"
+                    [dynamicCollectionColumnReference]="'instrumentTypeId'"
+                    (textChangedEvent)="dimensionalMeasurementTextChangedEvent($event)">
+                  </app-configuration-ptable>
+                  <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isDimensionalMeasurementFail===false,'red': isDimensionalMeasurementFail===true  }">{{ isDimensionalMeasurementFail ? 'Fail' : 'Pass'}}</label>
+                  </div> -->
+                  <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isDimensionalMeasurementFail===false,'red': isDimensionalMeasurementFail===true  }">{{ dimentionFailIndicator==1 ? 'Pass' : dimentionFailIndicator==0 ? 'Fail' :  ''}}</label>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+            <div class="row form-group" *ngIf="item.id==functionVariableTabId && item.isVisible">
+              <div>
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.FunctionVariable' | translate }}" [toggleable]="true">
+                  <app-configuration-ptable [column]="functionVariableColumns" [enableSkeleton]="false"
+                    [source]="supplierFunctionVariables " [enableDetail]="false" [enableToggle]="false"
+                    [enableEdit]="false" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false"
+                    [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                    [enableColumnFilter]="false" [dynamicTypeCollection]="dynamicTypeCollection"
+                    [isDisplayColumnReload]="isDisplayColumnReload" [canAddChartType]="canAddChartType"
+                    (addChartTypeEvent)="SPCChartFunctionVariableEvent($event)"
+                    (dropDownChangedEvent)="instrumentDropDownChangeEvent($event,5)"
+                    [dynamicCollectionColumnReference]="'instrumentTypeId'"
+                    (textChangedEvent)="functionVariableTextChangedEvent($event)">
+                  </app-configuration-ptable>
+                  <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isFunctionVariableFail===false,'red': isFunctionVariableFail===true  }">{{ isFunctionVariableFail ? 'Fail' : 'Pass'}}</label>
+                  </div> -->
+                  <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isFunctionVariableFail===false,'red': isFunctionVariableFail===true  }">{{ functionVariableFailIndicator==1 ? 'Pass' : functionVariableFailIndicator==0 ? 'Fail' :  ''}}</label>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+
+            <div class="row form-group" *ngIf="item.id==specWithMMCId && item.isVisible">
+              <div>
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.MPositionTolerance' | translate }}" [toggleable]="true">
+                  <app-configuration-ptable [column]="supplierMPositionToleranceColumns" [enableSkeleton]="false"
+                    [source]="supplierMPositionToleranceTabDetails" [enableDetail]="false" [enableToggle]="false"
+                    [enableEdit]="false" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false"
+                    [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                    [enableColumnFilter]="false" (editEvent)="editMPositionToleranceRecord($event)"
+                    [childDisplayColumns]="childDisplayColumnsMMC" [enableRowExpand]="true"
+                    [tableWidth]="tableWidthForMMCLMC" (exportEvent)="onExportEvent($event)"
+                    [dynamicTypeCollection]="dynamicTypeCollection" (rowExpandEvent)="onMMCRowExpand()"
+                    (childTextChangedEvent)="specWithMMCTextChangedEvent($event)"
+                    [dynamicCollectionColumnReference]="'instrumentTypeId'">
+                  </app-configuration-ptable>
+                  <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isMPositionToleranceFail===false,'red': isMPositionToleranceFail===true  }">{{ isMPositionToleranceFail ? 'Fail' : 'Pass'}}</label>
+                  </div> -->
+                  <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isMPositionToleranceFail===false,'red': isMPositionToleranceFail===true  }">{{ mPositionFailIndicator==1 ? 'Pass' : mPositionFailIndicator==0 ? 'Fail' :  ''}}</label>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+
+            <div class="row form-group" *ngIf="item.id==specWithLMCId && item.isVisible">
+              <div>
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.LPositionTolerance' | translate }}" [toggleable]="true">
+                  <app-configuration-ptable [column]="supplierLPositionToleranceColumns" [enableSkeleton]="false"
+                    [source]="supplierLPositionToleranceTabDetails" [enableDetail]="false" [enableToggle]="false"
+                    [enableEdit]="false" [paginator]="false" [showInactiveStatus]="false" [enableDelete]="false"
+                    [enableAuditTrail]="false" [enablePaginator]="false" [enableTblBottomPageInfo]="false"
+                    [enableColumnFilter]="false" (editEvent)="editLPositionToleranceRecord($event)"
+                    [childDisplayColumns]="childDisplayColumnsLMC" [enableRowExpand]="true"
+                    [tableWidth]="tableWidthForMMCLMC" (exportEvent)="onExportEvent($event)"
+                    [dynamicTypeCollection]="dynamicTypeCollection" (rowExpandEvent)="onLMCRowExpand()"
+                    (childTextChangedEvent)="specWithLMCTextChangedEvent($event)"
+                    [dynamicCollectionColumnReference]="'instrumentTypeId'">
+                  </app-configuration-ptable>
+                  <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isLPositionToleranceFail===false,'red': isLPositionToleranceFail===true  }">{{ isLPositionToleranceFail ? 'Fail' : 'Pass'}}</label>
+                  </div> -->
+                  <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isLPositionToleranceFail===false,'red': isLPositionToleranceFail===true  }">{{ lPositionFailIndicator==1 ? 'Pass' : lPositionFailIndicator==0 ? 'Fail' :  ''}}</label>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+
+            <div class="row form-group" *ngIf="item.id==dateCodeTabId && item.isVisible">
+              <div class="col-sm-12">
+
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.DateCode' | translate }}" [toggleable]="true">
+                  <div class="row form-group ">
+                    <div class="input-inline col-sm-3">
+                      <label class="col-form-label">{{ "Label.ManufactureDate" | translate }}:
+                      </label>
+                    </div>
+                    <div class="col-sm-4">
+                      <!--   -->
+                      <app-j-calendar formControlName="manufactureDate" id="manufactureDate" [showTime]="false"
+                        [timeOnly]="false" (dateSelect)="onManufactureDateSelect($event)"
+                        [selectionMode]="selectionModeSingle" [maxDate]="maxDate">
+                      </app-j-calendar>
+                    </div>
+                  </div>
+                  <div class="row form-group ">
+                    <div class="input-inline col-sm-3">
+                      <label class="col-form-label">{{ "Label.ShelfLife" | translate }}:
+                      </label>
+                    </div>
+                    <div class="col-sm-4">
+                      <p-inputNumber formControlName="shelfLifeMonths" [showButtons]="true" autocomplete="off"
+                        inputId="shelfLifeMonths" [useGrouping]="false" [min]="minNumber" [max]="maxNumber"
+                        [size]="size" [disabled]="true">
+                      </p-inputNumber>Months
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="input-inline col-sm-3">
+                      <label class="col-form-label">{{ "Label.ManufactureDC" | translate }}:
+                      </label>
+                    </div>
+                    <div class="col-sm-4">
+                      <!-- <p-inputNumber formControlName="manufactureDCWeeks" [showButtons]="true"
+                        (onInput)="onManufactureDCWeeksSelect($event)" autocomplete="off" inputId="manufactureDCWeeks"
+                        [useGrouping]="false" [max]="54" [size]="size">
+                      </p-inputNumber>Weeks -->
+                      <input type="number" formControlName="manufactureDCWeeks" (focusout)="formatWeeks()"
+                        id="manufactureDCWeeks" (change)="onManufactureDCWeeksSelect($event)" autocomplete="off"
+                        max="54" />Weeks
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4">
+                      <!-- <p-inputNumber formControlName="manufactureDCYears" [showButtons]="true"
+                        (onInput)="onManufactureDCYearsSelect($event)" autocomplete="off" inputId="manufactureDCYears"
+                        [useGrouping]="false" [max]="9999">
+                      </p-inputNumber> Years -->
+                      <input type="number" formControlName="manufactureDCYears" (focusout)="formatYear()"
+                        id="manufactureDCYears" (change)="onManufactureDCYearsSelect($event)" autocomplete="off"
+                        max="9999" />Years
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <label class="col-sm-3 col-form-label">{{ "Label.SurfaceFinishingDate" | translate }}:</label>
+                    <div class="col-sm-4">
+                      <app-j-calendar formControlName="surfaceFinishingDate" id="surfaceFinishingDate"
+                        [showTime]="false" [timeOnly]="false" [isDisabled]="true" [selectionMode]="selectionModeSingle">
+                      </app-j-calendar>
+                    </div>
+                  </div>
+                  <div class="row form-group ">
+                    <label class="col-sm-3 col-form-label">{{ "Label.DateCodeDetails" | translate }}:
+                    </label>
+                    <div class="col-sm-9">
+                      <input id="dateCodeDetails" type="text" class="form-control" formControlName="dateCodeDetails"
+                        autocomplete="off" maxlength="50" disabled />
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <label class="col-sm-3 col-form-label">{{ "Label.ExpireDate" | translate }}:</label>
+                    <div class="col-sm-4">
+                      <app-j-calendar formControlName="expireDate" id="expireDate" [showTime]="false" [timeOnly]="false"
+                        [isDisabled]="true" [selectionMode]="selectionModeSingle">
+                      </app-j-calendar>
+                    </div>
+                  </div>
+                  <div class="row form-group ">
+                    <div class="input-inline col-sm-3">
+                      <label class="col-form-label">{{ "Label.RemainingDays" | translate }}:
+                      </label>
+                    </div>
+                    <div class="col-sm-4">
+                      <p-inputNumber formControlName="remainingDays" [showButtons]="true" autocomplete="off"
+                        [disabled]="true" inputId="remainingDays"
+                        [ngClass]="{ 'border': isRemainingDaysWithinLimit==='false'}" [useGrouping]="false"
+                        [size]="size">
+                      </p-inputNumber>
+                    </div>
+                  </div>
+                  <div class="row form-group ">
+                    <div class="input-inline col-sm-3">
+                      <label class="col-form-label">{{ "Label.AcceptReject" | translate }}:
+                      </label>
+                    </div>
+                    <div class="col-sm-4">
+                      <p-radioButton class="inputRadioButton" *ngFor="let type of acceptRejectList" name="acceptReject"
+                        [value]="type.name" [label]="type.name" formControlName="acceptReject" [inputId]="type.name">
+                      </p-radioButton>
+                    </div>
+                  </div>
+                  <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': isRemainingDaysWithinLimit===true,'red': isRemainingDaysWithinLimit===false  }">{{ isRemainingDaysWithinLimit ? 'Pass' : 'Fail'}}</label>
+                  </div> -->
+                  <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                      [ngClass]="{ 'green': dateCodeFailIndicator===1,'red': dateCodeFailIndicator===0  }">{{ dateCodeFailIndicator==1 ? 'Pass' : dateCodeFailIndicator==0 ? 'Fail' :  ''}}</label>
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+            <div class="row form-group" *ngIf="item.id==bowTwistTabId && item.isVisible">
+              <div>
+                <p-fieldset collapsed="false" (click)="expandTabDynamic(item.id)"
+                  legend="{{ 'Label.BowTwist' | translate }}" [toggleable]="true">
+                  <div class="row form-group ">
+                    <div class="col-sm-9">
+                      <select class="form-control" *ngIf="specType" disabled>
+                        <option value="">{{"Label.Select" | translate}}</option>
+                        <ng-container *ngFor="let type of specType | keyvalue">
+                          <option *ngIf="type.key==specTypeId; else dropdownSpec" value="{{ type.key }}"
+                            selected="selected"> {{type.value}} </option>
+                          <ng-template #dropdownSpec>
+                            <option value="{{ type.key }}"> {{type.value}} </option>
+                          </ng-template>
+                        </ng-container>
+                      </select>
+                      <div class="col-sm-9">
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <label class="col-sm-3 col-form-label">{{ "Label.DataType" | translate }}:</label>
+                      <div class="col-sm-9">
+                        <table>
+                          <tr>
+                            <td *ngFor="let type of dataTypeList">
+                              <div *ngIf="type.id == dataTypeId; else radioBowDataType">
+                                <input type="radio" class="inputRadioButton" id={{rowIndex}} name=radioBow{{rowIndex}}
+                                  checked="true" [value]="type.name">
+                                <label for="{{type.name}}"> {{type.name}}</label>
+                              </div>
+                              <ng-template #radioBowDataType>
+                                <input type="radio" class="inputRadioButton" id={{rowIndex}}
+                                  (click)="onBowDataTypeChanged($event)" name=radioBow{{rowIndex}} [value]="type.name">
+                                <label for="{{type.name}}"> {{type.name}}</label>
+                              </ng-template>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="col-sm-9" *ngIf="bowTwistTitles">
+                      <label
+                        class="col-sm-6 col-form-label">{{ bowTwistTitles.length > 0 ? bowTwistTitles[0].displayMessage : ''  }}:</label>
+                    </div>
+                    <div class="grid-container">
+
+                      <div class="grid-child purple">
+                        {{ "Label.WarPage" | translate }}
+                        <ng-container *ngFor="let warPage of bowTwistTitles; let bowIndex = index">
+                          <ng-container *ngFor="let warPageRow of warPage.rows; let warPageIndex = index">
+                            <div class="positionWarpage">
+                              <label class="col-sm-2 col-form-label ">{{ warPageRow.rowTitle }}:</label>
+                            </div>
+                            <br />
+                          </ng-container>
+                        </ng-container>
+                      </div>
+
+                      <div class="grid-child green">
+                        <app-configuration-ptable [column]="displaySupplierBowTwistColumns" [enableSkeleton]="false"
+                          [source]="supplierBowTwists " [enableDetail]="false" [enableToggle]="false"
+                          [isDisplayColumnReload]="isDisplayColumnReload" [enableEdit]="false" [paginator]="false"
+                          [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false"
+                          [enablePaginator]="false" [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                          (textChangedEvent)="bowTwistTextChangedEvent($event)" [tableWidth]="tableWidthForBowTwist">
+                        </app-configuration-ptable>
+                        <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                            [ngClass]="{ 'green': isBowTwistFail===false,'red': isBowTwistFail===true  }">{{ isBowTwistFail ? 'Fail' : 'Pass'}}</label>
+                        </div> -->
+                        <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                            [ngClass]="{ 'green': isBowTwistFail===false,'red': isBowTwistFail===true  }">{{ bowTwistFailIndicator==1 ? 'Pass' : bowTwistFailIndicator==0 ? 'Fail' :  ''}}</label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </p-fieldset>
+              </div>
+            </div>
+          </ng-container>
+
+          <div class="row form-group">
+            <div>
+              <p-fieldset collapsed="false" (click)="expandSapBasedParameterTabDynamic()"
+                legend="{{ 'Label.SapBased' | translate }}" [toggleable]="true">
+                <small *ngIf="isSapBasedParameterDetailsEmpty()" class="form-text text-danger">
+                  {{ "Message.DefectTypeRequired" | translate }}
+                </small>
+                <app-configuration-ptable [column]="displaySupplierSapBasedParameterColumns" [enableSkeleton]="false"
+                  [source]="supplierSapBasedParameters" [enableDetail]="false" [enableToggle]="false"
+                  [enableEdit]="false" [enableAttachment]="true" [paginator]="false" [showInactiveStatus]="false"
+                  [enableDelete]="false" [enableAuditTrail]="false" [enablePaginator]="false"
+                  [enableTblBottomPageInfo]="false" [enableColumnFilter]="false" [canAddDefectTypes]="canAddDefectTypes"
+                  (addDefectTypesEvent)="openSapBasedDefectTypeModel($event)"
+                  (textChangedEvent)="physicalInspectionTextChangedEvent($event)">
+                </app-configuration-ptable>
+
+                <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                    [ngClass]="{'red': resultPassFailSapBased==='Fail' && isPassFailResultSapBased===true   }">{{  resultPassFailSapBased }}</label>
+                </div> -->
+                <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                    [ngClass]="{'red': resultPassFailSapBased==='Fail'   }">{{ sapBasedFailIndicator==1 ? 'Pass' : sapBasedFailIndicator==0 ? 'Fail' :  '' }}</label>
+                </div>
+              </p-fieldset>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-12">
+              <p-fieldset collapsed="false" legend="{{ 'Label.PackingInspection' | translate }}" [toggleable]="true">
+
+                <div class="row form-group">
+                  <div class="input-inline col-sm-3">
+                    <label class="col-form-label">{{ "Label.ResultDescription" | translate }}:</label>
+                    <label class="form-text text-danger">
+                      {{ "Message.RequiredSymbol" | translate }}
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    <textarea id="resultDescription" type="text" class="form-control"
+                      formControlName="resultDescription" maxlength="1000"></textarea>
+                  </div>
+                  <div class="offset-3 col-sm-9">
+                    <ng-container *ngIf="isResultDescriptionModified()">
+                      <small *ngIf="isResultDescriptionEmpty()" class="form-text text-danger">
+                        {{ "Message.Required" | translate }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="input-inline col-sm-3">
+                    <label class="col-form-label">{{ "Label.PackagingQuantity" | translate }}:
+                    </label>
+                    <label class="form-text text-danger">
+                      {{ "Message.RequiredSymbol" | translate }}
+                    </label>
+                  </div>
+                  <div class="col-sm-9">
+                    <!-- <input id="packagingQuantity" type="number"pattern="[1-9]" class="form-control"
+                      (ngModelChange)="checkPackagingQuantityGreaterThanZero($event)" formControlName="packagingQuantity"
+                      autocomplete="off" maxlength="256" /> -->
+                    <input id="packagingQuantity" type="text" class="form-control" formControlName="packagingQuantity"
+                      placeholder="Enter only numbers" autocomplete="off"
+                      (ngModelChange)="checkPackagingQuantityGreaterThanZero($event)" appMaxFraction
+                      [fraction]="fractionDigits" [isNegative]="true" />
+                  </div>
+                  <div class="offset-3 col-sm-9">
+                    <ng-container *ngIf="isPackingQuantityModified()">
+                      <small *ngIf="isPackingQuantityEmpty()" class="form-text text-danger">
+                        {{ "Message.Required" | translate }}
+                      </small>
+                      <small *ngIf="!isPackingQuantityGreaterThanZero" class="form-text text-danger">
+                        {{ "Message.PackingQuantityValidation" | translate }}
+                      </small>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <label class="col-sm-3 col-form-label">{{ "Label.Result" | translate }}:</label>
+                  <div class="col-sm-9">
+                    <p-radioButton class="inputRadioButton" (ngModelChange)="packingInspectionResultChange($event)"
+                      *ngFor="let type of acceptRejectResults" name="result" [value]="type.name" [label]="type.name"
+                      formControlName="result" [inputId]="type.name">
+                    </p-radioButton>
+                  </div>
+
+                </div>
+                <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                    [ngClass]="{ 'green': isPackingInspectionFail===false,'red': isPackingInspectionFail===true  }">{{ isPackingInspectionFail ? 'Fail' : 'Pass'}}</label>
+                </div> -->
+                <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                    [ngClass]="{ 'green': isPackingInspectionFail===false,'red': isPackingInspectionFail===true  }">{{ packingInspectionFailIndicator==1 ? 'Pass' : packingInspectionFailIndicator==0 ? 'Fail' :  ''}}</label>
+                </div>
+              </p-fieldset>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div>
+              <p-fieldset collapsed="false" (click)="expandSupplierTestReportTabDynamic()"
+                legend="{{ 'Label.TestReport' | translate }}" [toggleable]="true">
+                <small *ngIf="!supplierTestReportAttachmentUploaded()" class="form-text text-danger">
+                  {{ "Message.AttachmentRequired" | translate }}
+                </small>
+                <small *ngIf="!inspectionDetailsMaxCharactersValid()" class="form-text text-danger">
+                  {{ "Message.InspectionDetailsMaxLimit" | translate }}
+                </small>
+                <small *ngIf="isTestReportDefectTypeEmpty()" class="form-text text-danger">
+                  {{ "Message.DefectTypeRequired" | translate }}
+                </small>
+                <app-configuration-ptable [column]="displaySupplierTestReportColumns" [enableSkeleton]="false"
+                  [source]="supplierTestReportTabDetails" [enableDetail]="false" [enableToggle]="false"
+                  [enableEdit]="true" [enableAttachment]="true" [paginator]="false" [showInactiveStatus]="false"
+                  [enableDelete]="false" [enableAuditTrail]="false" [enablePaginator]="false"
+                  [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                  (editEvent)="editSupplierTestReportRecord($event)"
+                  [dynamicTypeCollection]="dynamicTypeTestReportCollection"
+                  (textChangedEvent)="supplierTestReportTextChangedEvent($event)"
+                  (checkBoxChangedEvent)="supplierTestReportCheckBoxChangedEvent()"
+                  (dropDownChangedEvent)="supplierTestReportDropDownChangeEvent($event)"
+                  (radioButtonChangedEvent)="testReportRadioButtonChangedEvent($event)"
+                  [dynamicRadioCollection]="resultExpectedTestReport">
+                </app-configuration-ptable>
+                <!-- <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                    [ngClass]="{ 'green': isTestReportFail===false,'red': isTestReportFail===true  }">{{ isTestReportFail ? 'Fail' : 'Pass'}}</label>
+                </div> -->
+                <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                    [ngClass]="{ 'green': isTestReportFail===false,'red': isTestReportFail===true  }">{{supplierTestReportTabDetails.length > 0 ? testReportFailIndicator==1 ? 'Pass' : testReportFailIndicator==0 ? 'Fail'  :  '': ''}}</label>
+                </div>
+              </p-fieldset>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div>
+              <p-fieldset collapsed="false" (click)="expandTabDynamic(supplierVisualInspectionsTabId)"
+                legend="{{ 'Label.VisualInspection' | translate }}" [toggleable]="true">
+                <small *ngIf="!visualInspectionDetailsMaxCharactersValid()" class="form-text text-danger">
+                  {{ "Message.InspectionDetailsMaxLimit" | translate }}
+                </small>
+                <small *ngIf="isVisualInspectionToolsEmpty()" class="form-text text-danger">
+                  {{ "Message.InspectionToolsRequired" | translate }}
+                </small>
+                <small *ngIf="isExceedInspectionQtyVisualInspection" class="form-text text-danger">
+                  {{ "Message.ExceedInspectionQty" | translate }}
+                </small>
+                <app-configuration-ptable [column]="displaySupplierVisualInspectionColumns" [enableSkeleton]="false"
+                  [source]="supplierVisualInspectionDetails" [enableDetail]="false" [enableToggle]="false"
+                  [enableEdit]="false" [enableDelete]="false" [enableAuditTrail]="false" [enablePaginator]="false"
+                  [enableTblBottomPageInfo]="false" [enableColumnFilter]="false"
+                  [dynamicTypeCollection]="dynamicToolsCollection" [paginator]="false" [showInactiveStatus]="false"
+                  [canAddDefectTypes]="canAddDefectTypes" (textChangedEvent)="inspectionDetailsTextChangedEvent($event)"
+                  (addDefectTypesEvent)="handleAddDefectTypesQtyEvent($event)">
+                </app-configuration-ptable>
+                <div class="block-options position">{{ "Label.RejectionQuantity" | translate }} :
+                  <label>{{  visualInspectionRejectionQty }}</label>
+                </div>
+                <div class="block-options position">{{ "Label.Result" | translate }} : <label
+                    [ngClass]="{'red': resultPassFailVisualInspection==='Fail'   }">{{ supplierVisualInspectionDetails.length > 0 ? visualInspectionFailIndicator==1 ? 'Pass' : visualInspectionFailIndicator==0 ? 'Fail' :  '': '' }}</label>
+                </div>
+              </p-fieldset>
+            </div>
+          </div>
+          <div class="row form-group" *ngIf="isSummarySectionVisible">
+            <div>
+              <div class="container" style="width: 487px;">
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>{{ "Label.SummaryResult" | translate }}:</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>{{ summaryResult}} </label>
+                  </div>
+                </div>
+                <ng-container *ngFor="let item of tabConfig; let i= index">
+
+                  <div class="row" *ngIf="item.id==supplierFunctionAttributeTabId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.FunctionAttribute" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(supplierFunctionAttributeTabId) }} </label>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="item.id==functionVariableTabId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.FunctionVariable" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(functionVariableTabId) }}</label>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="item.id==dimensionMeasurementTabId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.DimensionalMeasurement" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(dimensionMeasurementTabId) }} </label>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="item.id==microSectionParameterTabId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.MicroSection" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(microSectionParameterTabId)}}
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="item.id==dateCodeTabId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.DateCode" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(dateCodeTabId) }} </label>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="item.id==specWithMMCId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.SpecWithMMC" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(specWithMMCId) }} </label>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="item.id==specWithLMCId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.SpecWithLMC" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(specWithLMCId) }} </label>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="item.id==bowTwistTabId && item.isVisible">
+                    <div class="col-sm-6">
+                      <label>{{ "Label.BowTwist" | translate }}:</label>
+                    </div>
+                    <div class="col-sm-6">
+                      <label>{{ getPassFailStringExpressionCondition(bowTwistTabId) }} </label>
+
+                    </div>
+                  </div>
+                </ng-container>
+
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>{{ "Label.SapBased" | translate }}:</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>{{ getPassFailStringExpressionCondition(sapBasedParameterTabId) }} </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>{{ "Label.PackingInspection" | translate }}:</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>{{ getPassFailStringExpressionCondition(packingInspectionTabId) }} </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>{{ "Label.TestReport" | translate }}:</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>{{ getPassFailStringExpressionCondition(supplierTestReportTabId) }} </label>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>{{ "Label.VisualInspection" | translate }}:</label>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>{{ getPassFailStringExpressionCondition(supplierVisualInspectionsTabId) }} </label>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

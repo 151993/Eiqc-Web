@@ -1,0 +1,4 @@
+div.scrollmenu {
+    overflow: auto;
+    overflow-x: scroll;
+  }

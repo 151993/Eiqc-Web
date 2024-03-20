@@ -1,0 +1,168 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.SupplierFormMPositionActualConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+
+
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LineNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lineNo" type="text" class="form-control" formControlName="lineNo" maxlength="200" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.No" | translate }}:</label>
+
+
+            <div class="col-sm-10">
+              <input id="no" type="number" class="form-control" formControlName="no" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.ValueActual" | translate }}:</label>
+
+            <div class="col-sm-10">
+              <input id="no" type="valueActual" class="form-control" formControlName="valueActual" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PositionCalcul" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="no" type="positionCalcul" class="form-control" formControlName="positionCalcul" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PositionActual" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="no" type="positionActual" class="form-control" formControlName="positionActual" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Result" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="result" type="text" class="form-control" formControlName="result" maxlength="200" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InstrumentID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="instrumentID" type="text" class="form-control" formControlName="instrumentID"
+                maxlength="200" />
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InstrumentID2" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="instrumentID2" type="text" class="form-control" formControlName="instrumentID2"
+                maxlength="200" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Base1Actual" | translate }}:</label>
+
+
+            <div class="col-sm-10">
+              <input id="base1Actual" type="text" class="form-control" formControlName="base1Actual" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Base2Actual" | translate }}:</label>
+
+
+            <div class="col-sm-10">
+              <input id="base2Actual" type="text" class="form-control" formControlName="base2Actual" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Base3Actual" | translate }}:</label>
+
+
+
+            <div class="col-sm-10">
+              <input id="text" type="text" class="form-control" formControlName="base3Actual" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InstrumentID1" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="instrumentID1" type="text" class="form-control" formControlName="instrumentID1"
+                maxlength="200" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InstrumentID2" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="InstrumentID2" type="text" class="form-control" formControlName="instrumentID2"
+                maxlength="200" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.InstrumentID3" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="InstrumentID3" type="text" class="form-control" formControlName="instrumentID3"
+                maxlength="200" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PositionType" | translate }}:</label>
+
+
+            <div class="col-sm-10">
+              <input id="positionType" type="number" class="form-control" formControlName="positionType" />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Supplier" | translate }}:</label>
+
+            <div class="col-sm-10">
+              <j-auto-complete-supplier-form 
+              (onDropdownClick)="getData()"
+              [config]="supplierFormAutoCompleteConfig"
+                formControlName="supplierForm" >
+              </j-auto-complete-supplier-form>
+			  
+			  
+            </div>
+          </div>
+
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

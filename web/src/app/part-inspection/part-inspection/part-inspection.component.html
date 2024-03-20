@@ -1,0 +1,48 @@
+<div class="content">
+    <div class="col-md-12">
+      <div class="input-group mb-3">
+        <div *ngIf="filterValue" class="input-group-prepend">
+          <button class="btn btn-danger" type="button" title="{{ 'Label.Clear' | translate }}" (click)="clearFilter()">
+            <i class="fa fa-remove"></i>
+          </button>
+        </div>
+        <input type="text" class="form-control" placeholder="{{ 'Label.Filter' | translate }}"
+          (input)="inputFilterEvent.next($event)" [(ngModel)]="filterValue" />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="block block-rounded block-bordered">
+        <div class="block-header bg-gray-lighter">
+          <div class="row">
+            <div class="col-md-12 nav-item">
+              <h3 class="block-title ">
+                <a class="nav-link dropdown-toggle" href="#configurationCollapse" data-toggle="collapse"
+                  aria-expanded="true" aria-controls="configurationCollapse">
+                  {{ "Label.Inspection" | translate }}
+                </a>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="collapse show" id="configurationCollapse">
+          <div class="block-content">
+            <div class="row">
+              <ng-container *ngFor="let page of partInspectionConfiguration">
+                <div class="=col-md-4 col-xl-2" *ngIf="page.visible && page.hasAccess">
+                  <div class="block js-appear-enabled animated bounceIn" data-toggle="appear" data-class="animated bounceIn">
+                    <a class="text-center hoverClass" [routerLink]="'./' + page.url">
+                      <div class="item item-rounded item-maxWidth bg-body text-primary mx-auto "  title="{{ 'Label.' + page.title | translate }}">
+                          <i class="fa {{page.icon}}"></i>
+                      </div>
+                      <div class="pt-3">{{ "Label." + page.title | translate }}</div>
+                    </a>
+                </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

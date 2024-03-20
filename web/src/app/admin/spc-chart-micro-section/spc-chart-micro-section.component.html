@@ -1,0 +1,176 @@
+<div class="modal-header">
+  <button class="btn btn-default push-5-r" (click)="close()" type="button" title="{{('Label.Close'| translate)}}">
+    <i class="si si-close"> </i>
+  </button>
+  <h3 class="block-title">
+    {{ "Label.MicroSectionSPCChart" | translate }}
+  </h3>
+</div>
+
+<div *ngIf="isXBarR">
+  <div class="modal-body">
+    <div class="col">
+
+      <h6 *ngIf="!isInsufficientLot" [ngStyle]="{'color':'red'}">
+        {{ "Label.InsufficientLot" | translate }}
+      </h6>
+
+      <h7 class="block-header">
+        IP: &nbsp; {{ ipNo }}
+        <br />
+        {{ "Label.Cpk" | translate }}: &nbsp; {{ cpk }}
+        <br />
+        {{ "Label.Parameter" | translate }}: &nbsp; {{ parameter }}
+        ,&nbsp;&nbsp;
+        {{ "Label.NominalValue" | translate }}: &nbsp; {{ nominal }}
+        ,&nbsp;&nbsp;
+        {{ "Label.UpperLimit" | translate }}: &nbsp; {{ upper }}
+        ,&nbsp;&nbsp;
+        {{ "Label.LowerLimit" | translate }}: &nbsp; {{ lower }}
+      </h7>
+      <div class="centre-bold">{{chartConfigXBarR.title}}</div>
+      <qss-ui-p-qc-chart type="line" [config]="chartConfigXBarR" (ruleNameEvent)="getXBarRRuleData($event)">
+      </qss-ui-p-qc-chart>
+      <div *ngIf="isMavericLotDetectedForXBarR">
+        <div>{{ "Label.MaverickLot" | translate }} : <span [ngStyle]="{'color':'red'}" class="blink_me">Yes</span></div>
+        <div [ngStyle]="{'color':'red'}">
+          <span style="white-space: pre;">{{ruleNameForXBarR}}</span>
+          </div>
+      </div>
+      <div [ngStyle]="{'color':'red'}" *ngIf="cpk<1.67"> {{ "Label.CpkLess" | translate }}</div>
+    </div>
+    <br />
+
+    <div class="modal-body">
+      <div class="col">
+        <div class="centre-bold">{{chartConfigRangeXBarR.title}}</div>
+        <qss-ui-p-qc-chart type="line" [config]="chartConfigRangeXBarR" (ruleNameEvent)="getRangeXBarRRuleData($event)">
+        </qss-ui-p-qc-chart>
+        <div *ngIf="isMavericLotDetectedForRangeXBarR">
+          <div>{{ "Label.MaverickLot" | translate }} : <span [ngStyle]="{'color':'red'}" class="blink_me">Yes</span>
+          </div>
+          <div [ngStyle]="{'color':'red'}">
+            <span style="white-space: pre;">{{ruleNameForRangeXBarR}}</span>
+            </div>
+        </div>
+        <div [ngStyle]="{'color':'red'}" *ngIf="cpk<1.67"> {{ "Label.CpkLess" | translate }}</div>
+        <div class="centre-body"> {{ "Label.SubmittedbySupplier" | translate }} </div>
+        <div class="centre-body"> {{ "Label.PendingApprovalbyJabil" | translate }} </div>
+        <div class="centre-body"> {{ "Label.ApprovedbyJabil" | translate }} </div>
+        <div class="centre-body"> {{ "Label.RejectedbyJabil" | translate }} </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="isXBarS">
+  <div class="modal-body">
+    <div class="col">
+
+      <h6 *ngIf="!isInsufficientLot" [ngStyle]="{'color':'red'}">
+        {{ "Label.InsufficientLot" | translate }}
+      </h6>
+
+      <h7 class="block-header">
+        IP: &nbsp; {{ ipNo }}
+        <br />
+        {{ "Label.Cpk" | translate }}: &nbsp; {{ cpk }}
+        <br />
+        {{ "Label.Parameter" | translate }}: &nbsp; {{ parameter }}
+        ,&nbsp;&nbsp;
+        {{ "Label.NominalValue" | translate }}: &nbsp; {{ nominal }}
+        ,&nbsp;&nbsp;
+        {{ "Label.UpperLimit" | translate }}: &nbsp; {{ upper }}
+        ,&nbsp;&nbsp;
+        {{ "Label.LowerLimit" | translate }}: &nbsp; {{ lower }}
+      </h7>
+      <div class="centre-bold">{{chartConfigXBarS.title}}</div>
+      <qss-ui-p-qc-chart type="line" [config]="chartConfigXBarS" (ruleNameEvent)="getXBarSRuleData($event)">
+      </qss-ui-p-qc-chart>
+      <div *ngIf="isMavericLotDetectedForXBarS">
+        <div>{{ "Label.MaverickLot" | translate }} : <span [ngStyle]="{'color':'red'}" class="blink_me">Yes</span></div>
+        <div [ngStyle]="{'color':'red'}">
+          <span style="white-space: pre;">{{ruleNameForXBarS}}</span>
+          </div>
+      </div>
+      <div [ngStyle]="{'color':'red'}" *ngIf="cpk<1.67"> {{ "Label.CpkLess" | translate }}</div>
+    </div>
+  </div>
+  <br />
+
+  <div class="modal-body">
+    <div class="col">
+      <div class="centre-bold">{{chartConfigRangeXBarS.title}}</div>
+      <qss-ui-p-qc-chart type="line" [config]="chartConfigRangeXBarS" (ruleNameEvent)="getRangeXBarSRuleData($event)">
+      </qss-ui-p-qc-chart>
+
+      <div *ngIf="isMavericLotDetectedForRangeXBarS">
+        <div>{{ "Label.MaverickLot" | translate }} : <span [ngStyle]="{'color':'red'}" class="blink_me">Yes</span></div>
+        <div [ngStyle]="{'color':'red'}">
+          <span style="white-space: pre;">{{ruleNameForRangeXBarS}}</span>
+          </div>
+      </div>
+      <div [ngStyle]="{'color':'red'}" *ngIf="cpk<1.67"> {{ "Label.CpkLess" | translate }}</div>
+      <div class="centre-body"> {{ "Label.SubmittedbySupplier" | translate }} </div>
+      <div class="centre-body"> {{ "Label.PendingApprovalbyJabil" | translate }} </div>
+      <div class="centre-body"> {{ "Label.ApprovedbyJabil" | translate }} </div>
+      <div class="centre-body"> {{ "Label.RejectedbyJabil" | translate }} </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isIMR">
+  <div class="modal-body" *ngIf="isIMR">
+    <div class="col">
+      <h6 *ngIf="!isInsufficientLot" [ngStyle]="{'color':'red'}">
+        {{ "Label.InsufficientLot" | translate }}
+      </h6>
+
+      <h7 class="block-header">
+        IP: &nbsp; {{ ipNo }}
+        <br />
+        {{ "Label.Cpk" | translate }}: &nbsp; {{ cpk }}
+        <br />
+        {{ "Label.Parameter" | translate }}: &nbsp; {{ parameter }}
+        , &nbsp;&nbsp;
+        {{ "Label.NominalValue" | translate }}: &nbsp; {{ nominal }}
+        ,&nbsp;&nbsp;
+        {{ "Label.UpperLimit" | translate }}: &nbsp; {{ upper }}
+        ,&nbsp;&nbsp;
+        {{ "Label.LowerLimit" | translate }}: &nbsp; {{ lower }}
+      </h7>
+
+      <div class="centre-bold">{{chartConfigIMR.title}}</div>
+      <qss-ui-p-qc-chart type="line" [config]="chartConfigIMR" (ruleNameEvent)="getIMRRuleData($event)">
+      </qss-ui-p-qc-chart>
+      <div *ngIf="isMavericLotDetectedForIMR">
+        <div>{{ "Label.MaverickLot" | translate }} : <span [ngStyle]="{'color':'red'}" class="blink_me">Yes</span></div>
+        <div [ngStyle]="{'color':'red'}">
+          <span style="white-space: pre;">{{ruleNameForIMR}}</span>
+          </div>
+      </div>
+      <div [ngStyle]="{'color':'red'}" *ngIf="cpk<1.67"> {{ "Label.CpkLess" | translate }}</div>
+    </div>
+  </div>
+  <br />
+
+  <div class="modal-body">
+    <div class="col">
+      <div class="centre-bold">{{chartConfigRangeIMR.title}}</div>
+      <qss-ui-p-qc-chart type="line" [config]="chartConfigRangeIMR" (ruleNameEvent)="getRangeIMRRuleData($event)">
+      </qss-ui-p-qc-chart>
+      <div *ngIf="isMavericLotDetectedForRangeIMR">
+        <div>{{ "Label.MaverickLot" | translate }} : <span [ngStyle]="{'color':'red'}" class="blink_me">Yes</span></div>
+        <div [ngStyle]="{'color':'red'}">
+          <span style="white-space: pre;">{{ruleNameForRangeIMR}}</span>
+          </div>
+      </div>
+      <div [ngStyle]="{'color':'red'}" *ngIf="cpk<1.67"> {{ "Label.CpkLess" | translate }}</div>
+      <div class="centre-body"> {{ "Label.SubmittedbySupplier" | translate }} </div>
+      <div class="centre-body"> {{ "Label.PendingApprovalbyJabil" | translate }} </div>
+      <div class="centre-body"> {{ "Label.ApprovedbyJabil" | translate }} </div>
+      <div class="centre-body"> {{ "Label.RejectedbyJabil" | translate }} </div>
+    </div>
+  </div>
+</div>

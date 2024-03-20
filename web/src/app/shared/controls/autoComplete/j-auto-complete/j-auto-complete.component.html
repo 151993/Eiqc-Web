@@ -1,0 +1,21 @@
+<div class="ui-fluid">
+  <p-autoComplete field="{{config!.field}}" [minLength]="config!.minLength" [suggestions]="config!.suggestions"
+    [multiple]="true" [dropdown]="config!.dropdown" [forceSelection]="config!.forceSelection"
+    (completeMethod)="onCompleteMethod($event)" (onSelect)="select($event)" (onUnselect)="unselect($event)"
+    (onClear)="clear()" (onDropdownClick)="dropDownClick()" placeholder="{{ 'Label.Search' | translate }}"
+    emptyMessage="{{ 'Message.NoResultsFound' | translate }}" [(ngModel)]="internalValue" [disabled]="isDisabled" 
+    [style]="{'width':'100%'}">
+    <ng-template let-option pTemplate="item">
+      <div>
+        <div (click)="onClick(option)" [ngStyle]="!option.isEnabled? {'color': '#ccc', 'cursor': 'none'} : ''">         
+          {{option | displayFormatAndStatus: config!.format: config.mappingField}}
+        </div>
+      </div>
+    </ng-template>
+    <ng-template let-option pTemplate="selectedItem">
+      <div class="pr-4" title="{{option | displayFormatAndStatus: config!.format: config.mappingField}}">        
+        {{option | displayFormatAndStatus: config!.format: config.mappingField}}
+      </div>
+    </ng-template>
+  </p-autoComplete>
+</div>

@@ -1,0 +1,217 @@
+<header id="page-header">
+  <!-- Header Content -->
+  <div class="content-header">
+      <!-- Left Section -->
+      <div class="d-flex align-items-center">
+          <!-- Toggle Sidebar -->
+          <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+          <button type="button" aria-label="sidebar toggle" class="btn btn-sm btn-dual mr-2 d-lg-none" data-toggle="layout"
+              data-action="sidebar_toggle">
+              <i class="fa fa-fw fa-bars"></i>
+          </button>
+         
+          <!-- END Toggle Sidebar -->
+
+          <!-- Toggle Mini Sidebar -->
+          <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+          <button type="button" aria-label="mini sidebar toggle" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout"
+              data-action="sidebar_mini_toggle" id="sidebar-toggle2">
+              <i class="fas fa-bars"></i>
+          </button>
+          <a [routerLink]="['/Home']" class="navbar-brand logo">
+            <img src="{{ 'Image.eIQCLogo' | translate }}" [alt]="version" [title]="version" />
+          </a>
+          <!-- END Toggle Mini Sidebar -->
+
+          <!-- Search Form (visible on larger screens) -->
+          <form *ngIf="false" class="d-none d-sm-inline-block" action="be_pages_generic_search.html" method="POST">
+              <div class="input-group input-group-sm">
+                  <input type="text" class="form-control form-control-alt" placeholder="Search.."
+                      id="page-header-search-input2" name="page-header-search-input2">
+                  <div class="input-group-append">
+                      <span class="input-group-text bg-body border-0">
+                          <i class="si si-magnifier"></i>
+                      </span>
+                  </div>
+              </div>
+          </form>
+          <!-- END Search Form -->
+      </div>
+      <!-- END Left Section -->
+
+      <!-- END Loading Section -->
+      <div class="d-flex align-items-left">
+        <app-loading></app-loading>
+      </div>
+      <!-- END Loading Section -->
+
+      <!-- Right Section -->
+      <div class="d-flex align-items-center">
+        <!-- User Dropdown -->
+        <div class="dropdown d-inline-block ml-2">
+          <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="d-none d-sm-inline-block ml-1">{{ authService.getUserDisplayName() }}</span>
+              <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm"
+              aria-labelledby="page-header-user-dropdown">
+
+            <div class="p-2">
+              <a class="dropdown-item d-flex align-items-center justify-content-between"
+                (click)="open(content)">
+                  <span>{{ "Label.UserProfile" | translate }}</span>
+                  <span>
+                      <span *ngIf="false" class="badge badge-pill badge-success">1</span>
+                      <i class="si si-user ml-1"></i>
+                  </span>
+              </a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item d-flex align-items-center justify-content-between"
+                (click)="logout()">
+                  <span>{{ "Label.LogOut" | translate }}</span>
+                  <i class="si si-logout ml-1"></i>
+              </a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item d-flex align-items-center justify-content-between"
+                (click)="reEvaluatePermissions()">
+                  <span>{{ "Label.ReEvaluatePermissions" | translate }}</span>
+                  <i class="si si-refresh ml-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- END User Dropdown -->
+
+        <!-- Language Dropdown -->
+        <div class="dropdown d-inline-block ml-2">
+          <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+              <i class="fas fa-globe"></i>
+              <!-- <img class="img-fluid rounded iconImage" src="{{ selectedLanguage.icon }}" alt="{{ selectedLanguage.name }}" /> {{ selectedLanguage.name }} -->
+              <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+
+          </button>
+          <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm"
+              aria-labelledby="page-header-user-dropdown">
+              <div class="p-2">
+
+              <a class="dropdown-item d-flex align-items-center justify-content-between"
+              href="javascript:void(0)" *ngFor="let lang of languages" (click)="setLanguage(lang)">
+              <span>{{ lang.name }}</span>
+              <!-- <span>
+                  <img class="img-fluid rounded iconImage" src="{{ lang.icon }}" alt="{{ lang.name }}" />
+              </span> -->
+          </a>
+
+              </div>
+          </div>
+        </div>
+        <!-- END Language Dropdown -->
+
+        <!-- Help Dropdown -->
+        <div class="dropdown d-inline-block ml-2">
+          <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-question-circle fa-lg"></i>
+            <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm"
+              aria-labelledby="page-header-user-dropdown">
+
+            <div class="p-2">
+              <a class="dropdown-item d-flex align-items-center justify-content-between"
+                href="https://jabilit.service-now.com/sp?id=index" target="_blank">
+                <span>{{ "Label.HelpAndSupport" | translate }}</span>
+                <span>
+                  <span *ngIf="false" class="badge badge-pill badge-success">1</span>
+                  <i class="fa fa-exclamation-circle"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- END Help Dropdown -->
+
+          <!-- Toggle Side Overlay -->
+          <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+          <button *ngIf="false" type="button" class="btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="side_overlay_toggle" aria-label="side overlay toggle">
+              <i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i>
+          </button>
+          <!-- END Toggle Side Overlay -->
+      </div>
+      <!-- END Right Section -->
+  </div>
+  <!-- END Header Content -->
+
+  <!-- Header Loader -->
+  <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
+  <div id="page-header-loader" class="overlay-header bg-white">
+      <div class="content-header">
+          <div class="w-100 text-center">
+              <i class="fa fa-fw fa-circle-notch fa-spin"></i>
+          </div>
+      </div>
+  </div>
+  <!-- END Header Loader -->
+</header>
+
+<!-- User Modal -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-user"></i>{{ authService.getUserDisplayName() }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">{{ "Label.UserID" | translate }}:</label>
+            <div class="col-sm-5">
+                <label class="col-form-label">{{ userInfo ? userInfo.userName : '' }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">{{ "Label.EmployeeId" | translate }}:</label>
+            <div class="col-sm-5">
+                <label class="col-form-label">{{ userInfo ? userInfo.employeeId : '' }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">{{ "Label.Email" | translate }}:</label>
+            <div class="col-sm-5">
+                <label class="col-form-label">{{ userInfo ? userInfo.email : '' }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">{{ "Label.Role" | translate }}:</label>
+            <div class="col-sm-5 col-form-label">
+                <div *ngIf="userInfo">
+                    <span *ngFor="let role of userInfo.roles" class="badge badge-info badge-custom">{{ role.name }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">{{ "Label.Site" | translate }}:</label>
+            <div class="col-sm-5">
+              <label class="col-form-label">{{ userInfo ? userInfo.site.name : '' }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-5 col-form-label">{{ "Label.SiteCode" | translate }}:</label>
+            <div class="col-sm-5">
+              <label class="col-form-label">{{ userInfo ? userInfo.site.code : '' }}</label>
+            </div>
+        </div>     
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" aria-label="Close" (click)="d('Close click')">Close</button>
+    </div>
+</ng-template>
+<!-- END User Modal -->
+
+<p-dialog header="Session Expiring!" [(visible)]="authService.isSessionExpiring" [modal]="true" [closable]="false" [style]="{width: '350',minWidth:'200'}" [responsive]="true" [minY]="70">
+    {{ "Message.SessionExpiryMessagePrefix" | translate }} {{ authService.expiringTime }} {{ "Message.SessionExpiryMessageSuffix" | translate }}
+</p-dialog>

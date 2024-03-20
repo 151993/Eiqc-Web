@@ -1,0 +1,9 @@
+.expandContainer {
+  margin-left: 0px;
+  transition: margin 0.5s;
+}
+
+.app-content {
+  padding: 15px 15px 15px 15px;
+}
+

@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    {{ "Label.ChangeReason" | translate }}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('X')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="formInput">
+    <div class="form-group">
+      <label>{{ "Message.EnterChangeReason" | translate }}</label>
+      <textarea class="form-control" formControlName="changeReason" maxlength="256"></textarea>
+      <ng-container *ngIf="formInput.controls['changeReason'].touched">
+        <small *ngIf="formInput.controls['changeReason'].hasError('validateWhiteSpace')" class="form-text text-danger">
+          {{ "Message.BlankChangeReason" | translate }}
+        </small>
+      </ng-container>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close(formInput.value.changeReason)"
+    [disabled]="!formInput.valid || !formInput.dirty" ngbAutofocus>
+    {{ _defaultButtonText | translate }}
+  </button>
+  <button type="button" class="btn" (click)="activeModal.dismiss('Cancel')">
+    {{ "Label.Cancel" | translate }}
+  </button>
+</div>

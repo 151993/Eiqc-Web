@@ -1,0 +1,47 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <h3 class="block-title justify-content-center align-self-center ">
+        {{ "Label.SupplierTasks" | translate }}
+      </h3>
+      <div class="block-options">
+
+      </div>
+    </div>
+    <div class="block-content">
+      <div class="row">
+        <div class="block-content">
+          <div class="container-fluid">
+            <div class="col-sm-12">
+              <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                  <a href="#pendingApproval" data-toggle="tab"
+                    class="nav-link active">{{ "Label.SAPPartInspectionPlan" | translate }}</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#supplierMeasurementSubmissions" data-toggle="tab"
+                    class="nav-link">{{ "Label.SupplierMeasurementSubmissions" | translate }}</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="sapPartInspectionTabContent">
+                <div class="tab-pane fade show active col-sm-12 pt-2 scrollMenu" id="pendingApproval" role="tabpanel"
+                  aria-labelledby="sapPartInspectionTabContent">
+
+                  <app-configuration-ptable [column]="displayColumns" [source]="dataSource"
+                    [totalRecords]="totalRecords" [first]="first" [enableDetail]="canAccess"  [enableToggle]="false"
+                    [enableEdit]="canUpdate" [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false"
+                    (detailClickedEvent)="detailSelected($event)" (filterEvent)="onFilterEvent($event)"
+                    (pageSortEvent)="onPageSortEvent($event)" [tableWidth]="150" (editEvent)="editRecord($event)" (exportEvent)="onFileExportEvent($event)">
+                  </app-configuration-ptable>
+                </div>
+                <div class="tab-pane fade show col-sm-12 pt-2" id="supplierMeasurementSubmissions" role="tabpanel"
+                  aria-labelledby="sapPartInspectionTabContent">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

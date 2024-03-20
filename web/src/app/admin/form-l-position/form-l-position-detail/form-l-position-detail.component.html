@@ -1,0 +1,250 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.FormLPositionConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Form" | translate }}:</label>
+            <div class="col-sm-10 align-middle">
+              <j-auto-complete-form formControlName="form" (onDropdownClick)="getData()"
+              [config]="formAutoCompleteConfig">
+              </j-auto-complete-form>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isFormModified()">
+                {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LineNo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lineNo" type="text" class="form-control" formControlName="lineNo" maxlength="20" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLineNoModified()">
+                              <small *ngIf="isLineNoEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.ITCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="iTCode" type="text" class="form-control" formControlName="iTCode" maxlength="20" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isITCodeModified()">
+                              <small *ngIf="isITCodeEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.UOM" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="uOM" type="text" class="form-control" formControlName="uOM" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isUOMModified()">
+                              <small *ngIf="isUOMEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Spec" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="spec" type="text" class="form-control" formControlName="spec" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSpecModified()">
+                {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.UpperLimit" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="upperLimit" type="number" class="form-control" formControlName="upperLimit" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isUpperLimitModified()">
+                              <small *ngIf="isUpperLimitEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LowerLimit" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lowerLimit" type="number" class="form-control" formControlName="lowerLimit" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLowerLimitModified()">
+                              <small *ngIf="isLowerLimitEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Accuracy" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="accuracy" type="number" class="form-control" formControlName="accuracy" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isAccuracyModified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SampleSize" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="sampleSize" type="text" class="form-control" formControlName="sampleSize" maxlength="20" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSampleSizeModified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.UpperLimit1" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="upperLimit1" type="number" class="form-control" formControlName="upperLimit1" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isUpperLimit1Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LowerLimit1" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lowerLimit1" type="number" class="form-control" formControlName="lowerLimit1" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLowerLimit1Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.ITCode1" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="iTCode1" type="text" class="form-control" formControlName="iTCode1" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isITCode1Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.UpperLimit2" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="upperLimit2" type="number" class="form-control" formControlName="upperLimit2" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isUpperLimit2Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LowerLimit2" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lowerLimit2" type="number" class="form-control" formControlName="lowerLimit2" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLowerLimit2Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.ITCode2" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="iTCode2" type="text" class="form-control" formControlName="iTCode2" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isITCode2Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.UpperLimit3" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="upperLimit3" type="number" class="form-control" formControlName="upperLimit3" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isUpperLimit3Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LowerLimit3" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lowerLimit3" type="number" class="form-control" formControlName="lowerLimit3" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLowerLimit3Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.ITCode3" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="iTCode3" type="text" class="form-control" formControlName="iTCode3" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isITCode3Modified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PositionType" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="positionType" type="number" class="form-control" formControlName="positionType" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isPositionTypeModified()">
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

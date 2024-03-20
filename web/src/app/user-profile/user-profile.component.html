@@ -1,0 +1,37 @@
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <div class="block-title">
+        <i class="fa fa-user"></i> {{ userInfo ? userInfo.displayName : '' }}
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row">
+        <label class="col-sm-2 col-form-label">{{ "Label.UserID" | translate }}:</label>
+        <div class="col-sm-10">
+          <label class="col-form-label">{{ userInfo ? userInfo.userName : '' }}</label>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-2 col-form-label">{{ "Label.EmployeeId" | translate }}:</label>
+        <div class="col-sm-5">
+          <label class="col-form-label">{{ userInfo ? userInfo.employeeId : '' }}</label>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-2 col-form-label">{{ "Label.Email" | translate }}:</label>
+        <div class="col-sm-5">
+          <label class="col-form-label">{{ userInfo ? userInfo.email : '' }}</label>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-sm-2 col-form-label">{{ "Label.Role" | translate }}:</label>
+        <div class="col-sm-10 col-form-label">
+          <div *ngIf="userInfo">
+            <span *ngFor="let role of userInfo.roles" class="badge badge-info badge-custom">{{ role.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

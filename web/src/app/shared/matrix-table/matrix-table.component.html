@@ -1,0 +1,61 @@
+<div class="table-responsive">
+    <!-- grid header -->
+    <table *ngIf="cols">
+        <tr>
+            <td class="header-cell-sticky"></td>
+            <ng-container *ngFor="let col of cols; let i = index">
+                <td class="header-cell header-cell-group table-active" *ngIf="col.groupId != cols[i-1]?.groupId">
+                    <div class="vertical">
+                        <span (click)="expandGroup(col.groupId)" class="title group-title text-primary"
+                            [ngClass]="col.groupExpanded ? 'opened' : 'closed'"
+                            [pTooltip]="col.groupExpanded ? 'Close: ' + col.groupName : 'Open: ' + col.groupName"
+                            tooltipPosition="top">
+                            <i class="fas fa-minus-circle" *ngIf="col.groupExpanded"></i>
+                            <i class="fas fa-plus-circle" *ngIf="!col.groupExpanded"></i>
+                            {{ col.groupName }}
+                        </span>
+                    </div>
+                </td>
+                <td class="header-cell" *ngIf="col.groupExpanded">
+                    <div class="vertical">
+                        <span class="title" pTooltip="{{col.Name }}<br/><i>{{ col.Description}}</i>"
+                            tooltipPosition="left" [escape]="false">
+                            {{ col.Name }}
+                        </span>
+                    </div>
+                </td>
+            </ng-container>
+            <td class="cell-actions header-cell-actions">Actions</td>
+        </tr>
+
+        <!-- grid body -->
+
+        <tr *ngFor="let row of rows;">
+            <td class="cell cell-sticky cell-rows" pTooltip="{{ row.Name }}<br/>{{ row.Description }}" [escape]="false">
+                {{ row.Name }}<br /><i>{{ row.Description }}</i></td>
+            <ng-container *ngFor="let col of cols; let i = index">
+                <td class="cell cell-group table-active" *ngIf="col.groupId != cols[i-1]?.groupId" [escape]="false"
+                    pTooltip="Summary:<br/>{{ row.Name }}<br/>{{ col.groupName }}">
+                    {{ getGroupValue([row.id],[col.groupId]) }}</td>
+                <td class="cell" *ngIf="col.groupExpanded" pTooltip="{{ row.Name }}<br/>{{ col.Name }}"
+                    [escape]="false">
+                    <i class="cell-icon fas" [ngClass]="getIcon([row.id], [col.id])"
+                        (click)="clickCell(row.id, col.id)">
+                    </i>
+                    <span class="badge badge-pill badge-warning" *ngIf="getBadgeValue(row.id, col.id)!==undefined">
+                        {{ getBadgeValue(row.id, col.id) }}
+                    </span>
+                </td>
+            </ng-container>
+            <td class="cell-actions">
+                <button class="btn btn-info btn-sm" (click)="addData(row.id)" title="{{ 'Label.add' | translate }}">
+                    <i class="si si-plus"></i>
+                </button>
+                <button class="btn btn-info btn-sm" (click)="editData(row.id)" title="{{ 'Label.edit' | translate }}">
+                    <i class="si si-book-open"></i>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+<p-paginator [rows]="10" totalRecords="100" (onPageChange)="paginate($event)"></p-paginator>

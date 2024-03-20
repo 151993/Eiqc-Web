@@ -1,0 +1,5 @@
+
+<j-auto-complete [config]="autoCompleteConfig" (onSelect)="select($event)"
+  (onUnselect)="unselect($event)" (onClear)="clear()" (completeMethod)="search($event)"
+  (onDropdownClick)="getData()" [(ngModel)]="value" [isDisabled]="isDisabled" >
+</j-auto-complete>

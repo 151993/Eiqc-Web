@@ -1,0 +1,37 @@
+<!-- Page Content -->
+<!-- <div class="hero-static d-flex align-items-center"> -->
+<div class="w-100">
+    <!-- Maintenance Section -->
+    <div class="content content-full bg-white">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-4 py-6">
+                <!-- Header -->
+                <div class="text-center">
+                    <p>
+                        <i class="fa fa-3x fa-cog fa-spin text-primary"></i>
+                    </p>
+                    <h1 class="h4 mb-1">
+                      {{ "Message.NoPermissions" | translate }}
+                    </h1>
+                </div>
+                <!-- END Header -->
+            </div>
+        </div>
+    </div>
+    <!-- END Maintenance Section -->
+
+    <div class="text-center">
+      <a class="btn btn-primary" (click)="signIn()" >
+        <i class="fas fa-sign-in-alt"></i>
+        <span class="login-btn">{{ "Label.LogIn" | translate }}</span>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="font-size-sm text-center text-muted py-3">
+        <strong>{{projectName}} | {{version}}</strong> &copy; <span data-toggle="year-copy"></span>
+    </div>
+    <!-- END Footer -->
+</div>
+<!-- </div> -->
+<!-- END Page Content -->

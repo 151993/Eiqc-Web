@@ -1,0 +1,22 @@
+.adminContainer {
+    margin-top: 10px;
+  }
+  
+  .block-options {
+    margin-left: 0px;
+  }
+  
+  .btn-accordian[aria-expanded="true"]:after .si {
+    transform: rotate(-180deg);
+  }
+  
+  .nav-link {
+    padding: 0px;
+    color: inherit;
+  }
+  
+  .dropdown-toggle::after {
+    position: sticky;
+    left: 100%;
+  }
+  

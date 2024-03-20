@@ -1,0 +1,13 @@
+
+
+
+<div class="input-group j-binoculars-container">
+  <j-auto-complete-customer class="j-binoculars-autocomplete" [(ngModel)]="value" [dropdown]="false" 
+    [multiple]="true" (sendSelectedValue)="shareSelected($event)">
+  </j-auto-complete-customer>
+  <div class="input-group-btn">
+    <button class="ui-autocomplete-dropdown ui-button  p-component ui-state-default" (click)="showBinocularsModel($event)">
+      <i class="fa fa-binoculars white"></i>
+    </button>
+  </div>
+</div>

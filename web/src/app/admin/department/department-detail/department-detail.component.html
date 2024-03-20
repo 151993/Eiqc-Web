@@ -1,0 +1,69 @@
+<div class="content">
+	<div class="block block-rounded">
+		<div class="block-header border-bottom">
+			<button class="btn btn-default push-5-r" type="button" (click)="cancel()"
+				title="{{ 'Label.Back' | translate }}">
+				<i class="si si-action-undo"> </i>
+			</button>
+			<h3 class="block-title">
+				{{ "Label.DepartmentConfiguration" | translate }}
+				<i *ngIf="isAsycValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+			</h3>
+			<div class="block-options">
+				<button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+					data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+					<i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+				</button>
+			</div>
+		</div>
+		<div class="block-content contentHeight">
+			<div class="row overflow-auto">
+				<form [formGroup]="formInput">
+                   
+					<div class="row form-group ">
+						<label class="col-sm-1 col-form-label">{{ "Label.Name" | translate }}:</label>
+						<div class="col-sm-11">
+						  <input id="name" type="text" class="form-control" formControlName="name" maxlength="50" />
+						</div>
+						<div class="offset-1 col-sm-11">
+						  <ng-container *ngIf="isNameModified()">
+							<small *ngIf="isNameEmpty()" class="form-text text-danger">
+							  {{ "Message.Required" | translate }}
+							</small>
+							<small *ngIf="isNameHasWhiteSpace()" class="form-text text-danger">
+							  {{ "Message.BlankName" | translate }}
+							</small>
+							<small *ngIf="isNameExists()" class="text-danger">
+							  {{ "Message.NameExists" | translate }}
+							</small>
+						  </ng-container>
+						</div>
+					  </div>
+					  <div class="row form-group ">
+						<label class="col-sm-1 col-form-label">{{ "Label.Description" | translate }}:</label>
+						<div class="col-sm-11">
+						  <textarea id="description" type="text" class="form-control" placeholder="Optional" formControlName="description" maxlength="250"></textarea>
+						</div>
+					
+					  </div>
+					  <div class="row form-group ">
+						<label class="col-sm-1 col-form-label">{{ "Label.Status" | translate }}:</label>
+						<div class="col-sm-11">
+						  <div class="custom-control custom-switch">
+							<input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+							  formControlName="isEnabled">
+							<label class="custom-control-label" for="isEnabled" title="
+							{{formInput.controls['isEnabled'].value
+								  ? ('Label.Enabled' | translate)
+								  : ('Label.Disabled' | translate)
+							}}"></label>
+						  </div>
+						</div>
+					  </div>
+				
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

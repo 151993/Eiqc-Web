@@ -1,0 +1,14 @@
+<div class="modal-body">
+        <app-configuration-ptable [column]="displayColumns" [enableSkeleton]="true" [source]="dataSource"
+                [totalRecords]="totalRecords" [enableDetail]="false" [enableToggle]="false" [enableEdit]="false"
+                [showInactiveStatus]="false" [enableDelete]="false" [enableAuditTrail]="false" [enableSelect]="true"
+                (selectEvent)="selectRecord($event)" (filterEvent)="onFilterEvent($event)" selectionMode="single"
+                (pageSortEvent)="onPageSortEvent($event)">
+        </app-configuration-ptable>
+        <div class="float-right mb-2">
+                <button type="button" class="btn btn-primary" (click)="submitRecords()"
+                        title="{{ 'Label.Save' | translate }}">
+                        <i class=" fa fa-floppy-o"></i> {{ "Label.Select" | translate }}
+                </button>
+        </div>
+</div>

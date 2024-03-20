@@ -1,0 +1,548 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.FormConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.FormType" | translate }}:</label>
+            <div class="col-sm-10 align-middle">
+              <j-auto-complete-form-type formControlName="formType" (onDropdownClick)="getData()"
+              [config]="formTypeAutoCompleteConfig">
+              </j-auto-complete-form-type>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isFormTypeModified()">
+                {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.GRS" | translate }}:</label>
+            <div class="col-sm-10 align-middle">
+              <j-auto-complete-grs formControlName="gRS"
+              (onDropdownClick)="getData()"
+              [config]="grsAutoCompleteConfig">
+              </j-auto-complete-grs>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isGRSModified()">
+
+                {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DPID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="dPID" type="text" class="form-control" formControlName="dPID" maxlength="20" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDPIDModified()">
+              
+                
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SampleQTY" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="sampleQTY" type="number" class="form-control" formControlName="sampleQTY" />
+            </div>
+            <div class="offset-2 col-sm-10">
+              <!-- <ng-container *ngIf="isSampleQTYModified()">
+                              <small *ngIf="isSampleQTYEmpty()" class="form-text text-danger">
+                  {{ "Message.Required" | translate }}
+                </small>
+                                
+              </ng-container> -->
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DateCode" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="dateCode" type="text" class="form-control" formControlName="dateCode" maxlength="200" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDateCodeModified()">
+              
+                
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DateCodeActual" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input id="dateCodeActual" type="checkbox" class="custom-control-input" formControlName="dateCodeActual"
+                  name="dateCodeActual" />
+                <label class="custom-control-label" for="dateCodeActual" title="
+                  {{formInput.controls['dateCodeActual'].value
+                        ? ('Label.Enabled' | translate)
+                        : ('Label.Disabled' | translate)
+                  }}"></label>
+              </div>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDateCodeActualModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.Remark" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="remark" type="text" class="form-control" formControlName="remark" maxlength="1000" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isRemarkModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.UserName" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="userName" type="text" class="form-control" formControlName="userName" maxlength="20" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isUserNameModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.QN" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="qN" type="text" class="form-control" formControlName="qN" maxlength="20" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isQNModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.IPVersion" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="iPVersion" type="text" class="form-control" formControlName="iPVersion" maxlength="100" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isIPVersionModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.RefDoc" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="refDoc" type="text" class="form-control" formControlName="refDoc" maxlength="50" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isRefDocModified()">
+
+                {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.QNSoftcopy" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="qNSoftcopy" type="text" class="form-control" formControlName="qNSoftcopy" maxlength="100" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isQNSoftcopyModified()">
+
+                {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.GRSNoType" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="gRSNoType" type="text" class="form-control" formControlName="gRSNoType" maxlength="10" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isGRSNoTypeModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.BatchDC" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="batchDC" type="text" class="form-control" formControlName="batchDC" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isBatchDCModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.StorageLoc" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="storageLoc" type="text" class="form-control" formControlName="storageLoc" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isStorageLocModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.RequireStatus" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="requireStatus" type="number" class="form-control" formControlName="requireStatus" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isRequireStatusModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PackQty" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="packQty" type="number" class="form-control" formControlName="packQty" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isPackQtyModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.OddQtyPerBox" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="oddQtyPerBox" type="text" class="form-control" formControlName="oddQtyPerBox"
+                maxlength="100" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isOddQtyPerBoxModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.ReceivingInfo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="receivingInfo" type="text" class="form-control" formControlName="receivingInfo"
+                maxlength="4000" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isReceivingInfoModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DANo" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="dANo" type="text" class="form-control" formControlName="dANo" maxlength="200" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDANoModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.PackSampleQty" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="packSampleQty" type="number" class="form-control" formControlName="packSampleQty" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isPackSampleQtyModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.BuyerID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="buyerID" type="number" class="form-control" formControlName="buyerID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isBuyerIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DivisionId" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="divisionId" type="number" class="form-control" formControlName="divisionId" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDivisionIdModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SAPDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="sAPDefectTypeID" type="number" class="form-control" formControlName="sAPDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSAPDefectTypeIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.VISDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="vISDefectTypeID" type="number" class="form-control" formControlName="vISDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isVISDefectTypeIDModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.FUNDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="fUNDefectTypeID" type="number" class="form-control" formControlName="fUNDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isFUNDefectTypeIDModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.FunMeasureTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="funMeasureTypeID" type="number" class="form-control" formControlName="funMeasureTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isFunMeasureTypeIDModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DIMDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="dIMDefectTypeID" type="number" class="form-control" formControlName="dIMDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDIMDefectTypeIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MPositionDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="mPositionDefectTypeID" type="number" class="form-control"
+                formControlName="mPositionDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isMPositionDefectTypeIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LPositionDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lPositionDefectTypeID" type="number" class="form-control"
+                formControlName="lPositionDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLPositionDefectTypeIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DateCodeDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="dateCodeDefectTypeID" type="number" class="form-control"
+                formControlName="dateCodeDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDateCodeDefectTypeIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.BowTwistDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="bowTwistDefectTypeID" type="number" class="form-control"
+                formControlName="bowTwistDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isBowTwistDefectTypeIDModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.FunParaDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="funParaDefectTypeID" type="number" class="form-control"
+                formControlName="funParaDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isFunParaDefectTypeIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.MicroDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="microDefectTypeID" type="number" class="form-control" formControlName="microDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isMicroDefectTypeIDModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.TestReportDefectTypeID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="testReportDefectTypeID" type="number" class="form-control"
+                formControlName="testReportDefectTypeID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isTestReportDefectTypeIDModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SpecDefectType" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="specDefectType" type="text" class="form-control" formControlName="specDefectType"
+                maxlength="2550" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSpecDefectTypeModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LastFormID" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lastFormID" type="number" class="form-control" formControlName="lastFormID" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLastFormIDModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LockFlag" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lockFlag" type="number" class="form-control" formControlName="lockFlag" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLockFlagModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.LockUser" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="lockUser" type="text" class="form-control" formControlName="lockUser" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isLockUserModified()">
+ {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.DCRequirement" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="dCRequirement" type="text" class="form-control" formControlName="dCRequirement"
+                maxlength="4000" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isDCRequirementModified()">
+
+ {{ "Message.Required" | translate }}
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

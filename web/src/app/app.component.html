@@ -1,0 +1,35 @@
+
+<div id="page-container" class="sidebar-o sidebar-dark sidebar-mini enable-page-overlay side-scroll page-header-fixed side-trans-enabled">
+
+  <!-- Side Overlay-->
+  <app-side-overlay *ngIf="isAuth"></app-side-overlay>
+  <!-- END Side Overlay -->
+
+  <!-- Sidebar -->
+  <app-side-nav [ngClass]="{ hide: hideSideNav || !isAuth }" *ngIf="isAuth"></app-side-nav>
+  <!-- END Sidebar -->
+
+  <!-- Header -->
+  <app-header (toggleMenuEvent)="toggleMenuEventClicked($event)" *ngIf="isAuth"></app-header>
+  <!-- END Header -->
+
+  <!-- Main Container -->
+  <main id="main-container"
+    class="mainContainer"
+    [ngClass]="{ expandContainer: hideSideNav || !isAuth }"
+    [@routeAnimations]="prepareRoute(outlet)">
+      <!-- Page Content -->
+      <div class="content app-content">
+          <div class="block">
+            <router-outlet #outlet="outlet"></router-outlet>
+          </div>
+      </div>
+      <!-- END Page Content -->
+  </main>
+  <!-- END Main Container -->
+
+  <!-- Footer -->
+  <app-footer *ngIf="isAuth"></app-footer>
+  <!-- END Footer -->
+
+</div>

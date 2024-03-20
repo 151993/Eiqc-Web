@@ -1,0 +1,40 @@
+.header {
+  /* background-image: linear-gradient(to right, #2c4e6c, #9ec7d8); */
+  background-color: #003865;
+  max-height: 60px;
+}
+
+.logo {
+  color: white !important;
+  font-size: 16px;
+}
+
+a.logo img {
+  max-height: 40px;
+}
+
+.jabillogo {
+  position: absolute;
+  left: calc(50% - 80px);
+  width: 160px;
+  height: 40px;
+}
+
+.jabillogo img {
+  width: 100%;
+  height: 100%;
+}
+
+header.header a span {
+  font-size: 14px;
+  color: white;
+}
+
+.user-drop-menu {
+  width: 100%;
+  padding: 0px;
+}
+
+.iconImage{
+  width: 32px;
+}

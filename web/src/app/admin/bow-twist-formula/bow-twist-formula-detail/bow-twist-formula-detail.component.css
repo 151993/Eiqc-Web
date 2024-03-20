@@ -1,0 +1,6 @@
+.pi {
+    font-size: 2rem;
+}
+ ::ng-deep .p-tooltip {
+        max-width: fit-content;
+}

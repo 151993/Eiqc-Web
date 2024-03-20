@@ -1,0 +1,8 @@
+<a [routerLink]="[notificationComponentPath]">
+  <div class="notification ribbon ribbon-danger">
+    <div *ngIf="notificationNumber && notificationNumber != ''" class="ribbon-box">
+      {{ notificationNumber }}
+    </div>
+    <i class="fa fa-bell icon"></i>
+  </div>
+</a>

@@ -1,0 +1,110 @@
+<!-- Auto Generated Code By AutoCodeGen Jabil © 2019 -->
+
+
+<div class="content">
+  <div class="block block-rounded">
+    <div class="block-header border-bottom">
+      <button class="btn btn-default push-5-r" type="button" (click)="cancel()" title="{{ 'Label.Back' | translate }}">
+        <i class="si si-action-undo"> </i>
+      </button>
+      <h3 class="block-title">
+        {{ "Label.GRSSupplierFormConfiguration" | translate }}
+        <i *ngIf="isAsyncValidationPending()" class=" fa fa-spinner fa-spin text-info ml-auto"></i>
+      </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-primary" (click)="saveForm()" [disabled]="isSaveDisabled()"
+          data-dismiss="modal" title="{{ 'Label.Save' | translate }}">
+          <i class=" fa fa-floppy-o"></i> {{ "Label.Save" | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="block-content contentHeight">
+      <div class="row overflow-auto">
+        <form [formGroup]="formInput">
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SupplierForm" | translate }}:</label>
+            <div class="col-sm-10 align-middle">
+              <j-auto-complete-supplier-form 
+              (onDropdownClick)="getData()"
+              [config]="supplierFormAutoCompleteConfig"
+                formControlName="supplierForm" >
+              </j-auto-complete-supplier-form>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSupplierFormModified()">
+                {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.GRS" | translate }}:</label>
+            <div class="col-sm-10 align-middle">
+              <j-auto-complete-grs 
+              (onDropdownClick)="getData()"
+              [config]="grsAutoCompleteConfig"
+                formControlName="gRS" >
+              </j-auto-complete-grs>
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSupplierFormModified()">
+                {{ "Message.Required" | translate }}
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SubmitUser" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="submitUser" type="text" class="form-control" formControlName="submitUser" maxlength="255" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSubmitUserModified()">
+              
+                
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 col-form-label">{{ "Label.SubmitTime" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="submitTime" type="date" class="form-control" formControlName="submitTime" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isSubmitTimeModified()">
+              
+                
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group" [hidden]="true">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <input id="status" type="number" class="form-control" formControlName="status" />
+            </div>
+            <!-- <div class="offset-2 col-sm-10">
+              <ng-container *ngIf="isStatusModified()">
+
+
+              </ng-container>
+            </div> -->
+          </div>
+          <div class="row form-group ">
+            <label class="col-sm-2 col-form-label">{{ "Label.Status" | translate }}:</label>
+            <div class="col-sm-10">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isEnabled" name="isEnabled"
+                  formControlName="isEnabled">
+                <label class="custom-control-label" for="isEnabled" title="
+                {{formInput.controls['isEnabled'].value
+                      ? ('Label.Enabled' | translate)
+                      : ('Label.Disabled' | translate)
+                }}"></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

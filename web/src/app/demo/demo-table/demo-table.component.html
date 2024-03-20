@@ -1,0 +1,6 @@
+<app-configuration-ptable [enableSkeleton]="false" [column]="displayColumns" [source]="dataSource"
+  [totalRecords]="totalRecords" [first]="first" [fileName]="fileName" (editEvent)="editRecord($event)"
+  (toggleEvent)="toggleStatus($event)" (deleteEvent)="deleteRecord($event)" (exportEvent)="onExportEvent($event)"
+  (auditTrailEvent)="showAuditLog($event)" (filterEvent)="onFilterEvent($event)"
+  (pageSortEvent)="onPageSortEvent($event)">
+</app-configuration-ptable>

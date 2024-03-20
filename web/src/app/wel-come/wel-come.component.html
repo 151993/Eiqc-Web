@@ -1,0 +1,23 @@
+<div class="d-flex align-items-top justify-content-center flex-column welcomeContainer h-100vh">
+  <div class="d-flex align-items-center justify-content-center">
+  </div>
+  <div class="px-4 px-lg-5 d-flex align-items-center justify-content-center mt-auto mb-auto">
+    <div class="d-flex justify-content-center ">
+      <div class="text-center">
+        <img src="{{ 'Image.JabilLogo' | translate }}" class="justify-content-center align-self-center m-1 appLogo" />
+        <h2 class="text-white mx-auto mt-2 mb-5">{{ "Label.JabilCorrectiveActionAndAuditSystem" | translate }}</h2>
+        <div>
+          <button class="btn btn-primary action-button justify-content-center align-self-center m-1 w-25"
+            (click)="signIn()">{{ "Label.SignIn" | translate }}
+          </button>
+        </div>
+        <div>
+          <button class="btn btn-link text-white justify-content-center align-self-center m-1 w-25"
+            (click)="register()">
+            <u>{{ "Label.Register" | translate }}</u>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
